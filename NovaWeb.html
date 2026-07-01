@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>NovaWeb | L'Agence Web des Artisans & Commerçants</title>
+    <meta name="description" content="NovaWeb : Création de sites web professionnels pour artisans et commerçants. Formule tout inclus (hébergement, maintenance, SEO) à prix abordable. Lancez votre activité en ligne dès aujourd'hui.">
+    <meta name="keywords" content="agence web, site vitrine, artisans, commerçants, création site internet, maintenance web, référencement local, NovaWeb">
+    <meta name="author" content="NovaWeb">
+    <link rel="canonical" href="https://votre-site.fr">
+
+    <meta property="og:title" content="NovaWeb | L'Agence Web des Artisans & Commerçants">
+    <meta property="og:description" content="Votre site internet pro au prix d'un abonnement téléphonique. Tout inclus, zéro souci technique.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://votre-site.fr">
+    <meta property="og:image" content="https://votre-site.fr/preview.jpg">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+
+<body class="bg-zinc-950 text-zinc-50 antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
+
+    <nav class="fixed top-0 left-0 w-full bg-zinc-950/70 backdrop-blur-md z-50 border-b border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
+                Nova<span class="text-indigo-500">Web</span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-400">
+                <a href="#concept" class="hover:text-white transition-colors">Notre Concept</a>
+                <a href="#offres" class="hover:text-white transition-colors">Offres & Tarifs</a>
+                <a href="#delais" class="hover:text-white transition-colors">Disponibilités</a>
+            </div>
+            
+            <div>
+                <a href="#booking" class="bg-zinc-100 text-zinc-950 text-xs font-semibold uppercase tracking-wider px-5 py-3 rounded-lg hover:bg-zinc-200 transition-all cursor-pointer">
+                    Lancer mon projet
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 text-center space-y-8 z-10">
+            <span class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium px-4 py-1.5 rounded-full">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Offre de lancement : 3 places disponibles
+            </span>
+            
+            <h1 class="text-4xl sm:text-6xl font-bold tracking-tight max-w-4xl mx-auto leading-[1.15]">
+                Votre site internet pro pour le prix d'un <span class="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">abonnement téléphonique</span>.
+            </h1>
+            
+            <p class="text-zinc-400 text-base sm:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                Pas de budget à 3 000 € à sortir. Nous créons, hébergeons et gérons votre site vitrine à l'année. Vous vous concentrez sur vos clients, on gère le reste.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+                <a href="#offres" class="w-full sm:w-auto bg-indigo-600 text-white text-sm font-semibold px-8 py-4 rounded-xl hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/20 text-center">
+                    Découvrir nos tarifs
+                </a>
+                <button onclick="openExplainModal()" class="w-full sm:w-auto border border-zinc-800 text-zinc-300 text-sm font-semibold px-8 py-4 rounded-xl hover:bg-zinc-900 hover:text-white transition-colors cursor-pointer">
+                    Comment ça marche ?
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="concept" class="py-32 border-t border-zinc-900 bg-zinc-900/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-20">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Le web en toute sérénité.</h2>
+                <p class="text-zinc-400 font-light">Pourquoi les artisans et commerçants choisissent notre formule tout inclus.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-zinc-900/40 border border-zinc-800/60 p-8 rounded-2xl space-y-4">
+                    <div class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center rounded-xl">
+                        <i data-lucide="wallet" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold">Trésorerie préservée</h3>
+                    <p class="text-zinc-400 text-sm font-light leading-relaxed">Zéro barrière à l'entrée. Un petit abonnement mensuel lissé sur l'année au lieu d'une facture de plusieurs milliers d'euros d'un coup.</p>
+                </div>
+                <div class="bg-zinc-900/40 border border-zinc-800/60 p-8 rounded-2xl space-y-4">
+                    <div class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center rounded-xl">
+                        <i data-lucide="wrench" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold">Maintenance incluse</h3>
+                    <p class="text-zinc-400 text-sm font-light leading-relaxed">Un horaire à changer ? Une nouvelle photo à ajouter ? Vous nous envoyez un petit mail, et on effectue la modification dans les 24h.</p>
+                </div>
+                <div class="bg-zinc-900/40 border border-zinc-800/60 p-8 rounded-2xl space-y-4">
+                    <div class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center rounded-xl">
+                        <i data-lucide="smartphone" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold">Haute Performance</h3>
+                    <p class="text-zinc-400 text-sm font-light leading-relaxed">Nos sites sont codés sur-mesure pour être ultra-rapides sur mobile et optimisés au pixel près pour le référencement local (SEO Google).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="offres" class="py-32 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-20">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Des tarifs transparents, sans surprise.</h2>
+                <p class="text-zinc-400 font-light">Choisissez la formule qui correspond au stade de développement de votre entreprise.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                <div class="bg-zinc-900/30 border border-zinc-800 p-8 rounded-2xl flex flex-col justify-between relative">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold">Pack Starter</h3>
+                            <p class="text-zinc-400 text-xs mt-1">Idéal pour démarrer proprement</p>
+                        </div>
+                        <div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-bold tracking-tight">49€</span>
+                                <span class="text-zinc-400 text-sm">/ mois</span>
+                            </div>
+                            <p class="text-[11px] text-zinc-400 mt-1 italic">Tarifs nets</p>
+                        </div>
+                        <p class="text-zinc-400 text-xs font-light">Engagement 12 mois. Hébergement et support technique inclus.</p>
+                        <hr class="border-zinc-800">
+                        <ul class="space-y-3.5 text-sm text-zinc-300 font-light">
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Site Vitrine "One-Page"</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Galerie de 6 créations/photos</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Bouton de contact direct (Tél/Mail)</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Optimisation Mobile (Responsive)</li>
+                        </ul>
+                    </div>
+                    <div class="pt-8">
+                        <button onclick="openMailModal('Pack Starter')" class="w-full border border-zinc-700 hover:bg-zinc-900 py-3 rounded-xl ...">
+                            Choisir le Pack Starter
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-zinc-900/80 border-2 border-indigo-500 p-8 rounded-2xl flex flex-col justify-between relative shadow-xl shadow-indigo-500/5">
+                    <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-indigo-500 text-white text-[10px] uppercase font-bold tracking-widest px-4 py-1 rounded-full">Recommandé</span>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold">Pack Pro</h3>
+                            <p class="text-zinc-400 text-xs mt-1">Parfait pour les Tatoueurs & Artisans</p>
+                        </div>
+                        <div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-bold tracking-tight">89€</span>
+                                <span class="text-zinc-400 text-sm">/ mois</span>
+                            </div>
+                            <p class="text-[11px] text-zinc-400 mt-1 italic">Tarifs nets</p>
+                        </div>
+                        <p class="text-zinc-400 text-xs font-light">Engagement 12 mois. Hébergement et modifications mensuelles incluses.</p>
+                        <hr class="border-zinc-800">
+                        <ul class="space-y-3.5 text-sm text-zinc-300 font-light">
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Site complet multi-pages (jusqu'à 4)</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Portfolio / Grille de réalisations pro</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Formulaire de contact intelligent</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Intégration Module RDV (Calendly)</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Référencement Google local ciblé</li>
+                        </ul>
+                    </div>
+                    <div class="pt-8">
+                        <button onclick="openMailModal('Pack Pro')" class="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl ...">
+                        Choisir le Pack Pro
+                    </button>
+                    </div>
+                </div>
+
+                <div class="bg-zinc-900/30 border border-zinc-800 p-8 rounded-2xl flex flex-col justify-between relative">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold">E-Commerce / Sur-Mesure</h3>
+                            <p class="text-zinc-400 text-xs mt-1">Pour vendre vos produits en ligne</p>
+                        </div>
+                        <div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-bold tracking-tight">149€</span>
+                                <span class="text-zinc-400 text-sm">/ mois</span>
+                            </div>
+                            <p class="text-[11px] text-zinc-400 mt-1 italic">Tarifs nets</p>
+                        </div>
+                        <p class="text-zinc-400 text-xs font-light">Engagement 12 mois. Idéal pour lancer une boutique légère.</p>
+                        <hr class="border-zinc-800">
+                        <ul class="space-y-3.5 text-sm text-zinc-300 font-light">
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Boutique en ligne complète (15 produits)</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Système de paiement sécurisé Stripe</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Gestion autonome des stocks simplifiée</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-indigo-400"></i> Toutes les fonctionnalités du pack Pro</li>
+                        </ul>
+                    </div>
+                    <div class="pt-8">
+                        <button onclick="openMailModal('Pack Premium')" class="w-full border border-zinc-700 hover:bg-zinc-900 text-center py-3 rounded-xl text-sm font-medium transition-colors">
+                            Choisir l'offre Premium
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="delais" class="py-20 border-t border-zinc-900 bg-zinc-900/10">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-zinc-900/40 border border-zinc-800 p-6 sm:p-8 rounded-2xl space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <h3 class="text-xl font-bold tracking-tight flex items-center gap-2">
+                            <i data-lucide="clock" class="w-5 h-5 text-indigo-400"></i>
+                            Disponibilité & Délais Actuels
+                        </h3>
+                        <p class="text-zinc-400 text-xs font-light">Tableau mis à jour régulièrement selon notre charge de travail.</p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium px-3 py-1 rounded-full self-start sm:self-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Charge de travail : Normale
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead>
+                            <tr class="border-b border-zinc-800 text-zinc-500 text-xs uppercase tracking-wider">
+                                <th class="py-3 font-medium">Type de demande</th>
+                                <th class="py-3 font-medium">Délai estimé</th>
+                                <th class="py-3 font-medium text-right">Priorité</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-800/60 text-zinc-300 font-light">
+                            <tr>
+                                <td class="py-4 font-medium text-white">Réponse aux formulaires & questions</td>
+                                <td class="py-4 text-indigo-300 font-normal">Moins de 24h</td>
+                                <td class="py-4 text-right"><span class="text-[10px] bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded-md">Standard</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 font-medium text-white">Modifications de site (texte, horaires, image)</td>
+                                <td class="py-4 text-indigo-300 font-normal">24h à 48h</td>
+                                <td class="py-4 text-right"><span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-md">Inclus Abo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 font-medium text-white">Livraison d'un nouveau site (Pack Starter / Pro)</td>
+                                <td class="py-4 text-indigo-300 font-normal">7 à 10 jours ouvrés</td>
+                                <td class="py-4 text-right"><span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-md">Projet</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 font-medium text-white">Dépannage critique (Site inaccessible)</td>
+                                <td class="py-4 text-rose-400 font-medium">Moins de 4h (en journée)</td>
+                                <td class="py-4 text-right"><span class="text-[10px] bg-rose-500/10 text-rose-400 px-2 py-0.5 rounded-md font-medium">Urgent</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="py-24 bg-black-600 text-white-600">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">Planifier un échange</h2>
+            <p class="mb-10 text-white-600">Choisissez le créneau qui vous convient directement dans l'agenda ci-dessous.</p>
+            
+            <!-- Calendly inline widget begin -->
+            <div class="calendly-inline-widget" data-url="https://calendly.com/rafaeldupreypro?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:700px;width:100%;"></div>
+            <!-- Calendly inline widget end -->
+        </div>
+    </section>
+
+    <div id="contactModal" onclick="closeContactModalOnBackdrop(event)" 
+        class="invisible opacity-0 fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-300 ease-out">
+        
+        <div id="modalContent" class="scale-95 opacity-0 bg-zinc-900 border border-zinc-800 p-6 sm:p-10 rounded-3xl max-w-2xl w-full relative max-h-[90vh] overflow-y-auto space-y-8 shadow-2xl shadow-black/80 transition-all duration-300 ease-out delay-75">
+            <button onclick="closeContactModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <div class="text-center space-y-2">
+                <h2 id="modalTitle" class="text-2xl sm:text-3xl font-bold tracking-tight">Prêt à lancer votre projet ?</h2>
+                <p id="modalSubtitle" class="text-zinc-400 text-xs sm:text-sm font-light">L'équipe NovaWeb revient vers vous en moins de 24h.</p>
+            </div>
+
+            <form action="https://formspree.io/f/votre_id_formspree" method="POST" class="space-y-5">
+                <input type="hidden" name="offre_selectionnee" id="hiddenOfferInput">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label for="name" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Nom / Entreprise</label>
+                        <input type="text" name="name" id="name" required placeholder="Ex: Salon InkArt" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label for="email" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Adresse E-mail</label>
+                        <input type="email" name="email" id="email" required placeholder="Ex: contact@inkart.fr" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <label for="message" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Votre Message / Question</label>
+                    <textarea name="message" id="message" rows="4" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-600/10 flex items-center justify-center gap-2 cursor-pointer">
+                    <span>Envoyer ma demande</span><i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+            </form>
+            <hr class="border-zinc-800">
+            <div class="text-center space-y-3">
+                <p class="text-[10px] text-zinc-500 uppercase tracking-widest">Ou réservez un créneau direct</p>
+                <a href="https://calendly.com/" target="_blank" class="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-medium tracking-wider uppercase px-6 py-3 rounded-xl transition-colors text-center">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> Bloquer 15 min sur notre calendrier
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="explainModal" onclick="closeExplainModalOnBackdrop(event)" 
+        class="invisible opacity-0 fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-300 ease-out">
+        
+        <div id="explainContent" class="scale-95 opacity-0 bg-zinc-900 border border-zinc-800 p-6 sm:p-10 rounded-3xl max-w-2xl w-full relative max-h-[90vh] overflow-y-auto space-y-8 shadow-2xl shadow-black/80 transition-all duration-300 ease-out delay-75">
+            <button onclick="closeExplainModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Le processus NovaWeb</h2>
+                <p class="text-zinc-400 text-xs sm:text-sm font-light">De la prise de contact jusqu'à la mise en ligne de votre outil pro.</p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="flex gap-4 items-start p-4 bg-zinc-950/40 border border-zinc-800/50 rounded-xl">
+                    <div class="w-8 h-8 bg-indigo-500/10 text-indigo-400 flex items-center justify-center rounded-lg font-bold text-sm shrink-0">1</div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-semibold text-white">Prise de contact & Choix de l'offre</h4>
+                        <p class="text-xs text-zinc-400 font-light leading-relaxed">Cliquez sur un pack pour ouvrir le formulaire pré-rempli ou écrivez-nous directement.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start p-4 bg-zinc-950/40 border border-zinc-800/50 rounded-xl">
+                    <div class="w-8 h-8 bg-indigo-500/10 text-indigo-400 flex items-center justify-center rounded-lg font-bold text-sm shrink-0">2</div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-semibold text-white">Envoi de vos documents</h4>
+                        <p class="text-xs text-zinc-400 font-light leading-relaxed">Vous nous fournissez vos textes, vos horaires, votre logo et vos photos. Notre équipe vous guide pas à pas.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start p-4 bg-zinc-950/40 border border-zinc-800/50 rounded-xl">
+                    <div class="w-8 h-8 bg-indigo-500/10 text-indigo-400 flex items-center justify-center rounded-lg font-bold text-sm shrink-0">3</div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-semibold text-white">Développement & Validation</h4>
+                        <p class="text-xs text-zinc-400 font-light leading-relaxed">Nous codons votre site sous 7 à 10 jours. Vous validez le rendu avant toute mise en ligne.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start p-4 bg-zinc-950/40 border border-indigo-500/20 rounded-xl bg-indigo-500/5">
+                    <div class="w-8 h-8 bg-indigo-500/20 text-indigo-300 flex items-center justify-center rounded-lg font-bold text-sm shrink-0">4</div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-semibold text-indigo-300">Abonnement & Lancement</h4>
+                        <p class="text-xs text-zinc-400 font-light leading-relaxed">L'abonnement s'active et votre site est propulsé sur votre nom de domaine officiel (ex: `votre-salon.fr`).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2 flex justify-center">
+                <button onclick="switchModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
+                    <span>Démarrer dès maintenant</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <div id="calendly-anchor" style="padding-top: 50px;"></div>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.toggle('hidden');
+        }
+    </script>
+
+    <footer class="py-12 border-t border-zinc-900 text-center space-y-4 px-6">
+        <p class="text-xs font-bold tracking-tight bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">NovaWeb</p>
+        <p class="text-[10px] text-zinc-600 tracking-wide max-w-2xl mx-auto leading-relaxed">
+            © 2026 NovaWeb. Tous droits réservés. Tarifs nets, TVA non applicable (article 293 B du CGI). Contrats soumis à un engagement initial de 12 mois.
+        </p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // --- Configuration des liens Yousign ---
+        const yousignLinks = {
+            'Starter': 'https://app.yousign.com/votre-lien-starter',
+            'Pro': 'https://app.yousign.com/votre-lien-pro',
+            'Premium / E-Commerce': 'https://app.yousign.com/votre-lien-premium'
+        };
+
+        // --- Éléments DOM ---
+        const contactModal = document.getElementById('contactModal');
+        const modalContent = document.getElementById('modalContent');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSubtitle = document.getElementById('modalSubtitle');
+        const messageTextarea = document.getElementById('message');
+        const hiddenOfferInput = document.getElementById('hiddenOfferInput');
+
+        const explainModal = document.getElementById('explainModal');
+        const explainContent = document.getElementById('explainContent');
+
+        // --- Fonctions Modale Contact ---
+        function openContactModal(offerName) {
+            hiddenOfferInput.value = offerName;
+
+            if (offerName === 'Général') {
+                modalTitle.innerText = "Prêt à lancer votre projet ?";
+                modalSubtitle.innerText = "Détaillez votre besoin, réponse en moins de 24h.";
+                messageTextarea.placeholder = "Bonjour, je souhaiterais obtenir des informations pour créer un site...";
+                messageTextarea.value = "";
+            } else {
+                modalTitle.innerText = `Intéressé par le Pack ${offerName} ?`;
+                modalSubtitle.innerText = "Remplissez ce formulaire pour nous envoyer vos documents.";
+                messageTextarea.value = `Bonjour, je souhaite lancer mon projet avec le Pack ${offerName}. Merci de me recontacter !`;
+            }
+
+            contactModal.classList.remove('invisible', 'opacity-0');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactModal() {
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                contactModal.classList.add('invisible', 'opacity-0');
+                checkScroll();
+            }, 200);
+        }
+
+        function closeContactModalOnBackdrop(event) {
+            if (event.target === contactModal) closeContactModal();
+        }
+
+        // --- Fonctions Modale Explications ---
+        function openExplainModal() {
+            explainModal.classList.remove('invisible', 'opacity-0');
+            explainContent.classList.remove('scale-95', 'opacity-0');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeExplainModal() {
+            explainContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                explainModal.classList.add('invisible', 'opacity-0');
+                checkScroll();
+            }, 200);
+        }
+
+        function closeExplainModalOnBackdrop(event) {
+            if (event.target === explainModal) closeExplainModal();
+        }
+
+        // --- Utilitaires ---
+        function switchModal() {
+            // 1. On appelle votre fonction de fermeture existante
+            closeExplainModal();
+
+            // 2. On attend la fin de l'animation de fermeture (200ms) 
+            // avant de lancer le scroll vers le Calendly
+            setTimeout(() => {
+                const target = document.getElementById('calendly-anchor');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 200);
+        }
+
+        function checkScroll() {
+            if (contactModal.classList.contains('invisible') && explainModal.classList.contains('invisible')) {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function openMailModal(packName) {
+    const modal = document.getElementById('mailModal');
+    const reqList = document.getElementById('modalRequirements');
+    const mailLink = document.getElementById('mailActionLink');
+    
+    // Configuration
+    const config = {
+        'Pack Starter': ['Images de votre activité', 'Adresse e-mail de contact', 'Numéro de téléphone'],
+        'Pack Pro': ['Lien Calendly', 'Images professionnelles', 'Sujets/textes des pages'],
+        'Pack Premium': ['Lien Calendly', 'Lien Stripe (paiement)', 'Textes & Médias complets']
+    };
+
+    // Mise à jour de l'affichage
+    document.getElementById('modalTitle').innerText = packName;
+    reqList.innerHTML = config[packName].map(item => `<li>• ${item}</li>`).join('');
+
+    // Construction du contenu du mail
+    const subject = encodeURIComponent("Demande de souscription - " + packName);
+    const body = encodeURIComponent(
+        `Bonjour,\n\nJe souhaite souscrire au ${packName}.\n\nVoici les éléments nécessaires :\n` + 
+        config[packName].map(item => `- ${item} : `).join('\n') + 
+        `\n\nMerci.`
+    );
+    
+    mailLink.href = `mailto:rafaeldupreypro@gmail.com?subject=${subject}&body=${body}`;
+
+    // Affichage instantané
+    modal.classList.remove('hidden');
+}
+
+function closeMailModal() {
+    document.getElementById('mailModal').classList.add('hidden');
+}
+
+    // Fermer en cliquant sur le flou
+    document.getElementById('modalOverlay').addEventListener('click', closeMailModal);
+    </script>
+    <div id="mailModal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 hidden">
+    <div id="modalOverlay" class="absolute inset-0 bg-black/60 backdrop-blur-md"></div>
+    
+    <div id="modalContent" class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl max-w-lg w-full relative shadow-2xl">
+        <h2 id="modalTitle" class="text-white text-xl font-bold mb-2">Préparez votre demande, n'oubliez pas de joindre vos images.</h2>
+        <p class="text-zinc-400 text-xs mb-4">Pour valider votre demande, préparez les éléments suivants dans votre e-mail :</p>
+        
+        <ul id="modalRequirements" class="text-zinc-300 text-sm space-y-2 mb-6 bg-zinc-950 p-4 rounded-xl border border-zinc-800 font-light">
+        </ul>
+
+        <div class="flex gap-3 pt-2">
+            <button onclick="closeMailModal()" class="flex-1 bg-zinc-800 text-white py-3 rounded-xl text-sm">Annuler</button>
+            <a id="mailActionLink" href="#" class="flex-1 bg-indigo-600 text-white py-3 rounded-xl text-sm font-semibold text-center">Ouvrir mon application mail</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
