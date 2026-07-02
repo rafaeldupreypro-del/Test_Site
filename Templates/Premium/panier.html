@@ -146,6 +146,22 @@
 
         totalElement.innerText = total + " €";
     }
+    async function processPayment() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        if (cart.length === 0) {
+            alert("Le panier est vide.");
+            return;
+        }
+
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const itemNames = cart.map(item => `- ${item.name} (x${item.quantity})`).join('\n');
+
+        const testMessage = `--- MODE TEST ---\n\nProduits :\n${itemNames}\n\nTotal : ${total} €\n\nLe lien de paiement Stripe serait généré ici.`;
+
+        alert(testMessage);
+    }
+    
     renderCart();
     </script>
 </body>
