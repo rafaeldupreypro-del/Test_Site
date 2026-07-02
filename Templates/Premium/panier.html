@@ -58,6 +58,7 @@
 
     <script>
         function renderCart() {
+        console.log("Le panier est en train de se générer...");
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const container = document.getElementById('cart-items');
         const totalElement = document.getElementById('cart-total');
