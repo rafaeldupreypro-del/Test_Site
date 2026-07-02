@@ -34,6 +34,14 @@
                 <button class="md:hidden p-2"><i data-lucide="menu" class="w-6 h-6"></i></button>
             </div>
         </div>
+        <div class="flex items-center gap-4">
+            <button id="menu-btn" class="md:hidden p-2"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
+        </div> <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-b border-zinc-800 p-6 space-y-4 text-center">
+            <a href="collections.html" class="block text-xs uppercase tracking-widest text-zinc-300">Collections</a>
+            <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-zinc-300">E-Boutique</a>
+            <a href="atelier.html" class="block text-xs uppercase tracking-widest text-zinc-300">L'Atelier</a>
+        </div>
     </nav>
 
     <!-- Hero -->
@@ -132,7 +140,18 @@
         }
 
         function closeModal() { document.getElementById('product-modal').classList.add('hidden'); }
+        
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
 
+        menuBtn.onclick = () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            // Change l'icône entre menu et croix
+            icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x');
+            lucide.createIcons();
+        };
+        
         lucide.createIcons();
         updateCartCount();
     </script>
