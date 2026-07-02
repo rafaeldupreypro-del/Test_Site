@@ -108,33 +108,26 @@
             </button>
         `;
         card.querySelector('.aspect-square').onclick = () => openModal(p);
-        card.querySelector('button').onclick = () => addToCart({ id: p.name, name: p.name, price: p.price });
+        card.querySelector('button').onclick = (e) => addToCart({ id: p.name, name: p.name, price: p.price }, e.target);
         grid.appendChild(card);
     });
 
-    // 2. Logique de mise à jour des boutons (Universelle)
-    function updateAllButtons(productId) {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const isInCart = cart.find(item => item.id === productId);
-        const buttons = document.querySelectorAll(`button[data-id="${productId}"]`);
+    // 2. Fonction d'animation temporaire
+    function triggerSuccess(btn) {
+        const originalText = btn.innerText;
+        btn.innerText = "Ajouté !";
+        btn.classList.replace('bg-white', 'bg-green-600');
+        btn.classList.replace('text-zinc-950', 'text-white');
 
-        buttons.forEach(btn => {
-            if (isInCart) {
-                btn.innerText = "Déjà ajouté";
-                btn.classList.replace('bg-white', 'bg-green-600');
-                btn.classList.replace('text-zinc-950', 'text-white');
-                btn.disabled = true;
-            } else {
-                btn.innerText = "Ajouter au panier";
-                btn.classList.replace('bg-green-600', 'bg-white');
-                btn.classList.replace('text-white', 'text-zinc-950');
-                btn.disabled = false;
-            }
-        });
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.classList.replace('bg-green-600', 'bg-white');
+            btn.classList.replace('text-white', 'text-zinc-950');
+        }, 1000);
     }
 
     // 3. Ajout au panier
-    function addToCart(product) {
+    function addToCart(product, btn) {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const index = cart.findIndex(item => item.id === product.id);
 
@@ -146,11 +139,13 @@
         }
 
         localStorage.setItem('cart', JSON.stringify(cart));
-        updateAllButtons(product.id);
         updateCartCount();
+        
+        // Si le bouton est passé en paramètre, on lance l'animation
+        if(btn) triggerSuccess(btn);
     }
 
-    // 4. Utilitaires (Modale, Compteur, Menu)
+    // 4. Utilitaires conservés intacts
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const count = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -165,18 +160,26 @@
         document.getElementById('modal-name').innerText = p.name;
         document.getElementById('modal-desc').innerText = p.desc;
         const btn = document.getElementById('modal-btn');
-        btn.setAttribute('data-id', p.name);
-        btn.onclick = () => addToCart({ id: p.name, name: p.name, price: p.price });
+        btn.onclick = () => addToCart({ id: p.name, name: p.name, price: p.price }, btn);
         document.getElementById('product-modal').classList.remove('hidden');
-        updateAllButtons(p.name);
     }
 
     function closeModal() { document.getElementById('product-modal').classList.add('hidden'); }
 
-    // 5. Initialisation au chargement
+    // Menu Mobile
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.onclick = () => {
+        mobileMenu.classList.toggle('hidden');
+        const icon = menuBtn.querySelector('i');
+        icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x');
+        lucide.createIcons();
+    };
+
+    // Initialisation
     document.addEventListener('DOMContentLoaded', () => {
-        products.forEach(p => updateAllButtons(p.name));
         updateCartCount();
+        lucide.createIcons();
     });
 </script>
 </body>
