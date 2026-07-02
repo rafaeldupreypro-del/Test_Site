@@ -14,7 +14,7 @@
 <body class="bg-zinc-950 text-zinc-100 antialiased">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-zinc-950/80 backdrop-blur-md z-50 border-b border-zinc-900">
+    <nav class="fixed top-0 w-full bg-zinc-950/80 backdrop-blur-md z-50">
         <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
             <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light">Atelier Nora</a>
             
@@ -26,18 +26,21 @@
             </div>
 
             <div class="flex items-center gap-4">
+                <!-- Lien Panier -->
                 <a href="panier.html" class="relative p-2">
                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                     <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-amber-500 rounded-full text-[9px] font-bold text-zinc-950 flex items-center justify-center hidden">0</span>
                 </a>
-                <!-- Mobile Menu Icon (Placeholder) -->
-                <button class="md:hidden p-2"><i data-lucide="menu" class="w-6 h-6"></i></button>
+                
+                <!-- Menu Hamburger (Uniquement visible sur mobile grâce à md:hidden) -->
+                <button id="menu-btn" class="md:hidden p-2 flex items-center justify-center">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
             </div>
         </div>
-        <div class="flex items-center gap-4">
-            <button id="menu-btn" class="md:hidden p-2"><i data-lucide="menu" class="w-6 h-6"></i></button>
-            </div>
-        </div> <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-b border-zinc-800 p-6 space-y-4 text-center">
+
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-zinc-800 p-6 space-y-4 text-center">
             <a href="collections.html" class="block text-xs uppercase tracking-widest text-zinc-300">Collections</a>
             <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-zinc-300">E-Boutique</a>
             <a href="atelier.html" class="block text-xs uppercase tracking-widest text-zinc-300">L'Atelier</a>
@@ -151,7 +154,7 @@
             icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x');
             lucide.createIcons();
         };
-        
+
         lucide.createIcons();
         updateCartCount();
     </script>
