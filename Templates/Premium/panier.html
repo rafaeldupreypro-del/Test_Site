@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Votre Panier | Atelier Nora</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -107,50 +108,42 @@
             renderCart();
         }
 
-        renderCart();
-        async function processPayment() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const btn = event.target;
+        function renderCart() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const container = document.getElementById('cart-items');
+        const totalElement = document.getElementById('cart-total');
+        
+        container.innerHTML = '';
+        let total = 0;
 
-            if (cart.length === 0) {
-                alert("Votre panier est vide.");
-                return;
-            }
+        // C'est ici que le forEach commence
+        cart.forEach((item, index) => {
+            // C'est ici que l'affichage est généré pour chaque produit
+            container.innerHTML += `
+                <div class="flex items-center justify-between py-8 border-b border-zinc-800">
+                    <div class="flex items-center gap-6">
+                        <!-- Image grande taille -->
+                        <div class="w-24 h-24 bg-zinc-900 rounded-2xl flex-shrink-0"></div>
+                        
+                        <!-- Texte forcé en très gros -->
+                        <div class="flex flex-col gap-2">
+                            <h3 class="text-2xl font-bold text-white tracking-wide">${item.name}</h3>
+                            <p class="text-base text-zinc-400 uppercase">Quantité: ${item.quantity}</p>
+                            <button onclick="removeItem(${index})" class="text-sm text-red-500 font-bold uppercase tracking-widest mt-2 underline">
+                                Retirer
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Prix forcé en très gros -->
+                    <span class="text-2xl font-bold text-white">${item.price * item.quantity} €</span>
+                </div>`;
+            
+            total += (item.price * item.quantity);
+        });
 
-            // 1. État de chargement (UX professionnelle)
-            const originalText = btn.innerText;
-            btn.innerText = "Connexion à Stripe...";
-            btn.disabled = true;
-            btn.classList.add('opacity-50', 'cursor-not-allowed');
-
-            try {
-                // 2. Appel à votre futur serveur de paiement
-                // C'est ici que vous enverrez les données au backend pour créer la session Stripe
-                const response = await fetch('/create-checkout-session', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ items: cart })
-                });
-
-                const session = await response.json();
-
-                // 3. Redirection vers l'URL de paiement sécurisée de Stripe
-                if (session.url) {
-                    window.location.href = session.url;
-                } else {
-                    throw new Error("Impossible de créer la session de paiement.");
-                }
-
-            } catch (error) {
-                console.error("Erreur:", error);
-                alert("Une erreur est survenue lors de la redirection vers le paiement. Veuillez réessayer.");
-                
-                // Réinitialisation du bouton en cas d'erreur
-                btn.innerText = originalText;
-                btn.disabled = false;
-                btn.classList.remove('opacity-50', 'cursor-not-allowed');
-            }
-        }
+        totalElement.innerText = total + " €";
+    }
     </script>
 </body>
 </html>
