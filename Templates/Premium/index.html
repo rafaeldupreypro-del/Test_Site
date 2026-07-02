@@ -126,6 +126,7 @@
                 btn.classList.replace('bg-emerald-700', 'bg-zinc-800');
                 span.innerText = originalText;
             }, 1500);
+            updateButtonStates();
         }
 
         function updateCartCount() {
@@ -157,8 +158,29 @@
             lucide.createIcons();
         };
 
-        lucide.createIcons();
-        updateCartCount();
+        function updateButtonStates() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // On récupère tous les boutons qui ont un attribut data-id
+        const buttons = document.querySelectorAll('button[data-id]');
+
+        buttons.forEach(btn => {
+            const productId = btn.getAttribute('data-id');
+            // Vérifie si le produit est présent dans le panier
+            const isInCart = cart.find(item => item.id === productId);
+
+            if (isInCart) {
+                btn.innerText = "Déjà au panier";
+                btn.classList.add('opacity-50'); // Optionnel : griser le bouton
+            } else {
+                btn.innerText = "Ajouter au panier";
+                btn.classList.remove('opacity-50');
+            }
+        });
+    }
+    document.addEventListener('DOMContentLoaded', updateButtonStates);
+
+    lucide.createIcons();
+    updateCartCount();
     </script>
 </body>
 </html>
