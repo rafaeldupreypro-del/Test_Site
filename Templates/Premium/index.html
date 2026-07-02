@@ -6,10 +6,7 @@
     <title>Atelier Nora | Haute Joaillerie Artisanale</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-zinc-950 text-zinc-100 antialiased">
 
@@ -94,23 +91,38 @@
     const grid = document.getElementById('product-grid');
 
     // 1. Génération de la grille
-    products.forEach(p => {
-        const card = document.createElement('div');
-        card.className = "group bg-zinc-900/50 border border-zinc-800 p-4 rounded-2xl";
-        card.innerHTML = `
-            <div class="aspect-square bg-zinc-900 border border-zinc-800 rounded-xl mb-4 cursor-pointer"></div>
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-sm font-medium">${p.name}</h3>
-                <span class="text-xs text-zinc-400">${p.price} €</span>
+   products.forEach(p => {
+    const card = document.createElement('div');
+    // Carte avec un fond légèrement plus clair pour se détacher du fond du site
+    card.className = "group bg-zinc-900/40 border border-zinc-800 p-4 rounded-2xl transition-all hover:border-zinc-700";
+    
+    card.innerHTML = `
+        <div class="aspect-square bg-zinc-900 border border-zinc-800 rounded-xl mb-4 cursor-pointer overflow-hidden">
             </div>
-            <button data-id="${p.name}" class="w-full bg-white py-3 rounded-lg text-[10px] text-zinc-950 uppercase tracking-widest transition-colors duration-300">
-                <span>Ajouter au panier</span>
-            </button>
-        `;
-        card.querySelector('.aspect-square').onclick = () => openModal(p);
-        card.querySelector('button').onclick = (e) => addToCart({ id: p.name, name: p.name, price: p.price }, e.target);
-        grid.appendChild(card);
-    });
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-sm font-medium text-white">${p.name}</h3>
+            <span class="text-sm font-semibold text-accent">
+                ${p.price} €
+            </span>
+        </div>
+        <button data-id="${p.name}" 
+                class="btn-gold w-full py-3 rounded-lg font-bold uppercase tracking-widest transition-all duration-300">
+            <span>Ajouter au panier</span>
+        </button>
+    `;
+    
+    // Événements
+    card.querySelector('.aspect-square').onclick = () => openModal(p);
+    
+    // Utilisation de currentTarget pour assurer que le bouton est bien le déclencheur
+    card.querySelector('button').onclick = (e) => addToCart({ 
+        id: p.name, 
+        name: p.name, 
+        price: p.price 
+    }, e.currentTarget);
+    
+    grid.appendChild(card);
+});
 
     // 2. Fonction d'animation temporaire
     function triggerSuccess(btn) {
@@ -128,22 +140,40 @@
 
     // 3. Ajout au panier
     function addToCart(product, btn) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const index = cart.findIndex(item => item.id === product.id);
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.id === product.id);
 
-        if (index > -1) {
-            cart[index].quantity += 1;
-        } else {
-            product.quantity = 1;
-            cart.push(product);
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
-        
-        // Si le bouton est passé en paramètre, on lance l'animation
-        if(btn) triggerSuccess(btn);
+    if (index > -1) {
+        cart[index].quantity += 1;
+    } else {
+        product.quantity = 1;
+        cart.push(product);
     }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    
+    // Si le bouton est passé en paramètre, on lance l'animation
+    if(btn) {
+        triggerSuccess(btn);
+    }
+}
+
+function triggerSuccess(buttonElement) {
+    const originalText = buttonElement.querySelector('span').innerText;
+
+    // On retire la classe Or, on ajoute la classe Verte
+    buttonElement.classList.remove('btn-gold');
+    buttonElement.classList.add('btn-success');
+    buttonElement.querySelector('span').innerText = "Ajouté !";
+
+    // Revenir à l'or après 2 secondes
+    setTimeout(() => {
+        buttonElement.classList.remove('btn-success');
+        buttonElement.classList.add('btn-gold');
+        buttonElement.querySelector('span').innerText = originalText;
+    }, 1000);
+}
 
     // 4. Utilitaires conservés intacts
     function updateCartCount() {

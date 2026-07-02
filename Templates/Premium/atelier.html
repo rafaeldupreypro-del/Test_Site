@@ -5,48 +5,43 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <title>L'Atelier | Atelier Nora</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100">
-
-    <!-- Inclure ici votre <nav> -->
+<body class="bg-zinc-950 text-zinc-100 antialiased">
 
     <main class="max-w-4xl mx-auto pt-32 pb-20 px-6">
-        <!-- Section Histoire -->
         <div class="text-center space-y-10 mb-20">
             <h1 class="text-4xl font-extralight tracking-[0.2em] uppercase text-white">L'Atelier</h1>
-            <div class="w-20 h-[1px] bg-amber-600 mx-auto"></div>
-            <p class="text-zinc-400 font-light leading-relaxed max-w-2xl mx-auto text-sm">
+            <div class="w-20 h-[1px] bg-accent mx-auto"></div>
+            <p class="text-zinc-300 font-light leading-relaxed max-w-2xl mx-auto text-base">
                 Né au Havre, l'Atelier Nora est le fruit d'une quête d'équilibre entre l'artisanat traditionnel et une vision durable de la joaillerie. 
                 Chaque pièce que nous créons porte en elle l'empreinte de nos mains et le respect de la matière brute.
             </p>
         </div>
 
-        <!-- Section Valeurs / Processus -->
         <div class="grid md:grid-cols-3 gap-12 border-t border-zinc-900 pt-16">
-            <div class="space-y-4 text-center">
-                <i data-lucide="gem" class="w-6 h-6 mx-auto text-amber-500"></i>
-                <h3 class="text-xs uppercase tracking-widest font-medium">Éthique</h3>
-                <p class="text-[11px] text-zinc-500">Or 18k recyclé et pierres précieuses sourcées avec intégrité.</p>
+            <div class="space-y-4 text-center group">
+                <i data-lucide="gem" class="w-8 h-8 mx-auto text-accent mb-4 transition-transform group-hover:scale-110"></i>
+                <h3 class="text-xs uppercase tracking-widest font-medium text-white">Éthique</h3>
+                <p class="text-[13px] text-zinc-400 leading-relaxed">Or 18k recyclé et pierres précieuses sourcées avec intégrité.</p>
             </div>
-            <div class="space-y-4 text-center">
-                <i data-lucide="hammer" class="w-6 h-6 mx-auto text-amber-500"></i>
-                <h3 class="text-xs uppercase tracking-widest font-medium">Savoir-faire</h3>
-                <p class="text-[11px] text-zinc-500">Un travail manuel minutieux, privilégiant la qualité sur la quantité.</p>
+            <div class="space-y-4 text-center group">
+                <i data-lucide="hammer" class="w-8 h-8 mx-auto text-accent mb-4 transition-transform group-hover:scale-110"></i>
+                <h3 class="text-xs uppercase tracking-widest font-medium text-white">Savoir-faire</h3>
+                <p class="text-[13px] text-zinc-400 leading-relaxed">Un travail manuel minutieux, privilégiant la qualité sur la quantité.</p>
             </div>
-            <div class="space-y-4 text-center">
-                <i data-lucide="map-pin" class="w-6 h-6 mx-auto text-amber-500"></i>
-                <h3 class="text-xs uppercase tracking-widest font-medium">Local</h3>
-                <p class="text-[11px] text-zinc-500">Chaque bijou est façonné dans notre atelier en Normandie.</p>
+            <div class="space-y-4 text-center group">
+                <i data-lucide="map-pin" class="w-8 h-8 mx-auto text-accent mb-4 transition-transform group-hover:scale-110"></i>
+                <h3 class="text-xs uppercase tracking-widest font-medium text-white">Local</h3>
+                <p class="text-[13px] text-zinc-400 leading-relaxed">Chaque bijou est façonné dans notre atelier en Normandie.</p>
             </div>
         </div>
 
-        <!-- Section Visuelle -->
         <div class="mt-20">
-            <div class="aspect-video bg-zinc-900 rounded-3xl border border-zinc-800 flex items-center justify-center relative overflow-hidden">
-                <div class="absolute inset-0 bg-zinc-950/40"></div>
-                <span class="text-zinc-700 text-xs uppercase tracking-widest">Photo de l'artisan au travail</span>
-                <!-- <img src="images/atelier-photo.jpg" class="w-full h-full object-cover"> -->
-            </div>
+            <div class="aspect-video bg-zinc-900 rounded-3xl border border-zinc-800 flex items-center justify-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-zinc-950/20 transition-opacity group-hover:bg-zinc-950/0"></div>
+                <span class="text-zinc-600 text-xs uppercase tracking-widest">Photo de l'artisan au travail</span>
+                </div>
         </div>
     </main>
 

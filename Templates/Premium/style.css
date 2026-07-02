@@ -1,0 +1,142 @@
+/* 1. Typographie globale */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap');
+
+body {
+    background-color: #09090b; /* Votre zinc-950 */
+    background-image: 
+        radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.1), transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.05), transparent 50%);
+    background-attachment: fixed; /* L'effet reste fixe au scroll */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03; /* Très léger */
+    pointer-events: none;
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+}
+
+h1, h2, h3 {
+    color: #ffffff; /* Blanc pour le contraste */
+}
+
+/* Ajoutez une ligne de séparation élégante sous vos titres */
+.title-accent::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 2px;
+    background-color: var(--accent);
+    margin: 10px auto;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border: 1px solid var(--accent) !important;
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+}
+
+:root {
+    --accent-color: #D4AF37; /* Remplacez par votre couleur choisie */
+}
+
+/* Appliquez la couleur aux éléments clés */
+.text-accent { color: var(--accent-color) !important; }
+.accent-border { border-color: var(--accent-color) !important; }
+.accent-bg { background-color: var(--accent-color) !important; }
+
+.btn-accent {
+    background-color: var(--accent) !important;
+    color: #000 !important; /* Texte noir sur fond Or pour la lisibilité */
+}
+
+/* Effet de brillance au survol */
+.btn-accent:hover {
+    filter: brightness(1.2); /* Rends l'or un peu plus clair/lumineux */
+    transform: translateY(-2px);
+}
+
+.btn-gold {
+    background-color: #D4AF37 !important;
+    color: #000000 !important;
+}
+
+.btn-success {
+    background-color: #22c55e !important;
+    color: #ffffff !important;
+}
+
+.nav-link {
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent) !important;
+}
+
+.cart-count {
+    background-color: var(--accent) !important;
+    color: #000 !important;
+}
+
+/* 2. Lisibilité mobile (Atelier et Collections) */
+.text-readable {
+    color: #e4e4e7 !important;
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* 3. Spécifique Panier (pour forcer la taille sur mobile) */
+#cart-items div h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+}
+#cart-items div span {
+    font-size: 1.25rem !important;
+}
+#cart-items div p {
+    font-size: 1rem !important;
+}
+
+/* 4. Transitions et Boutons */
+.transition-colors {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.btn-outline {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    padding: 1rem !important;
+    border: 2px solid #ffffff !important;
+    color: #ffffff !important; /* Texte blanc par défaut */
+    background-color: transparent !important;
+    border-radius: 0.75rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-outline:hover {
+    background-color: #ffffff !important; /* Fond blanc au survol */
+    color: #000000 !important;            /* Texte NOIR au survol */
+    border-color: #ffffff !important;
+}
+
+.stripe-security-text {
+    font-size: 1.1rem !important; /* Plus grand */
+    font-weight: 600 !important;  /* Plus épais */
+    color: #a1a1aa !important;    /* Zinc-400 (plus contrasté) */
+    text-align: center;
+    margin-top: 1rem;
+    display: block;
+    margin-top: 0.5rem !important;   /* Espace avec le bouton "Payer" au-dessus */
+    margin-bottom: 1.5rem !important; /* Espace important avant le lien "Continuer" */
+}
