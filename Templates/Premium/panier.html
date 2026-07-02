@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Votre Panier | Atelier Nora</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased">
+
+    <!-- Navigation simplifiée -->
+    <nav class="fixed top-0 w-full bg-zinc-950/60 backdrop-blur-lg z-50 border-b border-zinc-900/60">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="text-base tracking-[0.3em] font-light uppercase text-white">Atelier Nora</a>
+        </div>
+    </nav>
+
+    <main class="max-w-2xl mx-auto pt-32 px-6">
+        <h1 class="text-2xl font-light uppercase tracking-widest mb-10">Votre Panier</h1>
+        
+        <div id="cart-items" class="space-y-6 border-b border-zinc-800 pb-6">
+            <!-- Les produits s'injectent ici -->
+        </div>
+
+        <!-- Récapitulatif et bouton de paiement -->
+            <div class="mt-10 border-t border-zinc-800 pt-6 space-y-6">
+                <div class="flex justify-between items-center text-white">
+                    <span class="text-sm">Total</span>
+                    <span id="cart-total" class="text-lg font-bold">0 €</span>
+                </div>
+
+                <!-- Bouton de paiement -->
+                <button onclick="processPayment()" 
+                        class="w-full bg-white text-zinc-950 py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-zinc-200 transition-all duration-300">
+                    Procéder au paiement
+                </button>
+                
+                <p class="text-[10px] text-zinc-500 text-center uppercase tracking-widest">
+                    Paiement sécurisé via Stripe
+                </p>
+            </div>
+        <a href="index.html" class="block text-center mt-6 text-xs text-zinc-500 hover:text-white">Continuer mes achats</a>
+    </main>
+
+    <script>
+        function renderCart() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const container = document.getElementById('cart-items');
+        const totalElement = document.getElementById('cart-total');
+        container.innerHTML = '';
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            // Note: J'ai ajouté une variable imagePath. 
+            // Remplacez 'images/default.jpg' par le nom du fichier réel si nécessaire.
+            container.innerHTML += `
+                <div class="flex items-center gap-6">
+                    <div class="w-16 h-16 bg-zinc-900 rounded-xl border border-zinc-800 flex-shrink-0 overflow-hidden">
+                        <img src="images/bijou-placeholder.jpg" alt="${item.name}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow flex justify-between items-center">
+                        <div>
+                            <h3 class="text-sm font-medium">${item.name}</h3>
+                            <p class="text-[10px] text-zinc-500 uppercase">Quantité: ${item.quantity}</p>
+                            <button onclick="removeItem(${index})" class="text-[10px] text-red-500 hover:text-red-400 uppercase tracking-widest mt-1">
+                                Retirer un exemplaire
+                            </button>
+                        </div>
+                        <span class="text-sm font-medium">${item.price * item.quantity} €</span>
+                    </div>
+                </div>`;
+            total += (item.price * item.quantity);
+        });
+        
+        totalElement.innerText = total + " €";
+    }
+    // ... reste de la fonction removeItem ...
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+            } else {
+                cart.splice(index, 1);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        renderCart();
+        async function processPayment() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const btn = event.target;
+
+            if (cart.length === 0) {
+                alert("Votre panier est vide.");
+                return;
+            }
+
+            // 1. État de chargement (UX professionnelle)
+            const originalText = btn.innerText;
+            btn.innerText = "Connexion à Stripe...";
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            try {
+                // 2. Appel à votre futur serveur de paiement
+                // C'est ici que vous enverrez les données au backend pour créer la session Stripe
+                const response = await fetch('/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ items: cart })
+                });
+
+                const session = await response.json();
+
+                // 3. Redirection vers l'URL de paiement sécurisée de Stripe
+                if (session.url) {
+                    window.location.href = session.url;
+                } else {
+                    throw new Error("Impossible de créer la session de paiement.");
+                }
+
+            } catch (error) {
+                console.error("Erreur:", error);
+                alert("Une erreur est survenue lors de la redirection vers le paiement. Veuillez réessayer.");
+                
+                // Réinitialisation du bouton en cas d'erreur
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+    </script>
+</body>
+</html>

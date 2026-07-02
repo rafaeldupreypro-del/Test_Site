@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processus & Hygiène | BlackInk Studio Le Havre</title>
+    <meta name="description" content="Découvrez le déroulement de votre projet de tatouage custom et nos engagements hygiène ARS à Le Havre.">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-black text-zinc-100 antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black/70 backdrop-blur-md z-50 border-b border-zinc-900">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold tracking-widest text-white uppercase">Black<span class="text-indigo-500">Ink</span></a>
+            <div class="hidden md:flex items-center space-x-8 text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                <a href="index.html" class="hover:text-white transition-colors">Accueil</a>
+                <a href="portfolio.html" class="hover:text-white transition-colors">Portfolio</a>
+                <a href="services.html" class="text-white">Tarifs & Process</a>
+                <a href="contact.html" class="hover:text-white transition-colors">Prendre RDV</a>
+            </div>
+            <a href="contact.html" class="bg-indigo-600 text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-lg hover:bg-indigo-500 transition-colors">Consultation</a>
+        </div>
+    </nav>
+
+    <!-- Contenu Services -->
+    <main class="pt-32 pb-24 max-w-5xl mx-auto px-6 space-y-20">
+        <div class="text-center max-w-xl mx-auto space-y-4">
+            <h1 class="text-4xl font-bold text-white tracking-tight">Notre Fonctionnement</h1>
+            <p class="text-zinc-400 text-sm font-light">De la première idée à la cicatrisation complète, nous vous accompagnons pas à pas.</p>
+        </div>
+
+        <!-- Les 3 Étapes du Projet -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl space-y-4">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600/10 flex items-center justify-center text-indigo-400 font-bold">1</div>
+                <h3 class="text-lg font-bold text-white">La Consultation</h3>
+                <p class="text-zinc-400 text-xs font-light leading-relaxed">Discussion autour de vos références, choix de l'emplacement, de la taille et validation du devis initial.</p>
+            </div>
+            <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl space-y-4">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600/10 flex items-center justify-center text-indigo-400 font-bold">2</div>
+                <h3 class="text-lg font-bold text-white">Le Dessin Custom</h3>
+                <p class="text-zinc-400 text-xs font-light leading-relaxed">Création de votre motif unique et ajustements nécessaires avant le jour J pour une pièce parfaite.</p>
+            </div>
+            <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl space-y-4">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600/10 flex items-center justify-center text-indigo-400 font-bold">3</div>
+                <h3 class="text-lg font-bold text-white">La Séance</h3>
+                <p class="text-zinc-400 text-xs font-light leading-relaxed">Réalisation du tatouage dans notre studio privé équipé, suivie de l'application des soins protecteurs.</p>
+            </div>
+        </div>
+
+        <!-- Section Hygiène ARS -->
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center">
+            <div class="p-4 bg-indigo-600/10 rounded-2xl text-indigo-400">
+                <i data-lucide="shield-check" class="w-12 h-12"></i>
+            </div>
+            <div class="space-y-2">
+                <h2 class="text-xl font-bold text-white">Normes Sanitaires & Sécurité</h2>
+                <p class="text-zinc-400 text-xs font-light leading-relaxed">Notre matériel est à usage unique, stérile et déballé devant vous. Le studio fait l'objet d'un nettoyage chirurgical quotidien et est entièrement validé par les réglementations de l'ARS Normandie.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-zinc-900 bg-zinc-950 px-6 text-xs text-zinc-500 font-light">
+        <!-- Même Footer pour cohérence -->
+        <div class="max-w-6xl mx-auto flex justify-between items-center text-zinc-600">
+            <p>© 2026 BlackInk Le Havre.</p>
+            <p>Certifié ARS Normandie.</p>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

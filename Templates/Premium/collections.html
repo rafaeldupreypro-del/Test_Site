@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Collections | Atelier Nora</title>
+</head>
+<body class="bg-zinc-950 text-zinc-100">
+
+    <!-- Inclure ici votre <nav> -->
+
+    <main class="max-w-7xl mx-auto pt-32 pb-20 px-6">
+        <!-- En-tête de page -->
+        <div class="mb-20 text-center space-y-4">
+            <h1 class="text-4xl font-extralight tracking-[0.2em] uppercase">Collections</h1>
+            <p class="text-zinc-500 text-xs tracking-widest uppercase">L'art de l'or et de la lumière</p>
+        </div>
+
+        <!-- Grille des collections -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Carte Collection 1 -->
+            <a href="#" class="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-zinc-900 border border-zinc-800">
+                <div class="absolute inset-0 bg-zinc-800/20 group-hover:bg-zinc-800/0 transition-all duration-500"></div>
+                <!-- <img src="images/alliances.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"> -->
+                <div class="absolute bottom-0 left-0 p-8">
+                    <span class="text-[10px] tracking-[0.2em] uppercase text-amber-500 font-medium">01</span>
+                    <h2 class="text-2xl font-light tracking-wide mt-2">Alliances</h2>
+                </div>
+            </a>
+
+            <!-- Carte Collection 2 -->
+            <a href="#" class="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-zinc-900 border border-zinc-800">
+                <div class="absolute inset-0 bg-zinc-800/20 group-hover:bg-zinc-800/0 transition-all duration-500"></div>
+                <div class="absolute bottom-0 left-0 p-8">
+                    <span class="text-[10px] tracking-[0.2em] uppercase text-amber-500 font-medium">02</span>
+                    <h2 class="text-2xl font-light tracking-wide mt-2">Pendentifs</h2>
+                </div>
+            </a>
+
+            <!-- Carte Collection 3 -->
+            <a href="#" class="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-zinc-900 border border-zinc-800">
+                <div class="absolute inset-0 bg-zinc-800/20 group-hover:bg-zinc-800/0 transition-all duration-500"></div>
+                <div class="absolute bottom-0 left-0 p-8">
+                    <span class="text-[10px] tracking-[0.2em] uppercase text-amber-500 font-medium">03</span>
+                    <h2 class="text-2xl font-light tracking-wide mt-2">Boucles</h2>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
