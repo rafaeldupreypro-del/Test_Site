@@ -79,136 +79,140 @@
     </div>
 
     <script>
-    const products = [
-        { name: "Alliance Dune", price: 420, desc: "Or 18k, martelé main.", meta: "Classique" },
-        { name: "Pendentif Astral", price: 680, desc: "Saphir bleu de Ceylan.", meta: "Saphir" },
-        { name: "Créoles Écorce", price: 510, desc: "Or jaune & diamants.", meta: "Diamants" },
-        { name: "Bague Épure", price: 950, desc: "Diamant solitaire.", meta: "Solitaire" },
-        { name: "Joncs Entrelacés", price: 1200, desc: "Trois ors entrelacés.", meta: "Or 18k" },
-        { name: "Boucles Nébuleuses", price: 720, desc: "Design organique.", meta: "Martelé" }
-    ];
+    // 1. Fonction pour charger les produits dynamiquement depuis Stripe / votre API
+    async function loadProducts() {
+        const grid = document.getElementById('product-grid');
+        grid.innerHTML = '<p class="text-zinc-500 text-xs tracking-widest uppercase col-span-full text-center py-10">Chargement de la collection...</p>';
 
-    const grid = document.getElementById('product-grid');
+        try {
+            // Remplacez cette URL par votre endpoint backend ou votre fonction serverless qui interroge Stripe
+            const response = await fetch('/api/products'); 
+            const products = await response.json();
 
-    // 1. Génération de la grille
-   products.forEach(p => {
-    const card = document.createElement('div');
-    // Carte avec un fond légèrement plus clair pour se détacher du fond du site
-    card.className = "group bg-zinc-900/40 border border-zinc-800 p-4 rounded-2xl transition-all hover:border-zinc-700";
-    
-    card.innerHTML = `
-        <div class="aspect-square bg-zinc-900 border border-zinc-800 rounded-xl mb-4 cursor-pointer overflow-hidden">
-            </div>
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-sm font-medium text-white">${p.name}</h3>
-            <span class="text-sm font-semibold text-accent">
-                ${p.price} €
-            </span>
-        </div>
-        <button data-id="${p.name}" 
-                class="btn-gold w-full py-3 rounded-lg font-bold uppercase tracking-widest transition-all duration-300">
-            <span>Ajouter au panier</span>
-        </button>
-    `;
-    
-    // Événements
-    card.querySelector('.aspect-square').onclick = () => openModal(p);
-    
-    // Utilisation de currentTarget pour assurer que le bouton est bien le déclencheur
-    card.querySelector('button').onclick = (e) => addToCart({ 
-        id: p.name, 
-        name: p.name, 
-        price: p.price 
-    }, e.currentTarget);
-    
-    grid.appendChild(card);
-});
+            grid.innerHTML = ''; // On vide le message de chargement
 
-    // 2. Fonction d'animation temporaire
-    function triggerSuccess(btn) {
-        const originalText = btn.innerText;
-        btn.innerText = "Ajouté !";
-        btn.classList.replace('bg-white', 'bg-green-600');
-        btn.classList.replace('text-zinc-950', 'text-white');
+            if (!products || products.length === 0) {
+                grid.innerHTML = '<p class="text-zinc-500 text-xs tracking-widest uppercase col-span-full text-center py-10">Aucun produit disponible pour le moment.</p>';
+                return;
+            }
+
+            // On boucle sur les produits renvoyés par l'API
+            products.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "group bg-zinc-900/40 border border-zinc-800 p-4 rounded-2xl transition-all hover:border-zinc-700";
+                
+                card.innerHTML = `
+                    <div class="aspect-square bg-zinc-900 border border-zinc-800 rounded-xl mb-4 cursor-pointer overflow-hidden flex items-center justify-center">
+                        ${p.image ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">` : '<span class="text-xs text-zinc-600">Image</span>'}
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-medium text-white">${p.name}</h3>
+                        <span class="text-sm font-semibold text-accent">
+                            ${p.price} €
+                        </span>
+                    </div>
+                    <button class="btn-gold w-full py-3 rounded-lg font-bold uppercase tracking-widest transition-all duration-300">
+                        <span>Ajouter au panier</span>
+                    </button>
+                `;
+
+                // Événements
+                card.querySelector('.aspect-square').onclick = () => openModal(p);
+                
+                card.querySelector('button').onclick = (e) => addToCart({ 
+                    id: p.id, // ID Stripe unique (ex: prod_...)
+                    name: p.name, 
+                    price: p.price 
+                }, e.currentTarget);
+                
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons(); // Recharge les icônes dynamiques
+
+        } catch (error) {
+            console.error("Erreur lors du chargement des produits :", error);
+            grid.innerHTML = '<p class="text-red-500 text-xs tracking-widest uppercase col-span-full text-center py-10">Impossible de charger le catalogue.</p>';
+        }
+    }
+
+    // 2. Animation de succès sur le bouton d'ajout au panier
+    function triggerSuccess(buttonElement) {
+        const spanEl = buttonElement.querySelector('span');
+        const originalText = spanEl ? spanEl.innerText : "Ajouter au panier";
+
+        buttonElement.classList.remove('btn-gold');
+        buttonElement.classList.add('btn-success');
+        if (spanEl) spanEl.innerText = "Ajouté !";
 
         setTimeout(() => {
-            btn.innerText = originalText;
-            btn.classList.replace('bg-green-600', 'bg-white');
-            btn.classList.replace('text-white', 'text-zinc-950');
+            buttonElement.classList.remove('btn-success');
+            buttonElement.classList.add('btn-gold');
+            if (spanEl) spanEl.innerText = originalText;
         }, 1000);
     }
 
-    // 3. Ajout au panier
+    // 3. Gestion du Panier (LocalStorage)
     function addToCart(product, btn) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const index = cart.findIndex(item => item.id === product.id);
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const index = cart.findIndex(item => item.id === product.id);
 
-    if (index > -1) {
-        cart[index].quantity += 1;
-    } else {
-        product.quantity = 1;
-        cart.push(product);
+        if (index > -1) {
+            cart[index].quantity += 1;
+        } else {
+            product.quantity = 1;
+            cart.push(product);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        
+        if (btn) {
+            triggerSuccess(btn);
+        }
     }
 
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    
-    // Si le bouton est passé en paramètre, on lance l'animation
-    if(btn) {
-        triggerSuccess(btn);
-    }
-}
-
-function triggerSuccess(buttonElement) {
-    const originalText = buttonElement.querySelector('span').innerText;
-
-    // On retire la classe Or, on ajoute la classe Verte
-    buttonElement.classList.remove('btn-gold');
-    buttonElement.classList.add('btn-success');
-    buttonElement.querySelector('span').innerText = "Ajouté !";
-
-    // Revenir à l'or après 2 secondes
-    setTimeout(() => {
-        buttonElement.classList.remove('btn-success');
-        buttonElement.classList.add('btn-gold');
-        buttonElement.querySelector('span').innerText = originalText;
-    }, 1000);
-}
-
-    // 4. Utilitaires conservés intacts
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const count = cart.reduce((sum, item) => sum + item.quantity, 0);
         const el = document.getElementById('cart-count');
-        if(el) {
+        if (el) {
             el.innerText = count;
             el.classList.toggle('hidden', count === 0);
         }
     }
 
+    // 4. Gestion de la modale produit
     function openModal(p) {
         document.getElementById('modal-name').innerText = p.name;
-        document.getElementById('modal-desc').innerText = p.desc;
+        document.getElementById('modal-desc').innerText = p.desc || "Pièce unique façonnée avec soin.";
         const btn = document.getElementById('modal-btn');
-        btn.onclick = () => addToCart({ id: p.name, name: p.name, price: p.price }, btn);
+        btn.onclick = () => addToCart({ id: p.id, name: p.name, price: p.price }, btn);
         document.getElementById('product-modal').classList.remove('hidden');
     }
 
-    function closeModal() { document.getElementById('product-modal').classList.add('hidden'); }
+    function closeModal() { 
+        document.getElementById('product-modal').classList.add('hidden'); 
+    }
 
-    // Menu Mobile
+    // 5. Menu Mobile
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.onclick = () => {
-        mobileMenu.classList.toggle('hidden');
-        const icon = menuBtn.querySelector('i');
-        icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x');
-        lucide.createIcons();
-    };
+    if (menuBtn && mobileMenu) {
+        menuBtn.onclick = () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            if (icon) {
+                icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x');
+                lucide.createIcons();
+            }
+        };
+    }
 
-    // Initialisation
+    // 6. Initialisation globale au chargement de la page
     document.addEventListener('DOMContentLoaded', () => {
         updateCartCount();
+        loadProducts(); // <-- Charge dynamiquement les produits à l'ouverture
         lucide.createIcons();
     });
 </script>
