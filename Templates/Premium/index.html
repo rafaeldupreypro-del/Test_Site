@@ -89,7 +89,7 @@
     // 1. Fonction pour charger les produits dynamiquement depuis Stripe / votre API
     async function loadProducts() {
         const grid = document.getElementById('product-grid');
-        grid.innerHTML = '<p class="text-ink-faint text-xs tracking-widest uppercase col-span-full text-center py-10">Chargement de la collection...</p>';
+        grid.innerHTML = '<p class="text-black font-bold text-xs tracking-widest uppercase col-span-full text-center py-10">Chargement de la collection...</p>';
 
         try {
             const [stripeResponse, stockResponse] = await Promise.all([
