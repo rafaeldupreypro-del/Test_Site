@@ -5,52 +5,114 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <title>Collections | Atelier Nora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100">
+<body class="bg-bone text-ink">
 
-    <!-- Inclure ici votre <nav> -->
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-bone/80 backdrop-blur-md z-50">
+        <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light text-accent">Atelier Nora</a>
+
+            <!-- Navigation Desktop -->
+            <div class="hidden md:flex items-center space-x-8 text-[10px] tracking-widest uppercase font-light text-ink-soft">
+                <a href="collections.html" class="hover:text-accent transition-colors">Collections</a>
+                <a href="index.html#boutique" class="hover:text-accent transition-colors">E-Boutique</a>
+                <a href="atelier.html" class="hover:text-accent transition-colors">L'Atelier</a>
+            </div>
+
+            <!-- Icônes (Panier + Menu) -->
+            <div class="flex items-center gap-6">
+                <!-- Lien Panier -->
+                <a href="panier.html" class="relative p-2 flex items-center">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
+                </a>
+
+                <!-- Bouton Menu (Visible uniquement sur mobile) -->
+                <button id="menu-btn" class="md:hidden p-2 flex items-center">
+                    <i data-lucide="menu" class="w-6 h-6 text-ink"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu Mobile (À placer juste après le <nav> pour éviter les problèmes de superposition) -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-panel border-b border-hairline p-6 space-y-6 text-center z-40">
+        <a href="collections.html" class="block text-xs uppercase tracking-widest text-ink-soft">Collections</a>
+        <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-ink-soft">E-Boutique</a>
+        <a href="atelier.html" class="block text-xs uppercase tracking-widest text-ink-soft">L'Atelier</a>
+    </div>
 
     <main class="max-w-7xl mx-auto pt-32 pb-20 px-6">
         <!-- En-tête de page -->
         <div class="mb-20 text-center space-y-4">
             <h1 class="text-4xl font-extralight tracking-[0.2em] uppercase">Collections</h1>
-            <p class="text-readable text-zinc-200 leading-relaxed" class="text-zinc-500 text-xs tracking-widest uppercase">L'art de l'or et de la lumière</p>
+            <p class="text-readable text-ink-faint text-xs tracking-widest uppercase">L'art de l'or et de la lumière</p>
         </div>
 
         <!-- Grille des collections -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             <!-- Carte Collection 1 -->
-            <a href="#" class="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-zinc-900 border border-zinc-800">
-                <div class="absolute inset-0 bg-zinc-800/20 group-hover:bg-zinc-800/0 transition-all duration-500"></div>
+            <a href="#" class="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-beige border border-beige">
+                <div class="absolute inset-0 bg-beige opacity-50 group-hover:opacity-0 transition-all duration-500"></div>
                 <!-- <img src="images/alliances.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"> -->
                 <div class="absolute bottom-0 left-0 p-8">
-                    <span class="text-[10px] tracking-[0.2em] uppercase text-amber-500 font-medium">01</span>
+                    <span class="text-[10px] tracking-[0.2em] uppercase text-accent font-medium">01</span>
                     <h2 class="text-2xl font-light tracking-wide mt-2">Alliances</h2>
                 </div>
             </a>
 
             <!-- Carte Collection 2 -->
-            <a href="#" class="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-zinc-900 border border-zinc-800">
-                <div class="absolute inset-0 bg-zinc-800/20 group-hover:bg-zinc-800/0 transition-all duration-500"></div>
+            <a href="#" class="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-beige border border-beige">
+                <div class="absolute inset-0 bg-beige opacity-50 group-hover:opacity-0 transition-all duration-500"></div>
                 <div class="absolute bottom-0 left-0 p-8">
-                    <span class="text-[10px] tracking-[0.2em] uppercase text-amber-500 font-medium">02</span>
+                    <span class="text-[10px] tracking-[0.2em] uppercase text-accent font-medium">02</span>
                     <h2 class="text-2xl font-light tracking-wide mt-2">Pendentifs</h2>
                 </div>
             </a>
 
             <!-- Carte Collection 3 -->
-            <a href="#" class="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-zinc-900 border border-zinc-800">
-                <div class="absolute inset-0 bg-zinc-800/20 group-hover:bg-zinc-800/0 transition-all duration-500"></div>
+            <a href="#" class="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-beige border border-beige">
+                <div class="absolute inset-0 bg-beige opacity-50 group-hover:opacity-0 transition-all duration-500"></div>
                 <div class="absolute bottom-0 left-0 p-8">
-                    <span class="text-[10px] tracking-[0.2em] uppercase text-amber-500 font-medium">03</span>
+                    <span class="text-[10px] tracking-[0.2em] uppercase text-accent font-medium">03</span>
                     <h2 class="text-2xl font-light tracking-wide mt-2">Boucles</h2>
                 </div>
             </a>
         </div>
     </main>
 
-    <script>lucide.createIcons();</script>
+    <script>
+        function updateCartCount() {
+            const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+            const el = document.getElementById('cart-count');
+            if (el) {
+                el.innerText = count;
+                el.classList.toggle('hidden', count === 0);
+            }
+        }
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.onclick = () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = menuBtn.querySelector('i');
+                if (icon) {
+                    icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x');
+                    lucide.createIcons();
+                }
+            };
+        }
+
+        updateCartCount();
+        lucide.createIcons();
+    </script>
 </body>
 </html>

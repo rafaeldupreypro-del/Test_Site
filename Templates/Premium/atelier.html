@@ -5,46 +5,109 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <title>L'Atelier | Atelier Nora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100 antialiased">
+<body class="bg-bone text-ink antialiased">
 
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-bone/80 backdrop-blur-md z-50">
+        <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light text-accent">Atelier Nora</a>
+
+            <!-- Navigation Desktop -->
+            <div class="hidden md:flex items-center space-x-8 text-[10px] tracking-widest uppercase font-light text-ink-soft">
+                <a href="collections.html" class="hover:text-accent transition-colors">Collections</a>
+                <a href="index.html#boutique" class="hover:text-accent transition-colors">E-Boutique</a>
+                <a href="atelier.html" class="hover:text-accent transition-colors">L'Atelier</a>
+            </div>
+
+            <!-- Icônes (Panier + Menu) -->
+            <div class="flex items-center gap-6">
+                <!-- Lien Panier -->
+                <a href="panier.html" class="relative p-2 flex items-center">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
+                </a>
+
+                <!-- Bouton Menu (Visible uniquement sur mobile) -->
+                <button id="menu-btn" class="md:hidden p-2 flex items-center">
+                    <i data-lucide="menu" class="w-6 h-6 text-ink"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu Mobile (À placer juste après le <nav> pour éviter les problèmes de superposition) -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-panel border-b border-hairline p-6 space-y-6 text-center z-40">
+        <a href="collections.html" class="block text-xs uppercase tracking-widest text-ink-soft">Collections</a>
+        <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-ink-soft">E-Boutique</a>
+        <a href="atelier.html" class="block text-xs uppercase tracking-widest text-ink-soft">L'Atelier</a>
+    </div>
     <main class="max-w-4xl mx-auto pt-32 pb-20 px-6">
         <div class="text-center space-y-10 mb-20">
-            <h1 class="text-4xl font-extralight tracking-[0.2em] uppercase text-white">L'Atelier</h1>
-            <div class="w-20 h-[1px] bg-accent mx-auto"></div>
-            <p class="text-zinc-300 font-light leading-relaxed max-w-2xl mx-auto text-base">
+            <h1 class="text-4xl font-extralight tracking-[0.2em] uppercase text-ink">L'Atelier</h1>
+            <div class="w-20 h-[1px] bg-accent mx-auto divider-gem"></div>
+            <p class="text-ink-soft font-light leading-relaxed max-w-2xl mx-auto text-base">
                 Né au Havre, l'Atelier Nora est le fruit d'une quête d'équilibre entre l'artisanat traditionnel et une vision durable de la joaillerie. 
                 Chaque pièce que nous créons porte en elle l'empreinte de nos mains et le respect de la matière brute.
             </p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-12 border-t border-zinc-900 pt-16">
+        <div class="grid md:grid-cols-3 gap-12 band-tint rounded-3xl pt-16 pb-12 px-8">
             <div class="space-y-4 text-center group">
                 <i data-lucide="gem" class="w-8 h-8 mx-auto text-accent mb-4 transition-transform group-hover:scale-110"></i>
-                <h3 class="text-xs uppercase tracking-widest font-medium text-white">Éthique</h3>
-                <p class="text-[13px] text-zinc-400 leading-relaxed">Or 18k recyclé et pierres précieuses sourcées avec intégrité.</p>
+                <h3 class="text-xs uppercase tracking-widest font-medium text-ink">Éthique</h3>
+                <p class="text-[13px] text-ink-soft leading-relaxed">Or 18k recyclé et pierres précieuses sourcées avec intégrité.</p>
             </div>
             <div class="space-y-4 text-center group">
                 <i data-lucide="hammer" class="w-8 h-8 mx-auto text-accent mb-4 transition-transform group-hover:scale-110"></i>
-                <h3 class="text-xs uppercase tracking-widest font-medium text-white">Savoir-faire</h3>
-                <p class="text-[13px] text-zinc-400 leading-relaxed">Un travail manuel minutieux, privilégiant la qualité sur la quantité.</p>
+                <h3 class="text-xs uppercase tracking-widest font-medium text-ink">Savoir-faire</h3>
+                <p class="text-[13px] text-ink-soft leading-relaxed">Un travail manuel minutieux, privilégiant la qualité sur la quantité.</p>
             </div>
             <div class="space-y-4 text-center group">
                 <i data-lucide="map-pin" class="w-8 h-8 mx-auto text-accent mb-4 transition-transform group-hover:scale-110"></i>
-                <h3 class="text-xs uppercase tracking-widest font-medium text-white">Local</h3>
-                <p class="text-[13px] text-zinc-400 leading-relaxed">Chaque bijou est façonné dans notre atelier en Normandie.</p>
+                <h3 class="text-xs uppercase tracking-widest font-medium text-ink">Local</h3>
+                <p class="text-[13px] text-ink-soft leading-relaxed">Chaque bijou est façonné dans notre atelier en Normandie.</p>
             </div>
         </div>
 
         <div class="mt-20">
-            <div class="aspect-video bg-zinc-900 rounded-3xl border border-zinc-800 flex items-center justify-center relative overflow-hidden group">
-                <div class="absolute inset-0 bg-zinc-950/20 transition-opacity group-hover:bg-zinc-950/0"></div>
-                <span class="text-zinc-600 text-xs uppercase tracking-widest">Photo de l'artisan au travail</span>
+            <div class="aspect-video bg-beige rounded-3xl border border-beige flex items-center justify-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-bone/10 transition-opacity group-hover:bg-bone/0"></div>
+                <span class="text-ink-faint text-xs uppercase tracking-widest">Photo de l'artisan au travail</span>
                 </div>
         </div>
     </main>
 
-    <script>lucide.createIcons();</script>
+    <script>
+        function updateCartCount() {
+            const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+            const el = document.getElementById('cart-count');
+            if (el) {
+                el.innerText = count;
+                el.classList.toggle('hidden', count === 0);
+            }
+        }
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.onclick = () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = menuBtn.querySelector('i');
+                if (icon) {
+                    icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x');
+                    lucide.createIcons();
+                }
+            };
+        }
+
+        updateCartCount();
+        lucide.createIcons();
+    </script>
 </body>
 </html>

@@ -1,142 +1,184 @@
-/* 1. Typographie globale */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap');
+/* ===================================================================
+   Atelier Nora — Feuille de style
+   Palette douce et feutrée, accent rose poudré assourdi.
+   =================================================================== */
 
-body {
-    background-color: #09090b; /* Votre zinc-950 */
-    background-image: 
-        radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.1), transparent 70%),
-        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.05), transparent 50%);
-    background-attachment: fixed; /* L'effet reste fixe au scroll */
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.03; /* Très léger */
-    pointer-events: none;
-    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
-}
-
-h1, h2, h3 {
-    color: #ffffff; /* Blanc pour le contraste */
-}
-
-/* Ajoutez une ligne de séparation élégante sous vos titres */
-.title-accent::after {
-    content: "";
-    display: block;
-    width: 50px;
-    height: 2px;
-    background-color: var(--accent);
-    margin: 10px auto;
-}
-
-input:focus, textarea:focus {
-    outline: none;
-    border: 1px solid var(--accent) !important;
-    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
-}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap');
 
 :root {
-    --accent-color: #D4AF37; /* Remplacez par votre couleur choisie */
+  /* Fond & surfaces — plus mats, moins de contraste */
+  --bone: #EFE7E1;        /* fond principal, greige chaud (pas de blanc franc) */
+  --panel: #E2CFCB;       /* cartes, encarts — rose mat */
+  --panel-soft: #E9DAD6;  /* variante plus douce */
+  --hairline: #C6A29C;    /* bordures, rose-brun assourdi */
+
+  /* Texte */
+  --ink: #2A211D;          /* texte principal, brun très sombre */
+  --ink-soft: #695D56;     /* texte secondaire */
+  --ink-faint: #9A8D85;    /* texte tertiaire / placeholders */
+
+  /* Accent — rose poudré assourdi (moins saturé, plus profond) */
+  --accent: #93585F;
+  --accent-dark: #71424A;
+  --accent-soft: #B98D8C;
+  --accent-tint: #D9C0BC;  /* voile mat, utilisé en bandeau de fond */
+
+  /* Beige / marron clair — pour "remplir" les grands aplats (visuels, cadres) */
+  --beige: #DBC7AC;
+  --beige-soft: #E8DCC7;
+  --beige-line: #BFA37D;
+
+  /* États */
+  --success: #5F7A64;
+  --danger: #A04434;
+
+  /* Ombres douces, teinte chaude et peu contrastée */
+  --shadow-soft: 0 1px 3px rgba(42, 33, 29, 0.10);
+  --shadow-lift: 0 10px 22px -10px rgba(42, 33, 29, 0.30);
 }
 
-/* Appliquez la couleur aux éléments clés */
-.text-accent { color: var(--accent-color) !important; }
-.accent-border { border-color: var(--accent-color) !important; }
-.accent-bg { background-color: var(--accent-color) !important; }
-
-.btn-accent {
-    background-color: var(--accent) !important;
-    color: #000 !important; /* Texte noir sur fond Or pour la lisibilité */
+html {
+  scroll-behavior: smooth;
 }
 
-/* Effet de brillance au survol */
-.btn-accent:hover {
-    filter: brightness(1.2); /* Rends l'or un peu plus clair/lumineux */
-    transform: translateY(-2px);
+body {
+  background-color: var(--bone);
+  background-image: linear-gradient(180deg, var(--accent-tint) 0%, var(--bone) 520px);
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-family: 'Jost', 'Helvetica Neue', sans-serif;
 }
 
+/* Titres en serif élégant, esprit "gravure" bijoutier */
+h1, h2 {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+h1 {
+  font-style: italic;
+}
+
+/* Garantit que les icônes Lucide (SVG en currentColor) héritent
+   toujours d'une couleur visible, même sans classe explicite. */
+[data-lucide], svg.lucide {
+  color: inherit;
+}
+
+/* ---------- Couleurs d'accent (utilisées comme classes utilitaires) ---------- */
+.text-accent { color: var(--accent); }
+.bg-accent   { background-color: var(--accent); }
+.border-accent { border-color: var(--accent); }
+
+/* ---------- Palette (classes utilitaires, remplacent les zinc-*) ---------- */
+.bg-bone       { background-color: var(--bone); }
+.bg-panel      { background-color: var(--panel); box-shadow: var(--shadow-soft); border-color: var(--hairline) !important; }
+.bg-panel-soft { background-color: var(--panel-soft); }
+.border-hairline { border-color: var(--hairline); }
+.text-ink       { color: var(--ink); }
+.text-ink-soft  { color: var(--ink-soft); }
+.text-ink-faint { color: var(--ink-faint); }
+
+/* Beige / marron clair — grands aplats, cadres d'image */
+.bg-beige      { background-color: var(--beige); }
+.bg-beige-soft { background-color: var(--beige-soft); }
+.border-beige  { border-color: var(--beige-line); }
+
+/* Variantes de transparence utilisées sur la nav / modales / overlays */
+.bg-bone\/80  { background-color: rgb(239 231 225 / 0.88); }
+.bg-bone\/70  { background-color: rgb(239 231 225 / 0.8); }
+.bg-bone\/90  { background-color: rgb(239 231 225 / 0.94); }
+.bg-bone\/10  { background-color: rgb(239 231 225 / 0.1); }
+.bg-bone\/0   { background-color: rgb(239 231 225 / 0); }
+.bg-panel\/60 { background-color: rgb(226 207 203 / 0.7); }
+.border-hairline\/60 { border-color: rgb(198 162 156 / 0.6); }
+.border-accent\/40 { border-color: rgb(147 88 95 / 0.4); }
+
+/* Nav : liseré discret en pied de barre */
+nav.bg-bone\/80, nav.bg-bone\/70 {
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* ---------- Boutons ---------- */
 .btn-gold {
-    background-color: #D4AF37 !important;
-    color: #000000 !important;
+  background-color: var(--accent);
+  color: #F7EFEC;
+  border: 1px solid var(--accent);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.25s ease;
 }
-
-.btn-success {
-    background-color: #22c55e !important;
-    color: #ffffff !important;
-}
-
-.nav-link {
-    transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: var(--accent) !important;
-}
-
-.cart-count {
-    background-color: var(--accent) !important;
-    color: #000 !important;
-}
-
-/* 2. Lisibilité mobile (Atelier et Collections) */
-.text-readable {
-    color: #e4e4e7 !important;
-    font-size: 1.1rem !important;
-    line-height: 1.6 !important;
-    margin-bottom: 1.5rem !important;
-}
-
-/* 3. Spécifique Panier (pour forcer la taille sur mobile) */
-#cart-items div h3 {
-    font-size: 1.25rem !important;
-    line-height: 1.75rem !important;
-}
-#cart-items div span {
-    font-size: 1.25rem !important;
-}
-#cart-items div p {
-    font-size: 1rem !important;
-}
-
-/* 4. Transitions et Boutons */
-.transition-colors {
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+.btn-gold:hover {
+  background-color: var(--accent-dark);
+  border-color: var(--accent-dark);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-1px);
 }
 
 .btn-outline {
-    display: block !important;
-    width: 100% !important;
-    text-align: center !important;
-    padding: 1rem !important;
-    border: 2px solid #ffffff !important;
-    color: #ffffff !important; /* Texte blanc par défaut */
-    background-color: transparent !important;
-    border-radius: 0.75rem !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    transition: all 0.3s ease !important;
+  background-color: var(--bone);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+  transition: all 0.25s ease;
 }
-
 .btn-outline:hover {
-    background-color: #ffffff !important; /* Fond blanc au survol */
-    color: #000000 !important;            /* Texte NOIR au survol */
-    border-color: #ffffff !important;
+  background-color: var(--panel-soft);
+  border-color: var(--accent);
+  transform: translateY(-1px);
 }
 
-.stripe-security-text {
-    font-size: 1.1rem !important; /* Plus grand */
-    font-weight: 600 !important;  /* Plus épais */
-    color: #a1a1aa !important;    /* Zinc-400 (plus contrasté) */
-    text-align: center;
-    margin-top: 1rem;
-    display: block;
-    margin-top: 0.5rem !important;   /* Espace avec le bouton "Payer" au-dessus */
-    margin-bottom: 1.5rem !important; /* Espace important avant le lien "Continuer" */
+.btn-success {
+  background-color: var(--success) !important;
+  color: #F7EFEC !important;
+  border: 1px solid var(--success) !important;
 }
+
+/* ---------- Cartes produits / collections : élévation discrète ---------- */
+a.group,
+div.group {
+  transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+}
+a.group:hover,
+.bg-panel.border-hairline:hover {
+  box-shadow: var(--shadow-lift);
+  border-color: var(--accent) !important;
+  transform: translateY(-2px);
+}
+
+/* ---------- Signature : petit repère "gemme" sur les séparateurs ---------- */
+.divider-gem {
+  position: relative;
+  background-color: var(--accent) !important;
+  height: 2px !important;
+}
+.divider-gem::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0 0 5px var(--bone);
+}
+
+/* ---------- Bandeau teinté réutilisable ---------- */
+.band-tint {
+  background-color: var(--panel-soft);
+  border: 1px solid var(--hairline);
+}
+
+/* ---------- Utilitaires divers ---------- */
+.text-readable {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* Scrollbar discrète */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bone); }
+::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }

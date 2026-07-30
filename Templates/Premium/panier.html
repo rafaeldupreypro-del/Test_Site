@@ -6,23 +6,25 @@
     <title>Votre Panier | Atelier Nora</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100 antialiased">
+<body class="bg-bone text-ink antialiased">
 
-    <nav class="fixed top-0 w-full bg-zinc-950/60 backdrop-blur-lg z-50 border-b border-zinc-900/60">
+    <nav class="fixed top-0 w-full bg-bone/70 backdrop-blur-lg z-50 border-b border-hairline/60">
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="text-base tracking-[0.3em] font-light uppercase text-accent">Atelier Nora</a>
         </div>
     </nav>
 
     <main class="max-w-2xl mx-auto pt-32 px-6">
-        <h1 class="text-2xl font-light uppercase tracking-widest mb-10 text-white">Votre Panier</h1>
+        <h1 class="text-2xl font-light uppercase tracking-widest mb-10 text-ink">Votre Panier</h1>
         
-        <div id="cart-items" class="space-y-6 border-b border-zinc-800 pb-6"></div>
+        <div id="cart-items" class="space-y-6 border-b border-hairline pb-6"></div>
 
-        <div class="mt-10 border-t border-zinc-800 pt-6 space-y-6">
-            <div class="flex justify-between items-center text-white">
+        <div class="mt-10 border-t border-hairline pt-6 space-y-6">
+            <div class="flex justify-between items-center text-ink">
                 <span class="text-sm">Total</span>
                 <span id="cart-total" class="text-lg font-bold text-accent">0 €</span>
             </div>
@@ -32,7 +34,7 @@
                 Procéder au paiement
             </button>
             
-            <p class="text-center text-xs text-zinc-500 uppercase tracking-widest">
+            <p class="text-center text-xs text-ink-faint uppercase tracking-widest">
                 Paiement sécurisé via Stripe
             </p>
         </div>
@@ -52,7 +54,7 @@
             let total = 0;
 
             if (cart.length === 0) {
-                container.innerHTML = '<p class="text-zinc-400 text-sm">Votre panier est vide.</p>';
+                container.innerHTML = '<p class="text-ink-soft text-sm">Votre panier est vide.</p>';
                 totalElement.innerText = "0 €";
                 return;
             }
@@ -61,18 +63,18 @@
                 total += (item.price * item.quantity);
                 
                 container.innerHTML += `
-                    <div class="flex items-center justify-between py-6 border-b border-zinc-800">
+                    <div class="flex items-center justify-between py-6 border-b border-hairline">
                         <div class="flex items-center gap-6">
-                            <div class="w-20 h-20 bg-zinc-900 rounded-xl flex-shrink-0 border border-zinc-800"></div>
+                            <div class="w-20 h-20 bg-beige rounded-xl flex-shrink-0 border border-beige"></div>
                             <div class="flex flex-col gap-1">
-                                <h3 class="text-base font-medium text-white">${item.name}</h3>
-                                <p class="text-xs text-zinc-400 uppercase tracking-wider">Quantité : ${item.quantity}</p>
-                                <button onclick="removeItem(${index})" class="text-xs text-red-500 hover:text-red-400 uppercase tracking-widest font-bold bg-zinc-900 px-3 py-1.5 rounded-md w-max mt-2">
+                                <h3 class="text-base font-medium text-ink">${item.name}</h3>
+                                <p class="text-xs text-ink-soft uppercase tracking-wider">Quantité : ${item.quantity}</p>
+                                <button onclick="removeItem(${index})" class="text-xs text-red-600 hover:text-red-600 uppercase tracking-widest font-bold bg-panel px-3 py-1.5 rounded-md w-max mt-2">
                                     Retirer
                                 </button>
                             </div>
                         </div>
-                        <span class="text-base font-bold text-white">${item.price * item.quantity} €</span>
+                        <span class="text-base font-bold text-ink">${item.price * item.quantity} €</span>
                     </div>`;
             });
 

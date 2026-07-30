@@ -6,59 +6,65 @@
     <title>Atelier Nora | Haute Joaillerie Artisanale</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-zinc-950 text-zinc-100 antialiased">
+<body class="bg-bone text-ink antialiased">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-zinc-950/80 backdrop-blur-md z-50">
+    <nav class="fixed top-0 w-full bg-bone/80 backdrop-blur-md z-50">
         <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
             <!-- Logo -->
-            <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light">Atelier Nora</a>
+            <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light text-accent">Atelier Nora</a>
             
             <!-- Navigation Desktop -->
-            <div class="hidden md:flex items-center space-x-8 text-[10px] tracking-widest uppercase font-light text-zinc-400">
-                <a href="collections.html" class="hover:text-white transition-colors">Collections</a>
-                <a href="index.html#boutique" class="hover:text-white transition-colors">E-Boutique</a>
-                <a href="atelier.html" class="hover:text-white transition-colors">L'Atelier</a>
+            <div class="hidden md:flex items-center space-x-8 text-[10px] tracking-widest uppercase font-light text-ink-soft">
+                <a href="collections.html" class="hover:text-accent transition-colors">Collections</a>
+                <a href="index.html#boutique" class="hover:text-accent transition-colors">E-Boutique</a>
+                <a href="atelier.html" class="hover:text-accent transition-colors">L'Atelier</a>
             </div>
 
             <!-- Icônes (Panier + Menu) -->
             <div class="flex items-center gap-6">
                 <!-- Lien Panier -->
                 <a href="panier.html" class="relative p-2 flex items-center">
-                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-amber-500 rounded-full text-[9px] font-bold text-zinc-950 flex items-center justify-center hidden">0</span>
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
                 </a>
                 
                 <!-- Bouton Menu (Visible uniquement sur mobile) -->
                 <button id="menu-btn" class="md:hidden p-2 flex items-center">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
+                    <i data-lucide="menu" class="w-6 h-6 text-ink"></i>
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- Menu Mobile (À placer juste après le <nav> pour éviter les problèmes de superposition) -->
-    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-zinc-900 border-b border-zinc-800 p-6 space-y-6 text-center z-40">
-        <a href="collections.html" class="block text-xs uppercase tracking-widest text-zinc-300">Collections</a>
-        <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-zinc-300">E-Boutique</a>
-        <a href="atelier.html" class="block text-xs uppercase tracking-widest text-zinc-300">L'Atelier</a>
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-panel border-b border-hairline p-6 space-y-6 text-center z-40">
+        <a href="collections.html" class="block text-xs uppercase tracking-widest text-ink-soft">Collections</a>
+        <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-ink-soft">E-Boutique</a>
+        <a href="atelier.html" class="block text-xs uppercase tracking-widest text-ink-soft">L'Atelier</a>
     </div>
 
     <!-- Hero -->
-    <section class="min-h-screen flex items-center justify-center px-4 text-center">
+    <section class="min-h-screen flex items-center justify-center px-4 text-center bg-panel-soft">
         <div class="max-w-2xl space-y-6">
+            <span class="inline-block bg-accent text-[#F7EFEC] text-[10px] tracking-[0.3em] uppercase font-medium px-4 py-1.5 rounded-full">Haute joaillerie artisanale</span>
             <h1 class="text-4xl md:text-5xl font-extralight tracking-tight uppercase leading-snug">Façonné à la main.<br>Porté pour l'éternité.</h1>
-            <p class="text-zinc-400 text-sm font-light">Pièces uniques en or recyclé 18 carats.</p>
-            <a href="#boutique" class="inline-block border border-zinc-800 text-[10px] uppercase tracking-widest px-8 py-3 rounded-full hover:bg-zinc-900 transition-all">Explorer</a>
+            <div class="w-24 h-[3px] bg-accent mx-auto divider-gem"></div>
+            <p class="text-ink-soft text-sm font-light">Pièces uniques en or recyclé 18 carats.</p>
+            <a href="#boutique" class="btn-gold inline-block text-[10px] uppercase tracking-widest px-8 py-3 rounded-full">Explorer</a>
         </div>
     </section>
 
     <!-- Boutique -->
-    <section id="boutique" class="py-20 px-4">
+    <section id="boutique" class="py-20 px-4 bg-panel">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-center text-lg tracking-widest uppercase mb-16">La Collection Permanente</h2>
+            <p class="text-center text-[10px] tracking-[0.3em] uppercase text-accent font-medium mb-3">Atelier Nora</p>
+            <h2 class="text-center text-lg tracking-widest uppercase mb-4">La Collection Permanente</h2>
+            <div class="w-24 h-[3px] bg-accent mx-auto divider-gem mb-16"></div>
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Injection JS -->
             </div>
@@ -66,13 +72,14 @@
     </section>
 
     <!-- Modale -->
-    <div id="product-modal" class="fixed inset-0 z-[100] hidden bg-zinc-950/90 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl w-full max-w-sm relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-zinc-400"><i data-lucide="x"></i></button>
-            <div class="aspect-square bg-zinc-950 border border-zinc-800 rounded-xl mb-4 flex items-center justify-center">Image</div>
+
+    <div id="product-modal" class="fixed inset-0 z-[100] hidden bg-bone/90 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-panel border border-hairline p-6 rounded-2xl w-full max-w-sm relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-ink-soft"><i data-lucide="x"></i></button>
+            <div class="aspect-square bg-beige border border-beige rounded-xl mb-4 flex items-center justify-center">Image</div>
             <h2 id="modal-name" class="text-lg font-medium mb-1"></h2>
-            <p id="modal-desc" class="text-xs text-zinc-400 mb-6 font-light"></p>
-            <button id="modal-btn" class="w-full bg-amber-600 text-zinc-950 py-3 rounded-lg text-xs uppercase tracking-widest font-bold">
+            <p id="modal-desc" class="text-xs text-ink-soft mb-6 font-light"></p>
+            <button id="modal-btn" class="w-full bg-accent text-ink py-3 rounded-lg text-xs uppercase tracking-widest font-bold">
                 <span>Ajouter au panier</span>
             </button>
         </div>
@@ -82,7 +89,7 @@
     // 1. Fonction pour charger les produits dynamiquement depuis Stripe / votre API
     async function loadProducts() {
         const grid = document.getElementById('product-grid');
-        grid.innerHTML = '<p class="text-zinc-500 text-xs tracking-widest uppercase col-span-full text-center py-10">Chargement de la collection...</p>';
+        grid.innerHTML = '<p class="text-ink-faint text-xs tracking-widest uppercase col-span-full text-center py-10">Chargement de la collection...</p>';
 
         try {
             const [stripeResponse, stockResponse] = await Promise.all([
@@ -96,7 +103,7 @@
             grid.innerHTML = ''; 
 
             if (!products || products.length === 0) {
-                grid.innerHTML = '<p class="text-zinc-500 text-xs tracking-widest uppercase col-span-full text-center py-10">Aucun produit disponible pour le moment.</p>';
+                grid.innerHTML = '<p class="text-ink-faint text-xs tracking-widest uppercase col-span-full text-center py-10">Aucun produit disponible pour le moment.</p>';
                 return;
             }
 
@@ -106,26 +113,26 @@
                 const isRupture = stock <= 0;
 
                 const card = document.createElement('div');
-                card.className = "group bg-zinc-900/40 border border-zinc-800 p-4 rounded-2xl transition-all hover:border-zinc-700";
+                card.className = "group bg-bone border border-hairline p-4 rounded-2xl transition-all hover:border-accent";
                 
                 card.innerHTML = `
-                    <div class="aspect-square bg-zinc-900 border border-zinc-800 rounded-xl mb-4 cursor-pointer overflow-hidden flex items-center justify-center relative">
-                        ${p.image ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover ${isRupture ? 'opacity-40 grayscale' : ''}">` : '<span class="text-xs text-zinc-600">Image</span>'}
-                        ${isRupture ? '<span class="absolute bg-zinc-950/80 text-zinc-200 text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-zinc-700">Rupture de stock</span>' : ''}
+                    <div class="aspect-square bg-beige border border-beige rounded-xl mb-4 cursor-pointer overflow-hidden flex items-center justify-center relative">
+                        ${p.image ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover ${isRupture ? 'opacity-40 grayscale' : ''}">` : '<span class="text-xs text-ink-faint">Image</span>'}
+                        ${isRupture ? '<span class="absolute bg-bone/80 text-ink text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-accent/40">Rupture de stock</span>' : ''}
                     </div>
                     <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-sm font-medium text-white">${p.name}</h3>
+                        <h3 class="text-sm font-medium text-ink">${p.name}</h3>
                         <span class="text-sm font-semibold text-accent">
                             ${p.price} €
                         </span>
                     </div>
                     <div class="mb-4 text-xs">
                         ${isRupture 
-                            ? '<span class="text-red-400">Épuisé</span>' 
-                            : `<span class="text-zinc-400">En stock : <strong class="text-white">${stock}</strong></span>`
+                            ? '<span class="text-red-600">Épuisé</span>' 
+                            : `<span class="text-ink-soft">En stock : <strong class="text-ink">${stock}</strong></span>`
                         }
                     </div>
-                    <button class="${isRupture ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed' : 'btn-gold'} w-full py-3 rounded-lg font-bold uppercase tracking-widest transition-all duration-300" ${isRupture ? 'disabled' : ''}>
+                    <button class="${isRupture ? 'bg-panel-soft text-ink-faint cursor-not-allowed' : 'btn-gold'} w-full py-3 rounded-lg font-bold uppercase tracking-widest transition-all duration-300" ${isRupture ? 'disabled' : ''}>
                         <span>${isRupture ? 'Indisponible' : 'Ajouter au panier'}</span>
                     </button>
                 `;
@@ -154,7 +161,7 @@
 
         } catch (error) {
             console.error("Erreur lors du chargement des produits :", error);
-            grid.innerHTML = '<p class="text-red-500 text-xs tracking-widest uppercase col-span-full text-center py-10">Impossible de charger le catalogue.</p>';
+            grid.innerHTML = '<p class="text-red-600 text-xs tracking-widest uppercase col-span-full text-center py-10">Impossible de charger le catalogue.</p>';
         }
     }
 
@@ -259,7 +266,7 @@
             
             // 2. On affiche un message de succès sur l'écran
             const banner = document.createElement('div');
-            banner.className = "fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-zinc-900 border border-zinc-700 text-white px-6 py-4 rounded-xl shadow-2xl text-xs uppercase tracking-widest font-bold flex items-center gap-3";
+            banner.className = "fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-panel border border-accent/40 text-ink px-6 py-4 rounded-xl shadow-2xl text-xs uppercase tracking-widest font-bold flex items-center gap-3";
             banner.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 text-accent"></i> Commande validée avec succès ! Merci pour votre achat.`;
             document.body.appendChild(banner);
             
