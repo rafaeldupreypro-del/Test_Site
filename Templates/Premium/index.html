@@ -85,25 +85,28 @@
         grid.innerHTML = '<p class="text-zinc-500 text-xs tracking-widest uppercase col-span-full text-center py-10">Chargement de la collection...</p>';
 
         try {
+            // 1. On récupère les produits depuis Stripe ET les stocks depuis Google Sheets en même temps
             const [stripeResponse, stockResponse] = await Promise.all([
                 fetch('/api/products'),
-                fetch('https://script.google.com/macros/s/AKfycbwOpBAd2WzT-fzdYcnKZS9qYyzR6tzTzoMCPDROqsNPBOSbhElvz5ReD9MWAweoYh4JnQ/exec')
+                fetch('https://script.google.com/macros/s/AKfycbwOpBAd2WzT-fzdYcnKZS9qYyzR6tzTzoMCPDROqsNPBOSbhElvz5ReD9MWAweoYh4JnQ/exec') // <-- Mets ton URL ici
             ]);
 
             const products = await stripeResponse.json();
             const stocksData = await stockResponse.json(); 
+            // Supposons que ton Sheets renvoie un tableau du genre : [{ id: "prod_xxx", stock: 5 }, ...]
 
-            grid.innerHTML = ''; 
+            grid.innerHTML = ''; // On vide le message de chargement
 
             if (!products || products.length === 0) {
                 grid.innerHTML = '<p class="text-zinc-500 text-xs tracking-widest uppercase col-span-full text-center py-10">Aucun produit disponible pour le moment.</p>';
                 return;
             }
 
+            // On boucle sur les produits renvoyés par Stripe
             products.forEach(p => {
-                // On cherche le stock dans Google Sheets en comparant les NOMS (insensible à la casse)
-                const stockItem = stocksData.find(s => String(s.name).trim().toLowerCase() === String(p.name).trim().toLowerCase());
-                const stock = stockItem ? parseInt(stockItem.stock, 10) : 0; 
+                // On cherche le stock correspondant dans les données du Google Sheets grâce à l'ID Stripe
+                const stockItem = stocksData.find(s => s.id === p.id);
+                const stock = stockItem ? parseInt(stockItem.stock, 10) : 0; // Par sécurité, 0 si non trouvé
                 const isRupture = stock <= 0;
 
                 const card = document.createElement('div');
@@ -125,6 +128,7 @@
                     </button>
                 `;
                 
+                // Événements (uniquement si le produit est en stock)
                 const imgContainer = card.querySelector('.aspect-square');
                 if (!isRupture) {
                     imgContainer.onclick = () => openModal(p);
@@ -141,13 +145,14 @@
                 grid.appendChild(card);
             });
 
-            lucide.createIcons();
+            lucide.createIcons(); // Recharge les icônes dynamiques
 
         } catch (error) {
             console.error("Erreur lors du chargement des produits :", error);
             grid.innerHTML = '<p class="text-red-500 text-xs tracking-widest uppercase col-span-full text-center py-10">Impossible de charger le catalogue.</p>';
         }
     }
+
     // 2. Animation de succès sur le bouton d'ajout au panier
     function triggerSuccess(buttonElement) {
         const spanEl = buttonElement.querySelector('span');
