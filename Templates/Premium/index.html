@@ -117,11 +117,17 @@
                         ${p.image ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover ${isRupture ? 'opacity-40 grayscale' : ''}">` : '<span class="text-xs text-zinc-600">Image</span>'}
                         ${isRupture ? '<span class="absolute bg-zinc-950/80 text-zinc-200 text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-zinc-700">Rupture de stock</span>' : ''}
                     </div>
-                    <div class="flex justify-between items-center mb-4">
+                    <div class="flex justify-between items-center mb-2">
                         <h3 class="text-sm font-medium text-white">${p.name}</h3>
                         <span class="text-sm font-semibold text-accent">
                             ${p.price} €
                         </span>
+                    </div>
+                    <div class="mb-4 text-xs">
+                        ${isRupture 
+                            ? '<span class="text-red-400">Épuisé</span>' 
+                            : `<span class="text-zinc-400">En stock : <strong class="text-white">${stock}</strong></span>`
+                        }
                     </div>
                     <button class="${isRupture ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed' : 'btn-gold'} w-full py-3 rounded-lg font-bold uppercase tracking-widest transition-all duration-300" ${isRupture ? 'disabled' : ''}>
                         <span>${isRupture ? 'Indisponible' : 'Ajouter au panier'}</span>
