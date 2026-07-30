@@ -44,18 +44,23 @@ export default async function handler(req, res) {
 
     try {
       // Récupère les articles de la commande depuis Stripe
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+      // Récupère les articles de la commande depuis Stripe en demandant explicitement l'expansion du produit
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+        expand: ['data.price.product']
+      });
 
       for (const item of lineItems.data) {
-        // Récupère l'ID du produit de façon sécurisée (qu'il soit string ou objet)
-        const productObj = item.price.product;
-        const productId = typeof productObj === 'string' ? productObj : productObj.id;
+        // Maintenant, item.price.product est un objet complet, on récupère son vrai ID de base
+        const productId = typeof item.price.product === 'string' 
+          ? item.price.product 
+          : item.price.product.id;
+          
         const quantity = item.quantity;
 
-        console.log("ID du produit envoyé à Google :", productId); // S'affichera dans les logs Vercel
+        console.log("Vrai ID du produit Stripe récupéré :", productId);
 
         // Envoie l'ordre de décrémentation à ton Google Apps Script
-        const googleResponse = await fetch('https://script.google.com/macros/s/AKfycbyvUxeTyPtPn5jQAyJ_tF3528YV8JvcWsVhc2bYjiL2zi7etgwJu_dOSpjTD1qbJ4R5og/exec', {
+        await fetch('https://script.google.com/macros/s/AKfycbyvUxeTyPtPn5jQAyJ_tF3528YV8JvcWsVhc2bYjiL2zi7etgwJu_dOSpjTD1qbJ4R5og/exec', {
           method: 'POST',
           redirect: 'follow',
           headers: { 'Content-Type': 'application/json' },
