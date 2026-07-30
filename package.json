@@ -1,0 +1,9 @@
+{
+  "name": "site-git",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}
