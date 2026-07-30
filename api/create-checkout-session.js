@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
       payment_method_types: ['card'],
       line_items,
       mode: 'payment',
-      success_url: `${req.headers.origin}/index.html?success=true`,
+      success_url: `${req.headers.origin}/Templates/Premium/index.html?success=true`,
       cancel_url: `${req.headers.origin}/panier.html`,
     });
 
