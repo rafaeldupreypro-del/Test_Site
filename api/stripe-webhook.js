@@ -53,7 +53,7 @@ export default async function handler(req, res) {
 
         // Envoie l'ordre de décrémentation à ton Google Apps Script
         // Envoie l'ordre de décrémentation à ton Google Apps Script
-        const googleResponse = await fetch('https://script.google.com/macros/s/AKfycbyvUxeTyPtPn5jQAyJ_tF3528YV8JvcWsVhc2bYjiL2zi7etgwJu_dOSpjTD1qbJ4R5og/exec', {
+        const googleResponse = await fetch('https://script.google.com/macros/s/AKfycbybPtNnjSFfbb3DbhgWb35H6zzOl9iyJg8inyYfqIUnORAbK8rbvUH-54lPSL37__84EQ/exec', {
           method: 'POST',
           redirect: 'follow', // <-- Force Vercel à suivre la redirection Google
           headers: { 'Content-Type': 'application/json' },
