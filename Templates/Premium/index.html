@@ -249,6 +249,32 @@
         updateCartCount();
         loadProducts(); 
         lucide.createIcons();
+
+        // Vérifie si on revient d'un paiement Stripe réussi
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // 1. On vide le panier local
+            localStorage.removeItem('cart');
+            updateCartCount(); // Met à jour le compteur du panier pour qu'il retombe à 0
+            
+            // 2. On affiche un message de succès sur l'écran
+            const banner = document.createElement('div');
+            banner.className = "fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-zinc-900 border border-zinc-700 text-white px-6 py-4 rounded-xl shadow-2xl text-xs uppercase tracking-widest font-bold flex items-center gap-3";
+            banner.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 text-accent"></i> Commande validée avec succès ! Merci pour votre achat.`;
+            document.body.appendChild(banner);
+            
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            // 3. On nettoie l'URL pour enlever le ?success=true
+            window.history.replaceState({}, document.title, window.location.pathname);
+
+            // 4. Disparaît après 5 secondes
+            setTimeout(() => {
+                banner.style.transition = "opacity 0.5s ease";
+                banner.style.opacity = "0";
+                setTimeout(() => banner.remove(), 500);
+            }, 5000);
+        }
     });
 </script>
 </body>
