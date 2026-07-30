@@ -38,6 +38,7 @@ export default async function handler(req, res) {
   }
 
   // Si le paiement est validé
+  // Si le paiement est validé
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
 
@@ -46,16 +47,17 @@ export default async function handler(req, res) {
       const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
 
       for (const item of lineItems.data) {
-        const productId = typeof item.price.product === 'string' 
-          ? item.price.product 
-          : item.price.product.id;
+        // Récupère l'ID du produit de façon sécurisée (qu'il soit string ou objet)
+        const productObj = item.price.product;
+        const productId = typeof productObj === 'string' ? productObj : productObj.id;
         const quantity = item.quantity;
 
+        console.log("ID du produit envoyé à Google :", productId); // S'affichera dans les logs Vercel
+
         // Envoie l'ordre de décrémentation à ton Google Apps Script
-        // Envoie l'ordre de décrémentation à ton Google Apps Script
-        const googleResponse = await fetch('https://script.google.com/macros/s/AKfycbybPtNnjSFfbb3DbhgWb35H6zzOl9iyJg8inyYfqIUnORAbK8rbvUH-54lPSL37__84EQ/exec', {
+        const googleResponse = await fetch('https://script.google.com/macros/s/AKfycbyvUxeTyPtPn5jQAyJ_tF3528YV8JvcWsVhc2bYjiL2zi7etgwJu_dOSpjTD1qbJ4R5og/exec', {
           method: 'POST',
-          redirect: 'follow', // <-- Force Vercel à suivre la redirection Google
+          redirect: 'follow',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             productId: productId,
