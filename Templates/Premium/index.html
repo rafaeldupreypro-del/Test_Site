@@ -132,15 +132,17 @@
                 
                 const imgContainer = card.querySelector('.aspect-square');
                 if (!isRupture) {
-                    imgContainer.onclick = () => openModal(p);
+                    imgContainer.onclick = () => openModal(p, stock);
                     
-                    // On transmet le stock max autorisé à la fonction addToCart
-                    card.querySelector('button').onclick = (e) => addToCart({ 
-                        id: p.id, 
-                        name: p.name, 
-                        price: p.price,
-                        maxStock: stock 
-                    }, e.currentTarget);
+                    card.querySelector('button').onclick = (e) => {
+                        addToCart({ 
+                            id: p.id, 
+                            name: p.name, 
+                            price: p.price,
+                            maxStock: stock 
+                        }, e.currentTarget);
+                        triggerSuccess(e.currentTarget);
+                    };
                 } else {
                     imgContainer.style.cursor = "default";
                 }
@@ -173,38 +175,38 @@
     }
 
     // 3. Gestion du Panier (LocalStorage)
-    let cart = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-function addToCart(product, buttonElement) {
-    // Vérifie si le produit est déjà dans le panier
-    let cartItem = cart.find(item => item.id === product.id);
-    let currentQuantityInCart = cartItem ? cartItem.quantity : 0;
+    function addToCart(product, buttonElement) {
+        let cartItem = cart.find(item => item.id === product.id);
+        let currentQuantityInCart = cartItem ? cartItem.quantity : 0;
 
-    // Si la quantité dans le panier + 1 dépasse le stock max, on bloque
-    if (currentQuantityInCart + 1 > product.maxStock) {
-        alert("Vous avez atteint la limite du stock disponible pour ce produit.");
-        return;
+        // Vérification stricte par rapport au stock max
+        if (currentQuantityInCart + 1 > product.maxStock) {
+            alert("Vous avez atteint la limite du stock disponible pour ce produit.");
+            return;
+        }
+
+        if (cartItem) {
+            cartItem.quantity += 1;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: 1,
+                maxStock: product.maxStock
+            });
+        }
+
+        // Sauvegarde dans le localStorage et mise à jour du compteur
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
     }
-
-    if (cartItem) {
-        cartItem.quantity += 1;
-    } else {
-        cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: 1,
-            maxStock: product.maxStock
-        });
-    }
-
-    // Met à jour l'affichage de ton panier ici
-    updateCartUI();
-}
 
     function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+        const count = currentCart.reduce((sum, item) => sum + item.quantity, 0);
         const el = document.getElementById('cart-count');
         if (el) {
             el.innerText = count;
@@ -213,11 +215,14 @@ function addToCart(product, buttonElement) {
     }
 
     // 4. Gestion de la modale produit
-    function openModal(p) {
+    function openModal(p, stock) {
         document.getElementById('modal-name').innerText = p.name;
         document.getElementById('modal-desc').innerText = p.desc || "Pièce unique façonnée avec soin.";
         const btn = document.getElementById('modal-btn');
-        btn.onclick = () => addToCart({ id: p.id, name: p.name, price: p.price }, btn);
+        btn.onclick = () => {
+            addToCart({ id: p.id, name: p.name, price: p.price, maxStock: stock }, btn);
+            triggerSuccess(btn);
+        };
         document.getElementById('product-modal').classList.remove('hidden');
     }
 
@@ -242,7 +247,7 @@ function addToCart(product, buttonElement) {
     // 6. Initialisation globale au chargement de la page
     document.addEventListener('DOMContentLoaded', () => {
         updateCartCount();
-        loadProducts(); // <-- Charge dynamiquement les produits à l'ouverture
+        loadProducts(); 
         lucide.createIcons();
     });
 </script>
