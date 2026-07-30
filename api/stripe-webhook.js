@@ -52,14 +52,19 @@ export default async function handler(req, res) {
         const quantity = item.quantity;
 
         // Envoie l'ordre de décrémentation à ton Google Apps Script
-        await fetch('https://script.google.com/macros/s/AKfycbyvUxeTyPtPn5jQAyJ_tF3528YV8JvcWsVhc2bYjiL2zi7etgwJu_dOSpjTD1qbJ4R5og/exec', {
+        // Envoie l'ordre de décrémentation à ton Google Apps Script
+        const googleResponse = await fetch('https://script.google.com/macros/s/AKfycbyvUxeTyPtPn5jQAyJ_tF3528YV8JvcWsVhc2bYjiL2zi7etgwJu_dOSpjTD1qbJ4R5og/exec', {
           method: 'POST',
+          redirect: 'follow', // <-- Force Vercel à suivre la redirection Google
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             productId: productId,
             quantity: quantity
           })
         });
+
+        const googleResult = await googleResponse.text();
+        console.log("Réponse de Google Apps Script :", googleResult);
       }
     } catch (error) {
       console.error("Erreur lors de la mise à jour Google Sheets :", error);
