@@ -43,29 +43,32 @@ export default async function handler(req, res) {
     const session = event.data.object;
 
     try {
-      // Récupère les articles de la commande depuis Stripe
-      // Récupère les articles de la commande depuis Stripe en demandant explicitement l'expansion du produit
+      // On demande explicitement à Stripe d'élargir l'objet produit pour récupérer son nom
       const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
         expand: ['data.price.product']
       });
 
       for (const item of lineItems.data) {
-        // Maintenant, item.price.product est un objet complet, on récupère son vrai ID de base
-        const productId = typeof item.price.product === 'string' 
-          ? item.price.product 
-          : item.price.product.id;
-          
+        const productObj = item.price.product;
+        
+        // Récupère le nom du produit (ex: "Petit caca bleu")
+        const productName = typeof productObj === 'object' && productObj !== null ? productObj.name : null;
         const quantity = item.quantity;
 
-        console.log("Vrai ID du produit Stripe récupéré :", productId);
+        if (!productName) {
+          console.error("Nom du produit introuvable pour cet article.");
+          continue;
+        }
 
-        // Envoie l'ordre de décrémentation à ton Google Apps Script
-        await fetch('https://script.google.com/macros/s/AKfycbyvUxeTyPtPn5jQAyJ_tF3528YV8JvcWsVhc2bYjiL2zi7etgwJu_dOSpjTD1qbJ4R5og/exec', {
+        console.log("Nom du produit acheté envoyé à Google :", productName);
+
+        // Envoie le nom au Google Apps Script
+        const googleResponse = await fetch('https://script.google.com/macros/s/AKfycbwOpBAd2WzT-fzdYcnKZS9qYyzR6tzTzoMCPDROqsNPBOSbhElvz5ReD9MWAweoYh4JnQ/exec', {
           method: 'POST',
           redirect: 'follow',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            productId: productId,
+            productName: productName,
             quantity: quantity
           })
         });

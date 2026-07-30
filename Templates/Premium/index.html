@@ -88,7 +88,7 @@
             // 1. On récupère les produits depuis Stripe ET les stocks depuis Google Sheets en même temps
             const [stripeResponse, stockResponse] = await Promise.all([
                 fetch('/api/products'),
-                fetch('https://script.google.com/macros/s/AKfycbybPtNnjSFfbb3DbhgWb35H6zzOl9iyJg8inyYfqIUnORAbK8rbvUH-54lPSL37__84EQ/exec') // <-- Mets ton URL ici
+                fetch('https://script.google.com/macros/s/AKfycbwOpBAd2WzT-fzdYcnKZS9qYyzR6tzTzoMCPDROqsNPBOSbhElvz5ReD9MWAweoYh4JnQ/exec') // <-- Mets ton URL ici
             ]);
 
             const products = await stripeResponse.json();
