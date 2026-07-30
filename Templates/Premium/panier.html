@@ -141,12 +141,27 @@
             return;
         }
 
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const itemNames = cart.map(item => `- ${item.name} (x${item.quantity})`).join('\n');
+        try {
+            // Appel de l'API serverless sur Vercel
+            const response = await fetch('/api/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ items: cart }),
+            });
 
-        const testMessage = `--- MODE TEST ---\n\nProduits :\n${itemNames}\n\nTotal : ${total} €\n\nLe lien de paiement Stripe serait généré ici.`;
+            const data = await response.json();
 
-        alert(testMessage);
+            if (data.url) {
+                window.location.href = data.url; // Redirection vers Stripe Checkout
+            } else {
+                alert("Erreur: " + (data.error || "Impossible de créer la session de paiement."));
+            }
+        } catch (error) {
+            console.error("Erreur:", error);
+            alert("Erreur de connexion avec le serveur de paiement.");
+        }
     }
 
     renderCart();
