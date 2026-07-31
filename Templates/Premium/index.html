@@ -76,7 +76,9 @@
     <div id="product-modal" class="fixed inset-0 z-[100] hidden bg-bone/90 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-panel border border-hairline p-6 rounded-2xl w-full max-w-sm relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-ink-soft"><i data-lucide="x"></i></button>
-            <div class="aspect-square bg-beige border border-beige rounded-xl mb-4 flex items-center justify-center">Image</div>
+            <div id="modal-image" class="aspect-square bg-beige border border-beige rounded-xl mb-4 flex items-center justify-center overflow-hidden">
+                <span class="text-ink-faint text-xs uppercase tracking-widest">Image</span>
+            </div>
             <h2 id="modal-name" class="text-lg font-medium mb-1"></h2>
             <p id="modal-desc" class="text-xs text-ink-soft mb-6 font-light"></p>
             <button id="modal-btn" class="w-full bg-accent text-ink py-3 rounded-lg text-xs uppercase tracking-widest font-bold">
@@ -225,6 +227,10 @@
     function openModal(p, stock) {
         document.getElementById('modal-name').innerText = p.name;
         document.getElementById('modal-desc').innerText = p.desc || "Pièce unique façonnée avec soin.";
+        const imgContainer = document.getElementById('modal-image');
+        imgContainer.innerHTML = p.image
+            ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">`
+            : '<span class="text-ink-faint text-xs uppercase tracking-widest">Image</span>';
         const btn = document.getElementById('modal-btn');
         btn.onclick = () => {
             addToCart({ id: p.id, name: p.name, price: p.price, maxStock: stock }, btn);
