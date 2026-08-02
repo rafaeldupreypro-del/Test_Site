@@ -140,29 +140,29 @@
           <div class="grid sm:grid-cols-2 gap-5 mb-5">
             <div>
               <label class="block text-sm font-medium mb-1.5">Nom complet</label>
-              <input required type="text" placeholder="Camille Dupont" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
+              <input id="nameInput" required type="text" placeholder="Camille Dupont" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
             </div>
             <div>
               <label class="block text-sm font-medium mb-1.5">E-mail</label>
-              <input required type="email" placeholder="camille@exemple.fr" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
+              <input id="emailInput" required type="email" placeholder="camille@exemple.fr" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
             </div>
           </div>
 
           <div class="grid sm:grid-cols-2 gap-5 mb-5">
             <div>
               <label class="block text-sm font-medium mb-1.5">Téléphone (optionnel)</label>
-              <input type="tel" placeholder="+33 5 56 00 00 00" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
+              <input id="phoneInput" type="tel" placeholder="+33 5 56 00 00 00" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
             </div>
             <div>
               <label class="block text-sm font-medium mb-1.5">Code postal du chantier</label>
-              <input type="text" placeholder="33000" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
+              <input id="postalInput" type="text" placeholder="33000" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
             </div>
           </div>
 
           <div class="grid sm:grid-cols-2 gap-5 mb-5">
             <div>
               <label class="block text-sm font-medium mb-1.5">Budget estimé</label>
-              <select class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
+              <select id="budgetInput" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
                 <option>Je ne sais pas encore</option>
                 <option>Moins de 5 000 €</option>
                 <option>5 000 – 15 000 €</option>
@@ -172,7 +172,7 @@
             </div>
             <div>
               <label class="block text-sm font-medium mb-1.5">Échéance souhaitée</label>
-              <select class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
+              <select id="deadlineInput" class="w-full border border-ink/15 rounded-lg px-4 py-2.5 text-sm bg-cream/40 transition">
                 <option>À définir</option>
                 <option>Dès que possible</option>
                 <option>Dans les 3 mois</option>
@@ -302,6 +302,40 @@
 
     function handleSubmit(e) {
       e.preventDefault();
+
+      const subjectLabels = {
+        devis: 'Demande de devis',
+        visite: 'Visite technique',
+        sav: 'SAV / intervention',
+        autre: 'Autre question'
+      };
+
+      const subjectKey = document.getElementById('subjectInput').value;
+      const subjectLabel = subjectLabels[subjectKey] || subjectKey;
+      const name = document.getElementById('nameInput').value;
+      const email = document.getElementById('emailInput').value;
+      const phone = document.getElementById('phoneInput').value || 'Non renseigné';
+      const postal = document.getElementById('postalInput').value || 'Non renseigné';
+      const budget = document.getElementById('budgetInput').value;
+      const deadline = document.getElementById('deadlineInput').value;
+      const project = document.getElementById('projectText').value;
+
+      const emailSubject = `[Atelier Renard] ${subjectLabel} - ${name}`;
+      const emailBody =
+`Nom complet : ${name}
+E-mail : ${email}
+Téléphone : ${phone}
+Code postal du chantier : ${postal}
+Budget estimé : ${budget}
+Échéance souhaitée : ${deadline}
+Sujet : ${subjectLabel}
+
+Projet :
+${project}`;
+
+      const mailtoLink = `mailto:rafaelduprey689@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+      window.location.href = mailtoLink;
+
       document.getElementById('confirmMsg').classList.remove('hidden');
       e.target.reset();
       document.getElementById('charCount').textContent = '0';
