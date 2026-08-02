@@ -77,6 +77,7 @@ h1 {
 
 /* ---------- Couleurs d'accent (utilisées comme classes utilitaires) ---------- */
 .text-accent { color: var(--accent); }
+.text-accent-dark { color: var(--accent-dark); }
 .bg-accent   { background-color: var(--accent); }
 .border-accent { border-color: var(--accent); }
 
@@ -104,6 +105,7 @@ h1 {
 .card {
   background-color: var(--card);
   border: 1px solid var(--card-line);
+  border-top: 3px solid var(--clay-dark);
   border-radius: 1rem;
   box-shadow: var(--shadow-soft);
   transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
@@ -111,6 +113,7 @@ h1 {
 .card:hover {
   box-shadow: var(--shadow-lift);
   transform: translateY(-2px);
+  border-top-color: var(--accent-dark);
 }
 
 /* Icône dans un médaillon teinté, comme un jalon d'étape */
@@ -118,11 +121,12 @@ h1 {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 0.75rem;
-  background-color: var(--clay-tint);
+  background-color: var(--clay-dark);
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.text-card { color: var(--card); }
 
 /* Nav desktop en pilule, cohérente avec un menu mobile déroulant */
 .nav-pill {
@@ -140,11 +144,11 @@ h1 {
   transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 .nav-pill a:hover {
-  color: var(--accent);
+  color: var(--accent-dark);
 }
 .nav-pill a.active {
-  background-color: var(--panel);
-  color: var(--ink);
+  background-color: var(--accent-dark);
+  color: var(--card);
   box-shadow: var(--shadow-soft);
 }
 
@@ -216,7 +220,7 @@ a.group:hover,
 /* ---------- Signature : petit repère "gemme" sur les séparateurs ---------- */
 .divider-gem {
   position: relative;
-  background-color: var(--accent) !important;
+  background-color: var(--accent-dark) !important;
   height: 2px !important;
 }
 .divider-gem::after {
@@ -226,7 +230,7 @@ a.group:hover,
   left: 50%;
   width: 8px;
   height: 8px;
-  background: var(--accent);
+  background: var(--accent-dark);
   transform: translate(-50%, -50%) rotate(45deg);
   box-shadow: 0 0 0 5px var(--bone);
 }
