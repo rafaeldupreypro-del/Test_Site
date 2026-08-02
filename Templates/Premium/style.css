@@ -128,9 +128,10 @@ h1 {
 }
 .text-card { color: var(--card); }
 
-/* Nav desktop en pilule, cohérente avec un menu mobile déroulant */
+/* Nav desktop en pilule, cohérente avec un menu mobile déroulant.
+   Ne définit pas `display` : c'est Tailwind (hidden / md:flex) qui
+   décide de la visibilité selon la largeur d'écran. */
 .nav-pill {
-  display: flex;
   align-items: center;
   gap: 0.25rem;
   background-color: var(--card);
