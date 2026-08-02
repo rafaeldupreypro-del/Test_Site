@@ -1,0 +1,258 @@
+/* ===================================================================
+   Atelier Nora — Feuille de style
+   Palette douce et feutrée, accent rose poudré assourdi.
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Fond & surfaces — plus mats, moins de contraste */
+  --bone: #EFE7E1;        /* fond principal, greige chaud (pas de blanc franc) */
+  --panel: #E2CFCB;       /* cartes, encarts — rose mat */
+  --panel-soft: #E9DAD6;  /* variante plus douce */
+  --hairline: #C6A29C;    /* bordures, rose-brun assourdi */
+
+  /* Texte */
+  --ink: #2A211D;          /* texte principal, brun très sombre */
+  --ink-soft: #695D56;     /* texte secondaire */
+  --ink-faint: #9A8D85;    /* texte tertiaire / placeholders */
+
+  /* Accent — rose poudré assourdi (moins saturé, plus profond) */
+  --accent: #93585F;
+  --accent-dark: #71424A;
+  --accent-soft: #B98D8C;
+  --accent-tint: #D9C0BC;  /* voile mat, utilisé en bandeau de fond */
+
+  /* Beige / marron clair — pour "remplir" les grands aplats (visuels, cadres) */
+  --beige: #DBC7AC;
+  --beige-soft: #E8DCC7;
+  --beige-line: #BFA37D;
+
+  /* Argile — troisième teinte chaude, pour varier sans sortir de la famille rose/beige */
+  --clay: #A9785C;
+  --clay-dark: #8B5E45;
+  --clay-tint: #EFE1D4;
+
+  /* Carte — blanc chaud, pour faire "flotter" le contenu sur les fonds teintés */
+  --card: #FDFBF8;
+  --card-line: rgba(42, 33, 29, 0.07);
+
+  /* États */
+  --success: #5F7A64;
+  --danger: #A04434;
+
+  /* Ombres douces, teinte chaude et peu contrastée */
+  --shadow-soft: 0 1px 3px rgba(42, 33, 29, 0.10);
+  --shadow-lift: 0 10px 22px -10px rgba(42, 33, 29, 0.30);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bone);
+  background-image: linear-gradient(180deg, var(--accent-tint) 0%, var(--bone) 520px);
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-family: 'Jost', 'Helvetica Neue', sans-serif;
+}
+
+/* Titres en serif élégant, esprit "gravure" bijoutier */
+h1, h2 {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+h1 {
+  font-style: italic;
+}
+
+/* Garantit que les icônes Lucide (SVG en currentColor) héritent
+   toujours d'une couleur visible, même sans classe explicite. */
+[data-lucide], svg.lucide {
+  color: inherit;
+}
+
+/* ---------- Couleurs d'accent (utilisées comme classes utilitaires) ---------- */
+.text-accent { color: var(--accent); }
+.text-accent-dark { color: var(--accent-dark); }
+.bg-accent   { background-color: var(--accent); }
+.border-accent { border-color: var(--accent); }
+
+/* ---------- Palette (classes utilitaires, remplacent les zinc-*) ---------- */
+.bg-bone       { background-color: var(--bone); }
+.bg-panel      { background-color: var(--panel); box-shadow: var(--shadow-soft); border-color: var(--hairline) !important; }
+.bg-panel-soft { background-color: var(--panel-soft); }
+.border-hairline { border-color: var(--hairline); }
+.text-ink       { color: var(--ink); }
+.text-ink-soft  { color: var(--ink-soft); }
+.text-ink-faint { color: var(--ink-faint); }
+
+/* Beige / marron clair — grands aplats, cadres d'image */
+.bg-beige      { background-color: var(--beige); }
+.bg-beige-soft { background-color: var(--beige-soft); }
+.border-beige  { border-color: var(--beige-line); }
+
+/* Argile — variante chaude complémentaire */
+.bg-clay      { background-color: var(--clay); }
+.bg-clay-tint { background-color: var(--clay-tint); }
+.text-clay    { color: var(--clay); }
+.border-clay  { border-color: var(--clay); }
+
+/* Carte — contenu qui "flotte" sur un fond teinté */
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--card-line);
+  border-top: 3px solid var(--clay-dark);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+  border-top-color: var(--accent-dark);
+}
+
+/* Icône dans un médaillon teinté, comme un jalon d'étape */
+.icon-badge {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  background-color: var(--clay-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text-card { color: var(--card); }
+.bg-card { background-color: var(--card); }
+
+/* Nav desktop en pilule, cohérente avec un menu mobile déroulant.
+   Ne définit pas `display` : c'est Tailwind (hidden / md:flex) qui
+   décide de la visibilité selon la largeur d'écran. */
+.nav-pill {
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.25rem;
+}
+.nav-pill a {
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+.nav-pill a:hover {
+  color: var(--accent-dark);
+}
+.nav-pill a.active {
+  background-color: var(--accent-dark);
+  color: var(--card);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Fluidité générale des interactions */
+a, button, .transition-all {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+/* Variantes de transparence utilisées sur la nav / modales / overlays */
+.bg-bone\/80  { background-color: rgb(239 231 225 / 0.88); }
+.bg-bone\/70  { background-color: rgb(239 231 225 / 0.8); }
+.bg-bone\/90  { background-color: rgb(239 231 225 / 0.94); }
+.bg-bone\/10  { background-color: rgb(239 231 225 / 0.1); }
+.bg-bone\/0   { background-color: rgb(239 231 225 / 0); }
+.bg-panel\/60 { background-color: rgb(226 207 203 / 0.7); }
+.border-hairline\/60 { border-color: rgb(198 162 156 / 0.6); }
+.border-accent\/40 { border-color: rgb(147 88 95 / 0.4); }
+
+/* Nav : liseré discret en pied de barre */
+nav.bg-bone\/80, nav.bg-bone\/70 {
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* ---------- Boutons ---------- */
+.btn-gold {
+  background-color: var(--accent);
+  color: #F7EFEC;
+  border: 1px solid var(--accent);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.25s ease;
+}
+.btn-gold:hover {
+  background-color: var(--accent-dark);
+  border-color: var(--accent-dark);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background-color: var(--bone);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+  transition: all 0.25s ease;
+}
+.btn-outline:hover {
+  background-color: var(--panel-soft);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.btn-success {
+  background-color: var(--success) !important;
+  color: #F7EFEC !important;
+  border: 1px solid var(--success) !important;
+}
+
+/* ---------- Cartes produits / collections : élévation discrète ---------- */
+a.group,
+div.group {
+  transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
+}
+a.group:hover,
+.bg-panel.border-hairline:hover {
+  box-shadow: var(--shadow-lift);
+  border-color: var(--accent) !important;
+  transform: translateY(-2px);
+}
+
+/* ---------- Signature : petit repère "gemme" sur les séparateurs ---------- */
+.divider-gem {
+  position: relative;
+  background-color: var(--accent-dark) !important;
+  height: 2px !important;
+}
+.divider-gem::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-dark);
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0 0 5px var(--bone);
+}
+
+/* ---------- Bandeau teinté réutilisable ---------- */
+.band-tint {
+  background-color: var(--panel-soft);
+  border: 1px solid var(--hairline);
+}
+
+/* ---------- Utilitaires divers ---------- */
+.text-readable {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* Scrollbar discrète */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bone); }
+::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }

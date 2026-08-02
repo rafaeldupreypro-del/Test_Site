@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>L'Atelier | Atelier Nora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-bone text-ink antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-bone/80 backdrop-blur-md z-50">
+        <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light text-accent">Atelier Nora</a>
+
+            <!-- Navigation Desktop -->
+            <div class="hidden md:flex nav-pill text-[10px] tracking-widest uppercase font-light">
+                <a href="collections.html">Collections</a>
+                <a href="index.html#boutique">E-Boutique</a>
+                <a href="atelier.html" class="active">L'Atelier</a>
+            </div>
+
+            <!-- Icônes (Panier + Menu) -->
+            <div class="flex items-center gap-6">
+                <!-- Lien Panier -->
+                <a href="panier.html" class="relative p-2 flex items-center">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
+                </a>
+
+                <!-- Bouton Menu (Visible uniquement sur mobile) -->
+                <button id="menu-btn" class="md:hidden p-2 flex items-center">
+                    <i data-lucide="menu" class="w-6 h-6 text-ink"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu Mobile (À placer juste après le <nav> pour éviter les problèmes de superposition) -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-panel border-b border-hairline p-6 space-y-6 text-center z-40">
+        <a href="collections.html" class="block text-xs uppercase tracking-widest text-ink-soft">Collections</a>
+        <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-ink-soft">E-Boutique</a>
+        <a href="atelier.html" class="block text-xs uppercase tracking-widest text-ink-soft">L'Atelier</a>
+    </div>
+    <main class="max-w-4xl mx-auto pt-32 pb-20 px-6">
+        <div class="text-center space-y-10 mb-20">
+            <p class="text-[10px] tracking-[0.3em] uppercase text-accent font-medium">Notre histoire</p>
+            <h1 class="text-4xl font-extralight tracking-[0.2em] uppercase text-ink -mt-6">L'Atelier</h1>
+            <div class="w-20 h-[1px] bg-accent mx-auto divider-gem"></div>
+            <p class="text-ink-soft font-light leading-relaxed max-w-2xl mx-auto text-base">
+                Né au Havre, l'Atelier Nora est le fruit d'une quête d'équilibre entre l'artisanat traditionnel et une vision durable de la joaillerie. 
+                Chaque pièce que nous créons porte en elle l'empreinte de nos mains et le respect de la matière brute.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="card p-8 text-center">
+                <div class="icon-badge mx-auto mb-5">
+                    <i data-lucide="gem" class="w-5 h-5 text-card"></i>
+                </div>
+                <h3 class="text-xs uppercase tracking-widest font-medium text-ink">Éthique</h3>
+                <p class="text-[13px] text-ink-soft leading-relaxed mt-3">Or 18k recyclé et pierres précieuses sourcées avec intégrité.</p>
+            </div>
+            <div class="card p-8 text-center">
+                <div class="icon-badge mx-auto mb-5">
+                    <i data-lucide="hammer" class="w-5 h-5 text-card"></i>
+                </div>
+                <h3 class="text-xs uppercase tracking-widest font-medium text-ink">Savoir-faire</h3>
+                <p class="text-[13px] text-ink-soft leading-relaxed mt-3">Un travail manuel minutieux, privilégiant la qualité sur la quantité.</p>
+            </div>
+            <div class="card p-8 text-center">
+                <div class="icon-badge mx-auto mb-5">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-card"></i>
+                </div>
+                <h3 class="text-xs uppercase tracking-widest font-medium text-ink">Local</h3>
+                <p class="text-[13px] text-ink-soft leading-relaxed mt-3">Chaque bijou est façonné dans notre atelier en Normandie.</p>
+            </div>
+        </div>
+
+        <div class="mt-20">
+            <div class="aspect-video bg-beige rounded-3xl border border-beige flex items-center justify-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-bone/10 transition-opacity group-hover:bg-bone/0"></div>
+                <span class="text-ink-faint text-xs uppercase tracking-widest">Photo de l'artisan au travail</span>
+                </div>
+        </div>
+
+        <!-- Nous trouver -->
+        <div class="mt-20 grid md:grid-cols-[1fr_320px] gap-6 items-start">
+            <div>
+                <p class="text-[10px] tracking-[0.3em] uppercase text-accent font-medium mb-3">Nous trouver</p>
+                <h2 class="text-2xl font-extralight tracking-[0.1em] uppercase text-ink mb-6">L'atelier, au Havre</h2>
+
+                <!--
+                    ⚙️ CONFIGURATION CARTE
+                    Remplacez "Le Havre" ci-dessous par l'adresse exacte de l'atelier
+                    dans les deux liens (src de l'iframe et href "Ouvrir dans Maps").
+                -->
+                <div class="rounded-2xl overflow-hidden relative card">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Le+Havre" target="_blank" rel="noopener" class="absolute top-3 left-3 z-10 bg-card text-ink text-xs font-medium px-3 py-2 rounded-lg shadow flex items-center gap-2 hover:bg-panel-soft transition">
+                        Ouvrir dans Maps
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                    <iframe
+                        title="Localisation Atelier Nora"
+                        class="w-full aspect-[4/3]"
+                        style="border:0"
+                        loading="lazy"
+                        allowfullscreen
+                        src="https://www.google.com/maps?q=Le+Havre&output=embed">
+                    </iframe>
+                </div>
+            </div>
+
+            <aside class="card p-6">
+                <h3 class="text-xs uppercase tracking-widest font-medium text-ink mb-4">Informations pratiques</h3>
+                <ul class="space-y-4 text-[13px] text-ink-soft">
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-accent-dark flex-shrink-0 mt-0.5"></i>
+                        Le Havre, Normandie
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="clock" class="w-4 h-4 text-accent-dark flex-shrink-0 mt-0.5"></i>
+                        Sur rendez-vous
+                    </li>
+                </ul>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        function updateCartCount() {
+            const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+            const el = document.getElementById('cart-count');
+            if (el) {
+                el.innerText = count;
+                el.classList.toggle('hidden', count === 0);
+            }
+        }
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.onclick = () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = menuBtn.querySelector('i');
+                if (icon) {
+                    icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x');
+                    lucide.createIcons();
+                }
+            };
+        }
+
+        updateCartCount();
+        lucide.createIcons();
+    </script>
+</body>
+</html>
