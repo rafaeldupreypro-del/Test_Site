@@ -3,7 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoPerform | Garage Mécanique & Diagnostic au Havre</title>
+
+    <!-- SEO -->
+    <title>AutoPerform | Garage Mécanique &amp; Diagnostic au Havre</title>
+    <meta name="description" content="Garage automobile au Havre (76600) : mécanique générale, diagnostic électronique multimarques, révision et vidange. Devis et rendez-vous au 02 35 00 00 00.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.autoperform-lehavre.fr/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AutoPerform">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="AutoPerform | Garage Mécanique & Diagnostic au Havre">
+    <meta property="og:description" content="Entretien, réparation et diagnostic électronique toutes marques. Garage de proximité au Havre.">
+    <meta property="og:url" content="https://www.autoperform-lehavre.fr/">
+    <meta property="og:image" content="https://www.autoperform-lehavre.fr/og-image.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AutoPerform | Garage Mécanique & Diagnostic au Havre">
+    <meta name="twitter:description" content="Entretien, réparation et diagnostic électronique toutes marques au Havre.">
+
+    <!-- Données structurées : commerce local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoRepair",
+      "name": "AutoPerform",
+      "description": "Garage automobile au Havre : mécanique générale, diagnostic électronique multimarques, révision et vidange.",
+      "url": "https://www.autoperform-lehavre.fr/",
+      "telephone": "+33235000000",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "145 Rue de l'Aviateur",
+        "addressLocality": "Le Havre",
+        "postalCode": "76600",
+        "addressCountry": "FR"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "08:00",
+          "closes": "18:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday"],
+          "opens": "09:00",
+          "closes": "12:00"
+        }
+      ],
+      "priceRange": "€€"
+    }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -13,13 +65,26 @@
 </head>
 <body class="bg-zinc-950 text-zinc-100 antialiased">
 
+    <!--
+        ⚙️ À PERSONNALISER AVANT MISE EN LIGNE
+        - Adresse e-mail : "contact@autoperform-lehavre.fr" est un exemple, remplacez-la
+          partout (3 endroits : hero, section Contact, footer) par la vraie adresse.
+        - Nom de domaine : remplacez "autoperform-lehavre.fr" dans les balises SEO du <head>.
+        - Galerie : remplacez les 6 emplacements par de vraies photos (voir commentaire
+          au-dessus de la section #galerie).
+    -->
+
     <nav class="fixed top-0 w-full bg-zinc-950/80 backdrop-blur-md z-50 border-b border-zinc-900">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <span class="text-lg font-bold tracking-tight text-white">Auto<span class="text-orange-500">Perform</span></span>
-            <div class="flex items-center gap-6 text-xs font-medium text-zinc-400">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+            <span class="text-lg font-bold tracking-tight text-white flex-shrink-0">Auto<span class="text-orange-500">Perform</span></span>
+            <div class="hidden sm:flex items-center gap-6 text-xs font-medium text-zinc-400">
                 <a href="#services" class="hover:text-white transition-colors">Services</a>
                 <a href="#galerie" class="hover:text-white transition-colors">Atelier</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
             </div>
+            <a href="tel:0235000000" class="inline-flex items-center gap-2 bg-orange-500 text-black px-3 py-2 sm:px-4 rounded-lg font-bold text-xs hover:bg-orange-400 transition-all flex-shrink-0">
+                <i data-lucide="phone-call" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">02 35 00 00 00</span><span class="sm:hidden">Appeler</span>
+            </a>
         </div>
     </nav>
 
@@ -30,9 +95,12 @@
         <p class="text-zinc-400 max-w-xl mx-auto text-base font-light">
             Entretien, réparation et diagnostic électronique toutes marques. Un garage de proximité avec une expertise technique garantie.
         </p>
-        <div class="pt-4">
+        <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
             <a href="tel:0235000000" class="inline-flex items-center justify-center gap-2 bg-orange-500 text-black px-8 py-4 rounded-xl font-bold text-sm hover:bg-orange-400 transition-all">
                 <i data-lucide="phone-call" class="w-4 h-4"></i> Prendre RDV : 02 35 00 00 00
+            </a>
+            <a href="mailto:contact@autoperform-lehavre.fr" class="inline-flex items-center justify-center gap-2 bg-zinc-900 border border-zinc-800 text-white px-8 py-4 rounded-xl font-bold text-sm hover:bg-zinc-800 transition-all">
+                <i data-lucide="mail" class="w-4 h-4"></i> Nous écrire
             </a>
         </div>
     </section>
@@ -62,38 +130,104 @@
         <h2 class="text-3xl font-bold mb-12">Pourquoi nous faire confiance ?</h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="space-y-2">
-                <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="w-12 h-12 bg-orange-500/10 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i data-lucide="shield-check"></i>
                 </div>
                 <h4 class="font-bold">Garantie Qualité</h4>
-                <p class="text-sm text-zinc-600">Un travail soigné et des produits sélectionnés avec rigueur.</p>
+                <p class="text-sm text-zinc-400">Un travail soigné et des produits sélectionnés avec rigueur.</p>
             </div>
             <div class="space-y-2">
-                <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="w-12 h-12 bg-orange-500/10 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i data-lucide="clock"></i>
                 </div>
                 <h4 class="font-bold">Rapidité</h4>
-                <p class="text-sm text-zinc-600">Nous respectons vos contraintes et vos délais.</p>
+                <p class="text-sm text-zinc-400">Nous respectons vos contraintes et vos délais.</p>
             </div>
             <div class="space-y-2">
-                <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="w-12 h-12 bg-orange-500/10 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i data-lucide="map-pin"></i>
                 </div>
                 <h4 class="font-bold">Proximité</h4>
-                <p class="text-sm text-zinc-600">Votre commerce de confiance, en plein cœur de ville.</p>
+                <p class="text-sm text-zinc-400">Votre commerce de confiance, en plein cœur de ville.</p>
             </div>
         </div>
     </div>
 </section>
 
+    <!--
+        ⚙️ CONFIGURATION GALERIE
+        Chaque bloc ci-dessous est un emplacement pour une photo (atelier1.jpg à atelier6.jpg).
+        Remplacez le fond par une vraie image, par exemple :
+        style="background-image:url('images/atelier1.jpg'); background-size:cover; background-position:center;"
+    -->
     <section id="galerie" class="py-16 max-w-5xl mx-auto px-4 space-y-8">
         <div class="text-center">
             <h2 class="text-xl font-bold text-white">Notre atelier en images</h2>
+            <p class="text-zinc-500 text-xs mt-2">Cliquez sur une photo pour l'agrandir</p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div onclick="openLightbox('atelier1.jpg', 'Poste de travail')" class="aspect-video bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer"></div>
-            <div onclick="openLightbox('atelier2.jpg', 'Diagnostic valise')" class="aspect-video bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer"></div>
-            <div onclick="openLightbox('atelier3.jpg', 'Révision')"class="aspect-video bg-zinc-900 border border-zinc-800 rounded-lg"></div>
+            <div onclick="openLightbox('atelier1.jpg', 'Poste de travail')" class="group aspect-video bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer relative overflow-hidden flex items-end p-3 hover:border-orange-500/50 transition-colors">
+                <span class="text-[10px] uppercase tracking-widest text-zinc-500 group-hover:text-orange-500 transition-colors">Poste de travail</span>
+            </div>
+            <div onclick="openLightbox('atelier2.jpg', 'Diagnostic valise')" class="group aspect-video bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer relative overflow-hidden flex items-end p-3 hover:border-orange-500/50 transition-colors">
+                <span class="text-[10px] uppercase tracking-widest text-zinc-500 group-hover:text-orange-500 transition-colors">Diagnostic valise</span>
+            </div>
+            <div onclick="openLightbox('atelier3.jpg', 'Révision')" class="group aspect-video bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer relative overflow-hidden flex items-end p-3 hover:border-orange-500/50 transition-colors">
+                <span class="text-[10px] uppercase tracking-widest text-zinc-500 group-hover:text-orange-500 transition-colors">Révision</span>
+            </div>
+            <div onclick="openLightbox('atelier4.jpg', 'Pont élévateur')" class="group aspect-video bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer relative overflow-hidden flex items-end p-3 hover:border-orange-500/50 transition-colors">
+                <span class="text-[10px] uppercase tracking-widest text-zinc-500 group-hover:text-orange-500 transition-colors">Pont élévateur</span>
+            </div>
+            <div onclick="openLightbox('atelier5.jpg', 'Vidange')" class="group aspect-video bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer relative overflow-hidden flex items-end p-3 hover:border-orange-500/50 transition-colors">
+                <span class="text-[10px] uppercase tracking-widest text-zinc-500 group-hover:text-orange-500 transition-colors">Vidange</span>
+            </div>
+            <div onclick="openLightbox('atelier6.jpg', 'Accueil client')" class="group aspect-video bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer relative overflow-hidden flex items-end p-3 hover:border-orange-500/50 transition-colors">
+                <span class="text-[10px] uppercase tracking-widest text-zinc-500 group-hover:text-orange-500 transition-colors">Accueil client</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Localisation -->
+    <section id="contact" class="py-16 max-w-5xl mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-xl font-bold text-white">Nous trouver</h2>
+            <p class="text-zinc-500 text-xs mt-2">145 Rue de l'Aviateur, 76600 Le Havre</p>
+        </div>
+
+        <div class="grid md:grid-cols-[1fr_300px] gap-4">
+            <div class="rounded-xl overflow-hidden border border-zinc-800 relative">
+                <a href="https://www.google.com/maps/search/?api=1&query=145+Rue+de+l%27Aviateur+76600+Le+Havre" target="_blank" rel="noopener" class="absolute top-3 left-3 z-10 bg-zinc-950/90 border border-zinc-800 text-white text-xs font-medium px-3 py-2 rounded-lg flex items-center gap-2 hover:bg-zinc-900 transition">
+                    Ouvrir dans Maps
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+                <iframe
+                    title="Localisation AutoPerform"
+                    class="w-full aspect-[4/3] md:aspect-auto md:h-full"
+                    style="border:0; min-height:280px;"
+                    loading="lazy"
+                    allowfullscreen
+                    src="https://www.google.com/maps?q=145+Rue+de+l%27Aviateur,+76600+Le+Havre&output=embed">
+                </iframe>
+            </div>
+
+            <div class="bg-zinc-900/60 border border-zinc-800 rounded-xl p-6 flex flex-col gap-5">
+                <div>
+                    <p class="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">Adresse</p>
+                    <p class="text-sm text-zinc-300">145 Rue de l'Aviateur<br>76600 Le Havre</p>
+                </div>
+                <div>
+                    <p class="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">Horaires</p>
+                    <p class="text-sm text-zinc-300">Lun-Ven : 8h-12h / 14h-18h30<br>Sam : 9h-12h</p>
+                </div>
+                <div class="mt-auto flex flex-col gap-2">
+                    <a href="tel:0235000000" class="inline-flex items-center justify-center gap-2 bg-orange-500 text-black px-4 py-3 rounded-lg font-bold text-xs hover:bg-orange-400 transition-all">
+                        <i data-lucide="phone-call" class="w-4 h-4"></i> 02 35 00 00 00
+                    </a>
+                    <a href="mailto:contact@autoperform-lehavre.fr" class="inline-flex items-center justify-center gap-2 bg-zinc-800 border border-zinc-700 text-white px-4 py-3 rounded-lg font-bold text-xs hover:bg-zinc-700 transition-all">
+                        <i data-lucide="mail" class="w-4 h-4"></i> Nous écrire
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -110,6 +244,7 @@
                 <h4 class="font-semibold text-white text-xs uppercase mb-4">Contact</h4>
                 <p class="text-zinc-400 text-xs">145 Rue de l'Aviateur<br>76600 Le Havre</p>
                 <p class="text-orange-500 text-xs mt-2 font-bold">02 35 00 00 00</p>
+                <a href="mailto:contact@autoperform-lehavre.fr" class="text-zinc-400 text-xs mt-1 block hover:text-white transition-colors">contact@autoperform-lehavre.fr</a>
             </div>
             <div>
                 <h4 class="font-semibold text-white text-xs uppercase mb-4">Horaires</h4>
