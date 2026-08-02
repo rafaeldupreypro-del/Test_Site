@@ -103,12 +103,7 @@
             <p class="text-[10px] tracking-[0.3em] uppercase text-accent font-medium mb-2">Contact</p>
             <h2 class="text-lg font-medium text-ink uppercase tracking-widest mb-6">Contactez-nous</h2>
 
-            <!--
-                ⚙️ CONFIGURATION FORMSPREE
-                Remplacez "VOTRE_ID" ci-dessous par l'identifiant de votre formulaire Formspree
-                (créé sur https://formspree.io -> l'URL ressemble à https://formspree.io/f/abcdwxyz).
-            -->
-            <form id="contact-form" action="https://formspree.io/f/VOTRE_ID" method="POST" class="space-y-4">
+            <form id="contact-form" class="space-y-4">
                 <div>
                     <label for="contact-name" class="block text-[10px] uppercase tracking-widest text-ink-soft mb-1.5">Nom</label>
                     <input type="text" id="contact-name" name="name" required
@@ -303,46 +298,33 @@
 
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
+        contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const status = document.getElementById('contact-status');
             const btn = contactForm.querySelector('button[type="submit"]');
             const btnSpan = btn.querySelector('span');
             const originalText = btnSpan.innerText;
 
-            btn.disabled = true;
-            btnSpan.innerText = "Envoi...";
-            status.classList.add('hidden');
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message').value;
 
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: new FormData(contactForm),
-                    headers: { 'Accept': 'application/json' }
-                });
+            const emailSubject = `[Atelier Nora] Nouveau message de ${name}`;
+            const emailBody = `Nom : ${name}\nEmail : ${email}\n\nMessage :\n${message}`;
 
-                if (response.ok) {
-                    status.innerText = "Message envoyé, merci !";
-                    status.classList.remove('hidden', 'text-red-600');
-                    status.classList.add('text-accent-dark');
-                    contactForm.reset();
-                    setTimeout(() => {
-                        closeContactModal();
-                        status.classList.add('hidden');
-                        btnSpan.innerText = originalText;
-                        btn.disabled = false;
-                    }, 1800);
-                } else {
-                    throw new Error("Erreur d'envoi");
-                }
-            } catch (error) {
-                console.error("Erreur formulaire de contact :", error);
-                status.innerText = "Une erreur est survenue, réessayez.";
-                status.classList.remove('hidden', 'text-accent-dark');
-                status.classList.add('text-red-600');
+            const mailtoLink = `mailto:rafaelduprey689@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            window.location.href = mailtoLink;
+
+            status.innerText = "Ouverture de votre messagerie...";
+            status.classList.remove('hidden', 'text-red-600');
+            status.classList.add('text-accent-dark');
+            contactForm.reset();
+            setTimeout(() => {
+                closeContactModal();
+                status.classList.add('hidden');
                 btnSpan.innerText = originalText;
                 btn.disabled = false;
-            }
+            }, 1800);
         });
     }
 
