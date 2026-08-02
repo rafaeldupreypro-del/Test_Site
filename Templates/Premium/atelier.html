@@ -88,6 +88,48 @@
                 <span class="text-ink-faint text-xs uppercase tracking-widest">Photo de l'artisan au travail</span>
                 </div>
         </div>
+
+        <!-- Nous trouver -->
+        <div class="mt-20 grid md:grid-cols-[1fr_320px] gap-6 items-start">
+            <div>
+                <p class="text-[10px] tracking-[0.3em] uppercase text-accent font-medium mb-3">Nous trouver</p>
+                <h2 class="text-2xl font-extralight tracking-[0.1em] uppercase text-ink mb-6">L'atelier, au Havre</h2>
+
+                <!--
+                    ⚙️ CONFIGURATION CARTE
+                    Remplacez "Le Havre" ci-dessous par l'adresse exacte de l'atelier
+                    dans les deux liens (src de l'iframe et href "Ouvrir dans Maps").
+                -->
+                <div class="rounded-2xl overflow-hidden relative card">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Le+Havre" target="_blank" rel="noopener" class="absolute top-3 left-3 z-10 bg-card text-ink text-xs font-medium px-3 py-2 rounded-lg shadow flex items-center gap-2 hover:bg-panel-soft transition">
+                        Ouvrir dans Maps
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                    <iframe
+                        title="Localisation Atelier Nora"
+                        class="w-full aspect-[4/3]"
+                        style="border:0"
+                        loading="lazy"
+                        allowfullscreen
+                        src="https://www.google.com/maps?q=Le+Havre&output=embed">
+                    </iframe>
+                </div>
+            </div>
+
+            <aside class="card p-6">
+                <h3 class="text-xs uppercase tracking-widest font-medium text-ink mb-4">Informations pratiques</h3>
+                <ul class="space-y-4 text-[13px] text-ink-soft">
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-accent-dark flex-shrink-0 mt-0.5"></i>
+                        Le Havre, Normandie
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="clock" class="w-4 h-4 text-accent-dark flex-shrink-0 mt-0.5"></i>
+                        Sur rendez-vous
+                    </li>
+                </ul>
+            </aside>
+        </div>
     </main>
 
     <script>

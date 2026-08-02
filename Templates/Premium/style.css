@@ -127,6 +127,7 @@ h1 {
   justify-content: center;
 }
 .text-card { color: var(--card); }
+.bg-card { background-color: var(--card); }
 
 /* Nav desktop en pilule, cohérente avec un menu mobile déroulant.
    Ne définit pas `display` : c'est Tailwind (hidden / md:flex) qui
