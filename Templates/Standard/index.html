@@ -5,9 +5,8 @@
     <script>
         (function () {
             var saved = localStorage.getItem('theme');
-            if (saved === 'light') {
-                // L'utilisateur a explicitement choisi le mode clair : on respecte son choix.
-            } else {
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (saved === 'dark' || (!saved && prefersDark)) {
                 document.documentElement.classList.add('dark');
             }
         })();
