@@ -19,10 +19,10 @@
             <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light text-accent">Atelier Nora</a>
             
             <!-- Navigation Desktop -->
-            <div class="hidden md:flex items-center space-x-8 text-[10px] tracking-widest uppercase font-light text-ink-soft">
-                <a href="collections.html" class="hover:text-accent transition-colors">Collections</a>
-                <a href="index.html#boutique" class="hover:text-accent transition-colors">E-Boutique</a>
-                <a href="atelier.html" class="hover:text-accent transition-colors">L'Atelier</a>
+            <div class="hidden md:flex nav-pill text-[10px] tracking-widest uppercase font-light">
+                <a href="collections.html">Collections</a>
+                <a href="index.html#boutique" class="active">E-Boutique</a>
+                <a href="atelier.html">L'Atelier</a>
             </div>
 
             <!-- Icônes (Panier + Menu) -->
@@ -115,7 +115,7 @@
                 const isRupture = stock <= 0;
 
                 const card = document.createElement('div');
-                card.className = "group bg-bone border border-hairline p-4 rounded-2xl transition-all hover:border-accent";
+                card.className = "group card p-4";
                 
                 card.innerHTML = `
                     <div class="aspect-square bg-beige border border-beige rounded-xl mb-4 cursor-pointer overflow-hidden flex items-center justify-center relative">

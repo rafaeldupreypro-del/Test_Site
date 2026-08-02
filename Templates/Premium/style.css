@@ -28,6 +28,15 @@
   --beige-soft: #E8DCC7;
   --beige-line: #BFA37D;
 
+  /* Argile — troisième teinte chaude, pour varier sans sortir de la famille rose/beige */
+  --clay: #A9785C;
+  --clay-dark: #8B5E45;
+  --clay-tint: #EFE1D4;
+
+  /* Carte — blanc chaud, pour faire "flotter" le contenu sur les fonds teintés */
+  --card: #FDFBF8;
+  --card-line: rgba(42, 33, 29, 0.07);
+
   /* États */
   --success: #5F7A64;
   --danger: #A04434;
@@ -84,6 +93,65 @@ h1 {
 .bg-beige      { background-color: var(--beige); }
 .bg-beige-soft { background-color: var(--beige-soft); }
 .border-beige  { border-color: var(--beige-line); }
+
+/* Argile — variante chaude complémentaire */
+.bg-clay      { background-color: var(--clay); }
+.bg-clay-tint { background-color: var(--clay-tint); }
+.text-clay    { color: var(--clay); }
+.border-clay  { border-color: var(--clay); }
+
+/* Carte — contenu qui "flotte" sur un fond teinté */
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--card-line);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+/* Icône dans un médaillon teinté, comme un jalon d'étape */
+.icon-badge {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  background-color: var(--clay-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Nav desktop en pilule, cohérente avec un menu mobile déroulant */
+.nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.25rem;
+}
+.nav-pill a {
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+.nav-pill a:hover {
+  color: var(--accent);
+}
+.nav-pill a.active {
+  background-color: var(--panel);
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Fluidité générale des interactions */
+a, button, .transition-all {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
 
 /* Variantes de transparence utilisées sur la nav / modales / overlays */
 .bg-bone\/80  { background-color: rgb(239 231 225 / 0.88); }
