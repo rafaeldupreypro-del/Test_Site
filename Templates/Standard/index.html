@@ -71,57 +71,130 @@
         @custom-variant dark (&:where(.dark, .dark *));
     </style>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; position: relative; overflow-x: hidden; }
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-        :root { --accent-rgb: 37, 99, 235; } /* bleu (mode clair) */
-        .dark { --accent-rgb: 249, 115, 22; } /* orange (mode sombre) */
+        :root {
+            --ink: 23 24 26;
+            --paper: 236 237 236;
+            --card: 255 255 255;
+            --line: 209 211 209;
+            --line-strong: 176 179 176;
+            --accent: 196 68 12;
+            --accent-ink: 255 250 244;
+            --accent2: 15 100 96;
+        }
+        .dark {
+            --ink: 232 232 230;
+            --paper: 10 11 12;
+            --card: 19 21 23;
+            --line: 41 44 46;
+            --line-strong: 63 67 70;
+            --accent: 255 122 40;
+            --accent-ink: 20 13 6;
+            --accent2: 45 212 191;
+        }
 
-        /* Halos lumineux en fond, pour une sensation plus ouverte / respirante */
+        * { border-color: rgb(var(--line)); }
+
+        html { background: rgb(var(--paper)); }
+        body {
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            background: rgb(var(--paper));
+            color: rgb(var(--ink));
+        }
+        .font-display { font-family: 'Oswald', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Grille technique en fond, façon plan d'atelier */
+        .blueprint {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgb(var(--ink) / 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgb(var(--ink) / 0.05) 1px, transparent 1px);
+            background-size: 42px 42px;
+            -webkit-mask-image: linear-gradient(to bottom, black, transparent 85%);
+            mask-image: linear-gradient(to bottom, black, transparent 85%);
+            pointer-events: none;
+        }
+
         .glow {
             position: absolute;
             border-radius: 999px;
-            filter: blur(90px);
+            filter: blur(100px);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Carte avec relief au survol */
-        .lift {
-            transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        /* Bordure façon vue CAO : deux coins seulement */
+        .bracket { position: relative; }
+        .bracket::before, .bracket::after {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgb(var(--accent) / 0.65);
+            pointer-events: none;
+            transition: border-color 0.3s ease;
         }
-        .lift:hover {
-            transform: translateY(-4px);
-            border-color: rgba(var(--accent-rgb), 0.4);
-            box-shadow: 0 20px 40px -20px rgba(var(--accent-rgb), 0.25);
-        }
+        .bracket::before { top: -1px; left: -1px; border-right: none; border-bottom: none; border-radius: 3px 0 0 0; }
+        .bracket::after { bottom: -1px; right: -1px; border-left: none; border-top: none; border-radius: 0 0 3px 0; }
+        .bracket:hover::before, .bracket:hover::after { border-color: rgb(var(--accent)); }
 
-        /* Médaillon d'icône */
+        .lift { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+        .lift:hover { transform: translateY(-3px); box-shadow: 0 24px 48px -28px rgb(var(--ink) / 0.35); }
+
         .icon-badge {
-            width: 3.25rem;
-            height: 3.25rem;
-            border-radius: 0.9rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.6rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(var(--accent-rgb),0.16), rgba(var(--accent-rgb),0.04));
-            border: 1px solid rgba(var(--accent-rgb),0.2);
+            background: linear-gradient(150deg, rgb(var(--accent) / 0.16), rgb(var(--accent) / 0.03));
+            border: 1px solid rgb(var(--accent) / 0.3);
+            color: rgb(var(--accent));
         }
 
         .eyebrow {
-            font-size: 10px;
-            letter-spacing: 0.25em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: rgb(var(--accent-rgb));
-            font-weight: 600;
+            color: rgb(var(--accent));
+            font-weight: 500;
+        }
+        .eyebrow::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            background: rgb(var(--accent));
+            border-radius: 1px;
+            transform: rotate(45deg);
+            flex-shrink: 0;
         }
 
-        /* Transition douce entre les deux thèmes */
-        body, nav, section, footer, .lift, #theme-toggle {
+        /* Bande de sécurité façon signalétique d'atelier */
+        .hazard-rule {
+            height: 6px;
+            background-image: repeating-linear-gradient(-45deg, rgb(var(--accent)) 0 10px, rgb(var(--ink)) 10px 20px);
+            opacity: 0.9;
+        }
+
+        body, nav, section, footer, .lift, #theme-toggle, .card-surface {
             transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
         }
 
-        /* Bouton de bascule thème */
+        .card-surface {
+            background: rgb(var(--card));
+            border: 1px solid rgb(var(--line));
+        }
+
         #theme-toggle {
             position: relative;
             width: 2.25rem;
@@ -144,9 +217,38 @@
             opacity: 1;
             transform: scale(1) rotate(0deg);
         }
+
+        /* Cadran de compte-tours décoratif dans le hero */
+        .gauge { color: rgb(var(--accent)); }
+        .gauge-glass { color: rgb(var(--ink)); }
+
+        .btn-primary {
+            background: rgb(var(--accent));
+            color: rgb(var(--accent-ink));
+            box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25), 0 14px 30px -14px rgb(var(--accent) / 0.55);
+        }
+        .btn-primary:hover { filter: brightness(1.08); }
+
+        .btn-ghost {
+            background: rgb(var(--card));
+            border: 1px solid rgb(var(--line-strong));
+            color: rgb(var(--ink));
+        }
+        .btn-ghost:hover { border-color: rgb(var(--accent) / 0.6); color: rgb(var(--accent)); }
+
+        .plate-tag {
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.12em;
+        }
+
+        .gallery-tile {
+            background:
+                repeating-linear-gradient(135deg, rgb(var(--ink) / 0.045) 0 8px, transparent 8px 16px),
+                rgb(var(--card));
+        }
     </style>
 </head>
-<body class="bg-slate-400 text-slate-900 antialiased dark:bg-black dark:text-slate-100">
+<body class="antialiased">
 
     <!--
         ⚙️ À PERSONNALISER AVANT MISE EN LIGNE
@@ -157,105 +259,136 @@
           au-dessus de la section #galerie).
     -->
 
-    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-slate-500 dark:bg-black/80 dark:border-slate-800">
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md border-b" style="background: rgb(var(--paper) / 0.82);">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-            <span class="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100 flex-shrink-0">Auto<span class="text-blue-600 dark:text-orange-500">Perform</span></span>
-            <div class="hidden sm:flex items-center gap-6 text-xs font-medium text-slate-500 dark:text-slate-400">
-                <a href="#services" class="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">Services</a>
-                <a href="#galerie" class="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">Atelier</a>
-                <a href="#contact" class="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">Contact</a>
+            <span class="font-display text-lg font-semibold tracking-tight uppercase flex-shrink-0">Auto<span style="color: rgb(var(--accent));">Perform</span></span>
+            <div class="hidden sm:flex items-center gap-8 text-xs font-medium plate-tag uppercase" style="color: rgb(var(--ink) / 0.55);">
+                <a href="#services" class="hover:opacity-100 transition-opacity" style="opacity:0.85;">Services</a>
+                <a href="#galerie" class="hover:opacity-100 transition-opacity" style="opacity:0.85;">Atelier</a>
+                <a href="#contact" class="hover:opacity-100 transition-opacity" style="opacity:0.85;">Contact</a>
             </div>
             <div class="flex items-center gap-1 flex-shrink-0">
-                <button id="theme-toggle" onclick="toggleTheme()" aria-label="Basculer entre le mode clair et le mode sombre" class="inline-flex items-center justify-center rounded-full text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:text-orange-500 dark:hover:bg-orange-500/10 transition-all">
+                <button id="theme-toggle" onclick="toggleTheme()" aria-label="Basculer entre le mode clair et le mode sombre" class="inline-flex items-center justify-center rounded-full transition-all" style="color: rgb(var(--ink) / 0.6);">
                     <span class="icon-sun"><i data-lucide="sun" class="w-4 h-4"></i></span>
                     <span class="icon-moon"><i data-lucide="moon" class="w-4 h-4"></i></span>
                 </button>
             </div>
         </div>
     </nav>
+    <div class="hazard-rule"></div>
 
     <section class="relative pt-40 pb-28 px-4 max-w-5xl mx-auto text-center space-y-8 overflow-hidden">
-        <div class="glow w-[600px] h-[600px] bg-blue-600/20 dark:bg-orange-600/20 -top-64 left-1/2 -translate-x-1/2"></div>
+        <div class="blueprint"></div>
+        <div class="glow w-[560px] h-[560px] -top-64 left-1/2 -translate-x-1/2" style="background: rgb(var(--accent) / 0.16);"></div>
+
+        <!-- Cadran de compte-tours, motif signature -->
+        <svg viewBox="0 0 400 400" class="absolute -right-32 top-6 w-[380px] h-[380px] opacity-[0.08] dark:opacity-[0.14] pointer-events-none hidden md:block" aria-hidden="true">
+            <g stroke="currentColor" class="gauge-glass" fill="none">
+                <circle cx="200" cy="200" r="170" stroke-width="1"></circle>
+            </g>
+            <g stroke="currentColor" class="gauge" stroke-width="4" stroke-linecap="round">
+                <path d="M 200 200 m -150 0 a 150 150 0 1 1 210 143" fill="none" stroke-width="3"></path>
+            </g>
+            <g stroke="currentColor" class="gauge-glass" stroke-width="2">
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(-135 200 200)"></line>
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(-105 200 200)"></line>
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(-75 200 200)"></line>
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(-45 200 200)"></line>
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(-15 200 200)"></line>
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(15 200 200)"></line>
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(45 200 200)"></line>
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(75 200 200)"></line>
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(105 200 200)"></line>
+                <line x1="200" y1="35" x2="200" y2="55" transform="rotate(135 200 200)"></line>
+            </g>
+            <g stroke="currentColor" class="gauge" stroke-width="6" stroke-linecap="round">
+                <line x1="200" y1="200" x2="200" y2="70" transform="rotate(70 200 200)"></line>
+            </g>
+            <circle cx="200" cy="200" r="10" class="gauge" fill="currentColor" stroke="none"></circle>
+        </svg>
 
         <div class="relative z-10 space-y-8">
-            <span class="inline-flex items-center gap-2 eyebrow bg-blue-600/10 border border-slate-500/20 dark:bg-orange-500/10 dark:border-orange-500/20 px-4 py-2 rounded-full">
-                <i data-lucide="map-pin" class="w-3 h-3"></i> Garage indépendant · Le Havre
+            <span class="eyebrow border px-4 py-2 rounded-full" style="border-color: rgb(var(--accent) / 0.3); background: rgb(var(--accent) / 0.08);">
+                Garage indépendant · Le Havre
             </span>
-            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100 leading-[1.05]">
-                Mécanique auto <span class="text-blue-600 dark:text-orange-500">au Havre</span> :<br class="hidden sm:block"> la confiance avant tout.
+            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-semibold uppercase tracking-tight leading-[1.02]">
+                Mécanique auto <span style="color: rgb(var(--accent));">au Havre</span> :<br class="hidden sm:block"> la confiance avant tout.
             </h1>
-            <p class="text-slate-500 dark:text-slate-400 max-w-xl mx-auto text-base sm:text-lg font-light leading-relaxed">
+            <p class="max-w-xl mx-auto text-base sm:text-lg font-light leading-relaxed" style="color: rgb(var(--ink) / 0.62);">
                 Entretien, réparation et diagnostic électronique toutes marques. Un garage de proximité avec une expertise technique garantie.
             </p>
             <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
-                <a href="tel:0235000000" class="inline-flex items-center justify-center gap-2 bg-blue-600 text-slate-100 px-8 py-4 rounded-xl font-bold text-sm hover:bg-blue-500 transition-all shadow-lg shadow-blue-600/20 border-[3px] border-slate-500 dark:bg-orange-500 dark:text-black dark:hover:bg-orange-400 dark:shadow-orange-500/20 dark:border-slate-700">
+                <a href="tel:0235000000" class="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-sm transition-all">
                     <i data-lucide="phone-call" class="w-4 h-4"></i> Prendre RDV : 02 35 00 00 00
                 </a>
-                <a href="mailto:contact@autoperform-lehavre.fr" class="inline-flex items-center justify-center gap-2 bg-slate-300 border-[3px] border-slate-500 text-slate-900 px-8 py-4 rounded-xl font-bold text-sm hover:bg-slate-500 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800 transition-all">
+                <a href="mailto:contact@autoperform-lehavre.fr" class="btn-ghost inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-sm transition-all">
                     <i data-lucide="mail" class="w-4 h-4"></i> Nous écrire
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="services" class="relative py-24 border-t border-slate-500 dark:border-slate-800 px-4 overflow-hidden">
-        <div class="glow w-[500px] h-[500px] bg-blue-600/10 dark:bg-orange-600/10 top-0 right-0"></div>
+    <section id="services" class="relative py-24 border-t px-4 overflow-hidden">
+        <div class="glow w-[500px] h-[500px] top-0 right-0" style="background: rgb(var(--accent2) / 0.10);"></div>
         <div class="relative z-10 max-w-6xl mx-auto">
             <div class="text-center mb-14 space-y-3">
-                <p class="eyebrow">Nos prestations</p>
-                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100">Un service complet, sous le même toit</h2>
+                <p class="eyebrow justify-center">Nos prestations</p>
+                <h2 class="font-display text-2xl sm:text-3xl font-semibold uppercase tracking-tight">Un service complet, sous le même toit</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="lift p-8 bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl dark:bg-slate-900/60 dark:border-slate-800">
+                <div class="bracket lift card-surface p-8 rounded-lg">
                     <div class="icon-badge mb-5">
-                        <i data-lucide="wrench" class="w-6 h-6 text-blue-600 dark:text-orange-500"></i>
+                        <i data-lucide="wrench" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-semibold text-slate-900 dark:text-slate-100 mb-2">Mécanique Générale</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">Réparations fiables : freinage, suspension, embrayage et distribution.</p>
+                    <p class="plate-tag text-[10px] uppercase mb-1" style="color: rgb(var(--ink) / 0.4);">01 — Atelier</p>
+                    <h3 class="font-display font-semibold uppercase tracking-tight mb-2">Mécanique Générale</h3>
+                    <p class="text-xs leading-relaxed" style="color: rgb(var(--ink) / 0.55);">Réparations fiables : freinage, suspension, embrayage et distribution.</p>
                 </div>
-                <div class="lift p-8 bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl dark:bg-slate-900/60 dark:border-slate-800">
+                <div class="bracket lift card-surface p-8 rounded-lg">
                     <div class="icon-badge mb-5">
-                        <i data-lucide="cpu" class="w-6 h-6 text-blue-600 dark:text-orange-500"></i>
+                        <i data-lucide="cpu" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-semibold text-slate-900 dark:text-slate-100 mb-2">Diagnostic Élec</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">Identification précise des pannes via valise de diagnostic multimarques.</p>
+                    <p class="plate-tag text-[10px] uppercase mb-1" style="color: rgb(var(--ink) / 0.4);">02 — Électronique</p>
+                    <h3 class="font-display font-semibold uppercase tracking-tight mb-2">Diagnostic Élec</h3>
+                    <p class="text-xs leading-relaxed" style="color: rgb(var(--ink) / 0.55);">Identification précise des pannes via valise de diagnostic multimarques.</p>
                 </div>
-                <div class="lift p-8 bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl dark:bg-slate-900/60 dark:border-slate-800">
+                <div class="bracket lift card-surface p-8 rounded-lg">
                     <div class="icon-badge mb-5">
-                        <i data-lucide="droplet" class="w-6 h-6 text-blue-600 dark:text-orange-500"></i>
+                        <i data-lucide="droplet" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-semibold text-slate-900 dark:text-slate-100 mb-2">Révision &amp; Vidange</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">Entretien complet préservant la garantie constructeur de votre véhicule.</p>
+                    <p class="plate-tag text-[10px] uppercase mb-1" style="color: rgb(var(--ink) / 0.4);">03 — Entretien</p>
+                    <h3 class="font-display font-semibold uppercase tracking-tight mb-2">Révision &amp; Vidange</h3>
+                    <p class="text-xs leading-relaxed" style="color: rgb(var(--ink) / 0.55);">Entretien complet préservant la garantie constructeur de votre véhicule.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 bg-slate-300 text-slate-900 px-4 border-y border-slate-500 dark:bg-black dark:text-slate-100 dark:border-slate-800">
+    <section class="py-24 px-4 border-y" style="background: rgb(var(--card));">
     <div class="max-w-6xl mx-auto text-center">
-        <p class="eyebrow mb-3">Notre engagement</p>
-        <h2 class="text-2xl sm:text-3xl font-bold mb-16">Pourquoi nous faire confiance ?</h2>
+        <p class="eyebrow justify-center mb-3">Notre engagement</p>
+        <h2 class="font-display text-2xl sm:text-3xl font-semibold uppercase tracking-tight mb-16">Pourquoi nous faire confiance ?</h2>
         <div class="grid md:grid-cols-3 gap-10">
             <div class="space-y-3">
                 <div class="icon-badge mx-auto">
-                    <i data-lucide="shield-check" class="text-blue-600 dark:text-orange-500"></i>
+                    <i data-lucide="shield-check" class="w-5 h-5"></i>
                 </div>
-                <h4 class="font-bold">Garantie Qualité</h4>
-                <p class="text-sm text-slate-500 dark:text-slate-400 max-w-[220px] mx-auto leading-relaxed">Un travail soigné et des produits sélectionnés avec rigueur.</p>
+                <h4 class="font-display font-semibold uppercase tracking-tight text-sm">Garantie Qualité</h4>
+                <p class="text-sm max-w-[220px] mx-auto leading-relaxed" style="color: rgb(var(--ink) / 0.55);">Un travail soigné et des produits sélectionnés avec rigueur.</p>
             </div>
             <div class="space-y-3">
                 <div class="icon-badge mx-auto">
-                    <i data-lucide="clock" class="text-blue-600 dark:text-orange-500"></i>
+                    <i data-lucide="clock" class="w-5 h-5"></i>
                 </div>
-                <h4 class="font-bold">Rapidité</h4>
-                <p class="text-sm text-slate-500 dark:text-slate-400 max-w-[220px] mx-auto leading-relaxed">Nous respectons vos contraintes et vos délais.</p>
+                <h4 class="font-display font-semibold uppercase tracking-tight text-sm">Rapidité</h4>
+                <p class="text-sm max-w-[220px] mx-auto leading-relaxed" style="color: rgb(var(--ink) / 0.55);">Nous respectons vos contraintes et vos délais.</p>
             </div>
             <div class="space-y-3">
                 <div class="icon-badge mx-auto">
-                    <i data-lucide="map-pin" class="text-blue-600 dark:text-orange-500"></i>
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
                 </div>
-                <h4 class="font-bold">Proximité</h4>
-                <p class="text-sm text-slate-500 dark:text-slate-400 max-w-[220px] mx-auto leading-relaxed">Votre commerce de confiance, en plein cœur de ville.</p>
+                <h4 class="font-display font-semibold uppercase tracking-tight text-sm">Proximité</h4>
+                <p class="text-sm max-w-[220px] mx-auto leading-relaxed" style="color: rgb(var(--ink) / 0.55);">Votre commerce de confiance, en plein cœur de ville.</p>
             </div>
         </div>
     </div>
@@ -269,28 +402,34 @@
     -->
     <section id="galerie" class="py-24 max-w-6xl mx-auto px-4 space-y-12">
         <div class="text-center space-y-3">
-            <p class="eyebrow">Galerie</p>
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100">Notre atelier en images</h2>
-            <p class="text-slate-500 dark:text-slate-400 text-xs">Cliquez sur une photo pour l'agrandir</p>
+            <p class="eyebrow justify-center">Galerie</p>
+            <h2 class="font-display text-2xl sm:text-3xl font-semibold uppercase tracking-tight">Notre atelier en images</h2>
+            <p class="plate-tag text-[11px]" style="color: rgb(var(--ink) / 0.4);">Cliquez sur une photo pour l'agrandir</p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
-            <div onclick="openLightbox('atelier1.jpg', 'Poste de travail')" class="lift group aspect-video bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl cursor-pointer dark:bg-slate-900/60 dark:border-slate-800 relative overflow-hidden flex items-end p-4">
-                <span class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-orange-500 transition-colors relative z-10">Poste de travail</span>
+            <div onclick="openLightbox('atelier1.jpg', 'Poste de travail')" class="bracket lift gallery-tile group aspect-video rounded-lg cursor-pointer relative overflow-hidden flex flex-col items-center justify-center gap-2">
+                <i data-lucide="image" class="w-5 h-5" style="color: rgb(var(--ink) / 0.3);"></i>
+                <span class="plate-tag text-[10px] uppercase tracking-widest group-hover:opacity-100 transition-opacity" style="color: rgb(var(--ink) / 0.45); opacity: 0.8;">Poste de travail</span>
             </div>
-            <div onclick="openLightbox('atelier2.jpg', 'Diagnostic valise')" class="lift group aspect-video bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl cursor-pointer dark:bg-slate-900/60 dark:border-slate-800 relative overflow-hidden flex items-end p-4">
-                <span class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-orange-500 transition-colors relative z-10">Diagnostic valise</span>
+            <div onclick="openLightbox('atelier2.jpg', 'Diagnostic valise')" class="bracket lift gallery-tile group aspect-video rounded-lg cursor-pointer relative overflow-hidden flex flex-col items-center justify-center gap-2">
+                <i data-lucide="image" class="w-5 h-5" style="color: rgb(var(--ink) / 0.3);"></i>
+                <span class="plate-tag text-[10px] uppercase tracking-widest group-hover:opacity-100 transition-opacity" style="color: rgb(var(--ink) / 0.45); opacity: 0.8;">Diagnostic valise</span>
             </div>
-            <div onclick="openLightbox('atelier3.jpg', 'Révision')" class="lift group aspect-video bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl cursor-pointer dark:bg-slate-900/60 dark:border-slate-800 relative overflow-hidden flex items-end p-4">
-                <span class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-orange-500 transition-colors relative z-10">Révision</span>
+            <div onclick="openLightbox('atelier3.jpg', 'Révision')" class="bracket lift gallery-tile group aspect-video rounded-lg cursor-pointer relative overflow-hidden flex flex-col items-center justify-center gap-2">
+                <i data-lucide="image" class="w-5 h-5" style="color: rgb(var(--ink) / 0.3);"></i>
+                <span class="plate-tag text-[10px] uppercase tracking-widest group-hover:opacity-100 transition-opacity" style="color: rgb(var(--ink) / 0.45); opacity: 0.8;">Révision</span>
             </div>
-            <div onclick="openLightbox('atelier4.jpg', 'Pont élévateur')" class="lift group aspect-video bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl cursor-pointer dark:bg-slate-900/60 dark:border-slate-800 relative overflow-hidden flex items-end p-4">
-                <span class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-orange-500 transition-colors relative z-10">Pont élévateur</span>
+            <div onclick="openLightbox('atelier4.jpg', 'Pont élévateur')" class="bracket lift gallery-tile group aspect-video rounded-lg cursor-pointer relative overflow-hidden flex flex-col items-center justify-center gap-2">
+                <i data-lucide="image" class="w-5 h-5" style="color: rgb(var(--ink) / 0.3);"></i>
+                <span class="plate-tag text-[10px] uppercase tracking-widest group-hover:opacity-100 transition-opacity" style="color: rgb(var(--ink) / 0.45); opacity: 0.8;">Pont élévateur</span>
             </div>
-            <div onclick="openLightbox('atelier5.jpg', 'Vidange')" class="lift group aspect-video bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl cursor-pointer dark:bg-slate-900/60 dark:border-slate-800 relative overflow-hidden flex items-end p-4">
-                <span class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-orange-500 transition-colors relative z-10">Vidange</span>
+            <div onclick="openLightbox('atelier5.jpg', 'Vidange')" class="bracket lift gallery-tile group aspect-video rounded-lg cursor-pointer relative overflow-hidden flex flex-col items-center justify-center gap-2">
+                <i data-lucide="image" class="w-5 h-5" style="color: rgb(var(--ink) / 0.3);"></i>
+                <span class="plate-tag text-[10px] uppercase tracking-widest group-hover:opacity-100 transition-opacity" style="color: rgb(var(--ink) / 0.45); opacity: 0.8;">Vidange</span>
             </div>
-            <div onclick="openLightbox('atelier6.jpg', 'Accueil client')" class="lift group aspect-video bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl cursor-pointer dark:bg-slate-900/60 dark:border-slate-800 relative overflow-hidden flex items-end p-4">
-                <span class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-orange-500 transition-colors relative z-10">Accueil client</span>
+            <div onclick="openLightbox('atelier6.jpg', 'Accueil client')" class="bracket lift gallery-tile group aspect-video rounded-lg cursor-pointer relative overflow-hidden flex flex-col items-center justify-center gap-2">
+                <i data-lucide="image" class="w-5 h-5" style="color: rgb(var(--ink) / 0.3);"></i>
+                <span class="plate-tag text-[10px] uppercase tracking-widest group-hover:opacity-100 transition-opacity" style="color: rgb(var(--ink) / 0.45); opacity: 0.8;">Accueil client</span>
             </div>
         </div>
     </section>
@@ -298,20 +437,20 @@
     <!-- Contact & Localisation -->
     <section id="contact" class="py-24 max-w-6xl mx-auto px-4">
         <div class="text-center mb-14 space-y-3">
-            <p class="eyebrow">Contact</p>
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100">Nous trouver</h2>
-            <p class="text-slate-500 dark:text-slate-400 text-xs">145 Rue de l'Aviateur, 76600 Le Havre</p>
+            <p class="eyebrow justify-center">Contact</p>
+            <h2 class="font-display text-2xl sm:text-3xl font-semibold uppercase tracking-tight">Nous trouver</h2>
+            <p class="plate-tag text-[11px]" style="color: rgb(var(--ink) / 0.4);">145 Rue de l'Aviateur, 76600 Le Havre</p>
         </div>
 
         <div class="grid md:grid-cols-[1fr_300px] gap-5">
-            <div class="rounded-2xl overflow-hidden border-[3px] border-slate-500 dark:border-slate-800 relative">
-                <a href="https://www.google.com/maps/search/?api=1&query=145+Rue+de+l%27Aviateur+76600+Le+Havre" target="_blank" rel="noopener" class="absolute top-3 left-3 z-10 bg-slate-300/90 border-[3px] border-slate-500 text-slate-900 text-xs font-medium px-3 py-2 rounded-lg flex items-center gap-2 hover:bg-slate-500 dark:bg-slate-900/90 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800 transition">
+            <div class="bracket rounded-lg overflow-hidden relative border" style="border-color: rgb(var(--line));">
+                <a href="https://www.google.com/maps/search/?api=1&query=145+Rue+de+l%27Aviateur+76600+Le+Havre" target="_blank" rel="noopener" class="absolute top-3 left-3 z-10 card-surface text-[11px] plate-tag uppercase px-3 py-2 rounded-md flex items-center gap-2 transition" style="border-color: rgb(var(--line-strong));">
                     Ouvrir dans Maps
                     <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                 </a>
                 <iframe
                     title="Localisation AutoPerform"
-                    class="w-full aspect-[4/3] md:aspect-auto md:h-full"
+                    class="w-full aspect-[4/3] md:aspect-auto md:h-full grayscale-[0.3] contrast-[1.05]"
                     style="border:0; min-height:280px;"
                     loading="lazy"
                     allowfullscreen
@@ -319,20 +458,20 @@
                 </iframe>
             </div>
 
-            <div class="bg-slate-300 border-[3px] border-slate-500 shadow-sm rounded-2xl p-7 flex flex-col gap-5 dark:bg-slate-900/60 dark:border-slate-800">
+            <div class="bracket card-surface rounded-lg p-7 flex flex-col gap-5">
                 <div>
-                    <p class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2">Adresse</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">145 Rue de l'Aviateur<br>76600 Le Havre</p>
+                    <p class="eyebrow mb-2">Adresse</p>
+                    <p class="text-sm" style="color: rgb(var(--ink) / 0.65);">145 Rue de l'Aviateur<br>76600 Le Havre</p>
                 </div>
                 <div>
-                    <p class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2">Horaires</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">Lun-Ven : 8h-12h / 14h-18h30<br>Sam : 9h-12h</p>
+                    <p class="eyebrow mb-2">Horaires</p>
+                    <p class="text-sm" style="color: rgb(var(--ink) / 0.65);">Lun-Ven : 8h-12h / 14h-18h30<br>Sam : 9h-12h</p>
                 </div>
                 <div class="mt-auto flex flex-col gap-2">
-                    <a href="tel:0235000000" class="inline-flex items-center justify-center gap-2 bg-blue-600 text-slate-100 px-4 py-3 rounded-lg font-bold text-xs hover:bg-blue-500 transition-all dark:bg-orange-500 dark:text-black dark:hover:bg-orange-400">
+                    <a href="tel:0235000000" class="btn-primary inline-flex items-center justify-center gap-2 px-4 py-3 rounded-md font-semibold text-xs transition-all">
                         <i data-lucide="phone-call" class="w-4 h-4"></i> 02 35 00 00 00
                     </a>
-                    <a href="mailto:contact@autoperform-lehavre.fr" class="inline-flex items-center justify-center gap-2 bg-slate-300 border-[3px] border-slate-500 text-slate-900 px-4 py-3 rounded-lg font-bold text-xs hover:bg-slate-500 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800 transition-all">
+                    <a href="mailto:contact@autoperform-lehavre.fr" class="btn-ghost inline-flex items-center justify-center gap-2 px-4 py-3 rounded-md font-semibold text-xs transition-all">
                         <i data-lucide="mail" class="w-4 h-4"></i> Nous écrire
                     </a>
                 </div>
@@ -340,33 +479,34 @@
         </div>
     </section>
 
-    <footer class="py-20 border-t border-slate-500 bg-slate-400 px-4 dark:bg-black dark:border-slate-800">
+    <div class="hazard-rule"></div>
+    <footer class="py-20 px-4" style="background: rgb(var(--card));">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
             <div class="col-span-1 md:col-span-2">
-                <p class="text-slate-900 dark:text-slate-100 font-bold tracking-tight text-lg mb-4">AutoPerform Le Havre</p>
-                <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed max-w-xs">
-                    Garagistes passionnés depuis plus de 10 ans, nous mettons notre expertise au service de la sécurité de votre véhicule. 
+                <p class="font-display font-semibold uppercase tracking-tight text-lg mb-4">AutoPerform Le Havre</p>
+                <p class="text-xs leading-relaxed max-w-xs" style="color: rgb(var(--ink) / 0.55);">
+                    Garagistes passionnés depuis plus de 10 ans, nous mettons notre expertise au service de la sécurité de votre véhicule.
                     Qualité, transparence et respect des délais sont nos engagements quotidiens.
                 </p>
             </div>
             <div>
-                <h4 class="font-semibold text-slate-900 dark:text-slate-100 text-xs uppercase mb-4">Contact</h4>
-                <p class="text-slate-500 dark:text-slate-400 text-xs">145 Rue de l'Aviateur<br>76600 Le Havre</p>
-                <p class="text-blue-600 dark:text-orange-500 text-xs mt-2 font-bold">02 35 00 00 00</p>
-                <a href="mailto:contact@autoperform-lehavre.fr" class="text-slate-500 dark:text-slate-400 text-xs mt-1 block hover:text-slate-900 dark:hover:text-slate-100 transition-colors">contact@autoperform-lehavre.fr</a>
+                <h4 class="plate-tag font-semibold text-xs uppercase mb-4" style="color: rgb(var(--ink) / 0.75);">Contact</h4>
+                <p class="text-xs" style="color: rgb(var(--ink) / 0.55);">145 Rue de l'Aviateur<br>76600 Le Havre</p>
+                <p class="text-xs mt-2 font-semibold" style="color: rgb(var(--accent));">02 35 00 00 00</p>
+                <a href="mailto:contact@autoperform-lehavre.fr" class="text-xs mt-1 block transition-colors" style="color: rgb(var(--ink) / 0.55);">contact@autoperform-lehavre.fr</a>
             </div>
             <div>
-                <h4 class="font-semibold text-slate-900 dark:text-slate-100 text-xs uppercase mb-4">Horaires</h4>
-                <p class="text-slate-500 dark:text-slate-400 text-xs">Lun-Ven : 8h-12h / 14h-18h30<br>Sam : 9h-12h</p>
+                <h4 class="plate-tag font-semibold text-xs uppercase mb-4" style="color: rgb(var(--ink) / 0.75);">Horaires</h4>
+                <p class="text-xs" style="color: rgb(var(--ink) / 0.55);">Lun-Ven : 8h-12h / 14h-18h30<br>Sam : 9h-12h</p>
             </div>
         </div>
-        <div class="max-w-6xl mx-auto mt-14 pt-8 border-t border-slate-500 dark:border-slate-800 text-slate-500 dark:text-slate-400 text-[10px] text-center md:text-left">
+        <div class="max-w-6xl mx-auto mt-14 pt-8 border-t plate-tag text-[10px] text-center md:text-left" style="color: rgb(var(--ink) / 0.4);">
             © 2026 AutoPerform - Garage automobile certifié.
         </div>
     </footer>
 
     <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center p-6 bg-black/80 backdrop-blur-md" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" class="max-w-4xl w-full rounded-2xl shadow-2xl border-[3px] border-slate-500 dark:border-slate-700">
+        <img id="lightbox-img" src="" class="max-w-4xl w-full rounded-lg shadow-2xl border" style="border-color: rgb(var(--line-strong));">
     </div>
 
     <script>
