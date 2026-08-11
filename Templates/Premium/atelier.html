@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="L'Atelier Nora : joaillerie artisanale façonnée à la main au Havre. Découvrez notre histoire, notre savoir-faire et nos engagements éthiques.">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <title>L'Atelier | Atelier Nora</title>
@@ -49,7 +50,7 @@
         </div>
     </nav>
 
-    <!-- Menu Mobile (À placer juste après le <nav> pour éviter les problèmes de superposition) -->
+    <!-- Menu Mobile -->
     <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-panel border-b border-hairline p-6 space-y-6 text-center z-40">
         <a href="collections.html" class="block text-xs uppercase tracking-widest text-ink-soft">Collections</a>
         <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-ink-soft">E-Boutique</a>
@@ -88,33 +89,61 @@
         </div>
     </div>
 
-    <main class="max-w-4xl mx-auto pt-32 pb-20 px-6">
-        <div class="text-center space-y-10 mb-20">
-            <p class="text-[10px] tracking-[0.3em] uppercase text-accent font-medium">Notre histoire</p>
-            <h1 class="text-4xl font-extralight tracking-[0.2em] uppercase text-ink -mt-6">L'Atelier</h1>
-            <div class="w-20 h-[1px] bg-accent mx-auto divider-gem"></div>
+    <!-- En-tête -->
+    <header class="pt-40 pb-20 px-6 text-center facet-field">
+        <div class="max-w-2xl mx-auto space-y-8">
+            <p class="kicker">Notre histoire</p>
+            <h1 class="text-4xl md:text-5xl font-extralight tracking-[0.15em] uppercase text-ink -mt-2">L'Atelier</h1>
+            <div class="facet-rule">
+                <svg class="facet-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l6 6-6 14L6 8l6-6z"/></svg>
+            </div>
             <p class="text-ink-soft font-light leading-relaxed max-w-2xl mx-auto text-base">
-                Né au Havre, l'Atelier Nora est le fruit d'une quête d'équilibre entre l'artisanat traditionnel et une vision durable de la joaillerie. 
+                Né au Havre, l'Atelier Nora est le fruit d'une quête d'équilibre entre l'artisanat traditionnel et une vision durable de la joaillerie.
                 Chaque pièce que nous créons porte en elle l'empreinte de nos mains et le respect de la matière brute.
             </p>
         </div>
+    </header>
 
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="card p-8 text-center">
+    <main class="max-w-4xl mx-auto pb-20 px-6">
+
+        <!-- Portrait fondatrice -->
+        <div class="grid md:grid-cols-[280px_1fr] gap-10 items-center mb-24 reveal">
+            <div class="art-panel sheen rounded-3xl aspect-[4/5] mx-auto w-full max-w-[280px]">
+                <svg viewBox="0 0 100 130" fill="none" stroke="currentColor" stroke-width="1.3">
+                    <circle cx="50" cy="38" r="20"/>
+                    <path d="M18 118 C18 85 30 68 50 68 C70 68 82 85 82 118"/>
+                    <path d="M40 30 q10 -8 20 0" stroke-width="0.9"/>
+                </svg>
+            </div>
+            <div>
+                <p class="kicker mb-2">La fondatrice</p>
+                <h2 class="text-2xl font-extralight uppercase tracking-wide mb-4">Nora, orfèvre depuis quinze ans</h2>
+                <p class="text-ink-soft font-light leading-relaxed text-[15px] mb-4">
+                    Formée aux Compagnons du Devoir puis chez un joaillier parisien, Nora choisit en 2018 de revenir s'installer au Havre, sa ville natale, pour y ouvrir un atelier à taille humaine. Elle y travaille aujourd'hui aux côtés de deux artisans, sertisseur et polisseur, formés selon les mêmes exigences.
+                </p>
+                <p class="text-ink-soft font-light leading-relaxed text-[15px]">
+                    « Je voulais des bijoux qu'on puisse porter toute une vie, dont on connaisse l'origine de chaque gramme d'or. C'est cette exigence qui guide chaque pièce qui sort de l'atelier. »
+                </p>
+            </div>
+        </div>
+
+        <!-- Valeurs -->
+        <div class="grid md:grid-cols-3 gap-6 mb-24">
+            <div class="card p-8 text-center reveal">
                 <div class="icon-badge mx-auto mb-5">
                     <i data-lucide="gem" class="w-5 h-5 text-card"></i>
                 </div>
                 <h3 class="text-xs uppercase tracking-widest font-medium text-ink">Éthique</h3>
                 <p class="text-[13px] text-ink-soft leading-relaxed mt-3">Or 18k recyclé et pierres précieuses sourcées avec intégrité.</p>
             </div>
-            <div class="card p-8 text-center">
+            <div class="card p-8 text-center reveal reveal-delay-1">
                 <div class="icon-badge mx-auto mb-5">
                     <i data-lucide="hammer" class="w-5 h-5 text-card"></i>
                 </div>
                 <h3 class="text-xs uppercase tracking-widest font-medium text-ink">Savoir-faire</h3>
                 <p class="text-[13px] text-ink-soft leading-relaxed mt-3">Un travail manuel minutieux, privilégiant la qualité sur la quantité.</p>
             </div>
-            <div class="card p-8 text-center">
+            <div class="card p-8 text-center reveal reveal-delay-2">
                 <div class="icon-badge mx-auto mb-5">
                     <i data-lucide="map-pin" class="w-5 h-5 text-card"></i>
                 </div>
@@ -123,17 +152,77 @@
             </div>
         </div>
 
-        <div class="mt-20">
-            <div class="aspect-video bg-beige rounded-3xl border border-beige flex items-center justify-center relative overflow-hidden group">
-                <div class="absolute inset-0 bg-bone/10 transition-opacity group-hover:bg-bone/0"></div>
-                <span class="text-ink-faint text-xs uppercase tracking-widest">Photo de l'artisan au travail</span>
+        <!-- Processus (séquence réelle : 7 étapes de fabrication) -->
+        <div class="mb-24">
+            <p class="kicker mb-2 text-center">Le processus</p>
+            <h2 class="text-2xl font-extralight uppercase tracking-wide mb-14 text-center">Sept étapes, une seule main</h2>
+            <div class="timeline space-y-10 max-w-2xl mx-auto">
+                <div class="timeline-item reveal">
+                    <div class="timeline-num">01</div>
+                    <h3 class="text-sm uppercase tracking-widest font-medium mb-1.5">Croquis &amp; modélisation</h3>
+                    <p class="text-[13px] text-ink-soft leading-relaxed">Chaque pièce naît d'un dessin à la main, puis d'une modélisation 3D pour valider ses proportions.</p>
                 </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-num">02</div>
+                    <h3 class="text-sm uppercase tracking-widest font-medium mb-1.5">Fonte de l'or recyclé</h3>
+                    <p class="text-[13px] text-ink-soft leading-relaxed">L'or 18 carats, issu de bijoux refondus, est coulé selon l'alliage propre à chaque teinte.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-num">03</div>
+                    <h3 class="text-sm uppercase tracking-widest font-medium mb-1.5">Façonnage à la main</h3>
+                    <p class="text-[13px] text-ink-soft leading-relaxed">Martelage, laminage et limage donnent sa forme définitive à la monture.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-num">04</div>
+                    <h3 class="text-sm uppercase tracking-widest font-medium mb-1.5">Sertissage de la pierre</h3>
+                    <p class="text-[13px] text-ink-soft leading-relaxed">Chaque pierre est sertie à la loupe binoculaire, griffe par griffe.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-num">05</div>
+                    <h3 class="text-sm uppercase tracking-widest font-medium mb-1.5">Polissage &amp; finition</h3>
+                    <p class="text-[13px] text-ink-soft leading-relaxed">Un polissage progressif révèle l'éclat satiné caractéristique de la maison.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-num">06</div>
+                    <h3 class="text-sm uppercase tracking-widest font-medium mb-1.5">Contrôle qualité</h3>
+                    <p class="text-[13px] text-ink-soft leading-relaxed">Chaque bijou est vérifié, pesé et poinçonné avant de quitter l'atelier.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-num">07</div>
+                    <h3 class="text-sm uppercase tracking-widest font-medium mb-1.5">Écrin &amp; certificat</h3>
+                    <p class="text-[13px] text-ink-soft leading-relaxed">La pièce est numérotée, certifiée et présentée dans son écrin fait main.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="aspect-video art-panel deep sheen rounded-3xl relative overflow-hidden mb-24 reveal">
+            <svg viewBox="0 0 240 140" fill="none" stroke="currentColor" stroke-width="1.2" class="w-2/3 h-2/3">
+                <rect x="20" y="30" width="70" height="80" rx="4"/>
+                <path d="M40 30 V15 h30 v15"/>
+                <circle cx="140" cy="70" r="30"/>
+                <path d="M120 70 h40 M140 50 v40"/>
+                <path d="M190 40 l20 30-20 30-20-30z"/>
+            </svg>
+        </div>
+
+        <!-- Matières -->
+        <div class="grid md:grid-cols-2 gap-6 mb-24">
+            <div class="card p-8 reveal">
+                <i data-lucide="recycle" class="w-6 h-6 text-gold mb-4"></i>
+                <h3 class="text-sm uppercase tracking-widest font-medium mb-3">L'or, refondu</h3>
+                <p class="text-[13px] text-ink-soft leading-relaxed">100&nbsp;% de notre or provient de la refonte de bijoux anciens rachetés en France. Aucune extraction minière n'entre dans la fabrication de nos pièces.</p>
+            </div>
+            <div class="card p-8 reveal reveal-delay-1">
+                <i data-lucide="gem" class="w-6 h-6 text-gold mb-4"></i>
+                <h3 class="text-sm uppercase tracking-widest font-medium mb-3">Les pierres, tracées</h3>
+                <p class="text-[13px] text-ink-soft leading-relaxed">Diamants certifiés Kimberley et pierres de couleur achetées directement auprès de lapidaires européens que nous connaissons personnellement.</p>
+            </div>
         </div>
 
         <!-- Nous trouver -->
-        <div class="mt-20 grid md:grid-cols-[1fr_320px] gap-6 items-start">
+        <div class="grid md:grid-cols-[1fr_320px] gap-6 items-start">
             <div>
-                <p class="text-[10px] tracking-[0.3em] uppercase text-accent font-medium mb-3">Nous trouver</p>
+                <p class="kicker mb-3">Nous trouver</p>
                 <h2 class="text-2xl font-extralight tracking-[0.1em] uppercase text-ink mb-6">L'atelier, au Havre</h2>
 
                 <!--
@@ -168,10 +257,65 @@
                         <i data-lucide="clock" class="w-4 h-4 text-accent-dark flex-shrink-0 mt-0.5"></i>
                         Sur rendez-vous
                     </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="mail" class="w-4 h-4 text-accent-dark flex-shrink-0 mt-0.5"></i>
+                        contact@ateliernora.fr
+                    </li>
                 </ul>
+                <a href="#" onclick="openContactModal(); return false;" class="btn-gold block text-center mt-6 py-3 rounded-lg text-[11px] uppercase tracking-widest font-bold">Prendre rendez-vous</a>
             </aside>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-20 pb-10 px-4">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-[1.3fr_1fr_1fr_1.2fr] gap-12">
+            <div>
+                <p class="text-lg tracking-[0.2em] uppercase font-light text-[color:var(--gold-tint)] mb-4">Atelier Nora</p>
+                <p class="text-sm opacity-70 font-light leading-relaxed max-w-xs">Haute joaillerie artisanale façonnée au Havre. Or recyclé, pierres sourcées avec intégrité, pièces uniques faites pour durer.</p>
+                <div class="flex gap-3 mt-6">
+                    <a href="#" aria-label="Instagram" class="social-dot"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="#" aria-label="Facebook" class="social-dot"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                    <a href="#" aria-label="Pinterest" class="social-dot"><i data-lucide="image" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+            <div>
+                <p class="footer-title text-sm uppercase mb-4">Boutique</p>
+                <ul class="space-y-2.5 text-sm font-light">
+                    <li><a href="collections.html">Collections</a></li>
+                    <li><a href="index.html#boutique">E-Boutique</a></li>
+                    <li><a href="panier.html">Votre panier</a></li>
+                    <li><a href="atelier.html">L'Atelier</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="footer-title text-sm uppercase mb-4">Service</p>
+                <ul class="space-y-2.5 text-sm font-light">
+                    <li><a href="#" onclick="openContactModal(); return false;">Nous contacter</a></li>
+                    <li><a href="#">Livraison &amp; retours</a></li>
+                    <li><a href="#">Guide des tailles</a></li>
+                    <li><a href="#">Entretien des bijoux</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="footer-title text-sm uppercase mb-4">Nous trouver</p>
+                <ul class="space-y-3 text-sm font-light opacity-90">
+                    <li class="flex gap-2"><i data-lucide="map-pin" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--gold-light)"></i> Le Havre, Normandie</li>
+                    <li class="flex gap-2"><i data-lucide="clock" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--gold-light)"></i> Atelier sur rendez-vous</li>
+                    <li class="flex gap-2"><i data-lucide="mail" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--gold-light)"></i> contact@ateliernora.fr</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="footer-hr my-10 max-w-6xl mx-auto">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] tracking-wide opacity-60 font-light">
+            <p>&copy; 2026 Atelier Nora. Tous droits réservés.</p>
+            <div class="flex gap-6">
+                <a href="#">Mentions légales</a>
+                <a href="#">Confidentialité</a>
+                <a href="#">CGV</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
 
@@ -249,6 +393,26 @@
 
         updateCartCount();
         lucide.createIcons();
+    </script>
+
+    <!-- Révélation au scroll (nouveau) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealEls = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window && revealEls.length) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                revealEls.forEach(el => io.observe(el));
+            } else {
+                revealEls.forEach(el => el.classList.add('is-visible'));
+            }
+        });
     </script>
 </body>
 </html>

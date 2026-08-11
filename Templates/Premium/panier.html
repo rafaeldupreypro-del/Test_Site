@@ -15,47 +15,98 @@
     <nav class="fixed top-0 w-full bg-bone/70 backdrop-blur-lg z-50 border-b border-hairline/60">
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="text-base tracking-[0.3em] font-light uppercase text-accent">Atelier Nora</a>
+            <a href="index.html#boutique" class="hidden sm:inline-flex items-center gap-2 text-[10px] tracking-widest uppercase font-light text-ink-soft hover:text-accent-dark">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Continuer mes achats
+            </a>
         </div>
     </nav>
 
-    <main class="max-w-2xl mx-auto pt-32 px-6">
-        <h1 class="text-2xl font-light uppercase tracking-widest mb-10 text-ink">Votre Panier</h1>
-        
+    <main class="max-w-2xl mx-auto pt-32 pb-24 px-6">
+        <p class="kicker mb-2">Étape 1 sur 2</p>
+        <h1 class="text-3xl font-extralight uppercase tracking-widest mb-2 text-ink">Votre Panier</h1>
+        <p class="text-ink-faint text-xs uppercase tracking-widest mb-10">Vérifiez votre sélection avant paiement</p>
+
         <div id="cart-items" class="space-y-6 border-b border-hairline pb-6"></div>
 
         <div class="mt-10 border-t border-hairline pt-6 space-y-6">
-            <div class="flex justify-between items-center text-ink">
-                <span class="text-sm">Total</span>
-                <span id="cart-total" class="text-lg font-bold text-accent">0 €</span>
+            <div class="flex justify-between items-center text-ink-soft text-sm">
+                <span>Sous-total</span>
+                <span id="cart-total-display" class="text-ink">—</span>
+            </div>
+            <div class="flex justify-between items-center text-ink-soft text-sm">
+                <span>Livraison assurée</span>
+                <span class="text-tide font-medium">Offerte</span>
+            </div>
+            <div class="flex justify-between items-center text-ink pt-2 border-t border-hairline/60">
+                <span class="text-sm uppercase tracking-widest">Total</span>
+                <span id="cart-total" class="text-xl font-bold text-accent">0 €</span>
             </div>
 
             <button onclick="processPayment()" 
-                    class="btn-gold w-full py-4 rounded-xl font-bold uppercase tracking-widest transition-all duration-300 hover:brightness-110 cursor-pointer">
-                Procéder au paiement
+                    class="btn-gold w-full py-4 rounded-xl font-bold uppercase tracking-widest transition-all duration-300 hover:brightness-110 cursor-pointer flex items-center justify-center gap-2">
+                <i data-lucide="lock" class="w-4 h-4"></i> Procéder au paiement
             </button>
-            
-            <p class="text-center text-xs text-ink-faint uppercase tracking-widest">
-                Paiement sécurisé via Stripe
-            </p>
+
+            <div class="flex items-center justify-center gap-6 text-ink-faint">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+                <p class="text-center text-xs uppercase tracking-widest">
+                    Paiement sécurisé via Stripe
+                </p>
+            </div>
         </div>
-        
+
         <a href="index.html" class="btn-outline block text-center w-full py-4 rounded-xl font-bold uppercase tracking-widest mt-6">
             Continuer mes achats
         </a>
+
+        <!-- Réassurance -->
+        <div class="grid grid-cols-3 gap-4 mt-14 text-center">
+            <div>
+                <i data-lucide="package-check" class="w-4 h-4 text-gold mx-auto mb-2"></i>
+                <p class="text-[10px] uppercase tracking-widest text-ink-soft">Écrin offert</p>
+            </div>
+            <div>
+                <i data-lucide="undo-2" class="w-4 h-4 text-gold mx-auto mb-2"></i>
+                <p class="text-[10px] uppercase tracking-widest text-ink-soft">Retours 30 jours</p>
+            </div>
+            <div>
+                <i data-lucide="shield-check" class="w-4 h-4 text-gold mx-auto mb-2"></i>
+                <p class="text-[10px] uppercase tracking-widest text-ink-soft">Garantie à vie</p>
+            </div>
+        </div>
     </main>
+
+    <!-- Footer minimal -->
+    <footer class="site-footer py-8 px-6">
+        <div class="max-w-2xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] tracking-wide opacity-60 font-light">
+            <p>&copy; 2026 Atelier Nora — Le Havre, Normandie</p>
+            <div class="flex gap-6">
+                <a href="#">Mentions légales</a>
+                <a href="#">CGV</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         function renderCart() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const container = document.getElementById('cart-items');
             const totalElement = document.getElementById('cart-total');
+            const subtotalDisplay = document.getElementById('cart-total-display');
             
             container.innerHTML = '';
             let total = 0;
 
             if (cart.length === 0) {
-                container.innerHTML = '<p class="text-ink-soft text-sm">Votre panier est vide.</p>';
+                container.innerHTML = `
+                    <div class="text-center py-10">
+                        <i data-lucide="shopping-bag" class="w-8 h-8 text-ink-faint mx-auto mb-4"></i>
+                        <p class="text-ink-soft text-sm mb-1">Votre panier est vide.</p>
+                        <p class="text-ink-faint text-xs">Découvrez la collection permanente pour commencer.</p>
+                    </div>`;
                 totalElement.innerText = "0 €";
+                if (subtotalDisplay) subtotalDisplay.innerText = "0 €";
+                if (typeof lucide !== 'undefined') lucide.createIcons();
                 return;
             }
 
@@ -79,6 +130,7 @@
             });
 
             totalElement.innerText = total + " €";
+            if (subtotalDisplay) subtotalDisplay.innerText = total + " €";
         }
 
         function removeItem(index) {
@@ -121,6 +173,7 @@
         }
 
         renderCart();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
     </script>
 </body>
 </html>
