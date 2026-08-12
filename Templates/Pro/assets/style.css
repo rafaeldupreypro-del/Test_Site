@@ -522,6 +522,17 @@ section { position: relative; }
 .field.has-error input, .field.has-error textarea, .field.has-error select { border-color: #a3372a; }
 .field.has-error .field-error { display: block; }
 
+.form-global-error {
+  border: 1px solid rgba(163, 55, 42, .35);
+  background: rgba(163, 55, 42, .07);
+  color: #a3372a;
+  padding: 1rem 1.25rem;
+  font-family: var(--mono);
+  font-size: .78rem;
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+
 .form-success {
   display: none;
   border: 1px solid var(--accent-line);
@@ -599,6 +610,29 @@ section { position: relative; }
 .footer-grid a, .footer-grid p { font-size: .88rem; color: var(--dark-ink-70); }
 .footer-grid li { margin-bottom: .65rem; }
 .footer-grid a:hover { color: var(--dark-ink); }
+
+.footer-newsletter { border-top: 1px solid var(--dark-line); }
+.footer-newsletter__inner { padding-block: clamp(2.5rem, 5vw, 3.5rem); display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; }
+.footer-newsletter__copy p:first-child { font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: var(--dark-ink); }
+.footer-newsletter__copy p:last-child { margin-top: .4rem; font-size: .85rem; color: var(--dark-ink-70); max-width: 40ch; }
+.newsletter-form { display: flex; flex-wrap: wrap; gap: .75rem; align-items: flex-start; }
+.newsletter-form__row { display: flex; gap: 0; border-bottom: 1px solid var(--dark-ink-45); min-width: 260px; }
+.newsletter-form input[type="email"] {
+  background: transparent; border: none; color: var(--dark-ink);
+  font-size: .92rem; padding: .6rem .25rem; min-width: 220px; flex: 1;
+}
+.newsletter-form input[type="email"]::placeholder { color: var(--dark-ink-45); }
+.newsletter-form input[type="email"]:focus { outline: none; }
+.newsletter-form button {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--dark-ink); padding: .6rem .25rem; white-space: nowrap; border-bottom: 1px solid transparent;
+  transition: border-color .2s ease, color .2s ease;
+}
+.newsletter-form button:hover { color: var(--accent-line); border-color: var(--accent-line); }
+.newsletter-form button:disabled { opacity: .5; cursor: default; }
+.newsletter-msg { display: none; font-family: var(--mono); font-size: .72rem; color: var(--dark-ink-70); flex-basis: 100%; }
+.newsletter-msg.is-visible { display: block; }
+.newsletter-msg.is-error { color: #e08a7d; }
 .footer-bottom {
   border-top: 1px solid var(--dark-line);
   padding-block: 1.5rem;
@@ -637,6 +671,25 @@ section { position: relative; }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1; transform: none; transition: none; }
 }
+
+/* -------------------------------------------------------------------------
+   21b. BREADCRUMB
+   ------------------------------------------------------------------------- */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .04em;
+  color: var(--ink-35);
+  margin-bottom: 1.75rem;
+}
+.breadcrumb a { color: var(--ink-55); transition: color .2s ease; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb span[aria-current] { color: var(--ink-70); }
+.breadcrumb .sep { color: var(--ink-35); }
 
 /* -------------------------------------------------------------------------
    22. PAGE BANNER (pages secondaires)

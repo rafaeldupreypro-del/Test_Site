@@ -3,10 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Siège Armateur & Cie | Projets | Atelier Méridien</title>
-<meta name="description" content="Siège Armateur & Cie, Le Havre — immeuble de bureaux livré en 2022 par Atelier Méridien face au grand large.">
+<title>Siège Armateur &amp; Cie | Projets | Atelier Méridien</title>
+<meta name="description" content="Siège Armateur &amp; Cie, Le Havre — immeuble de bureaux livré en 2022 par Atelier Méridien face au grand large.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.atelier-meridien.fr/projet-siege-armateur.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Atelier Méridien">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Siège Armateur &amp; Cie | Atelier Méridien">
+<meta property="og:description" content="Immeuble de bureaux livré en 2022 au Havre, face au chenal.">
+<meta property="og:url" content="https://www.atelier-meridien.fr/projet-siege-armateur.html">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Siège Armateur &amp; Cie",
+  "creator": {
+    "@type": "ArchitectureFirm",
+    "name": "Atelier Méridien",
+    "url": "https://www.atelier-meridien.fr/"
+  },
+  "about": "Bureaux",
+  "locationCreated": {
+    "@type": "Place",
+    "name": "Le Havre"
+  },
+  "dateCreated": "2022"
+}
+</script>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#ece6da">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.atelier-meridien.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Projets", "item": "https://www.atelier-meridien.fr/projets.html" },
+    { "@type": "ListItem", "position": 3, "name": "Siège Armateur & Cie", "item": "https://www.atelier-meridien.fr/projet-siege-armateur.html" }
+  ]
+}
+</script>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -39,10 +83,13 @@
 
 <section class="page-banner" style="padding-bottom:2.5rem;">
   <div class="container">
-    <a href="projets.html" class="coord" style="display:inline-flex; align-items:center; gap:.5rem;">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Retour aux projets
-    </a>
+    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+      <a href="index.html">Accueil</a>
+      <span class="sep">/</span>
+      <a href="projets.html">Projets</a>
+      <span class="sep">/</span>
+      <span aria-current="page">Siège Armateur &amp; Cie</span>
+    </nav>
     <p class="eyebrow no-rule" style="margin-top:2rem;">Bureaux — Plan N° 55</p>
     <h1 class="h-1" style="margin-top:.75rem; max-width:20ch;">Siège Armateur & Cie</h1>
     <div class="page-banner__meta">
@@ -164,6 +211,23 @@
       </ul>
     </div>
   </div>
+  <div class="footer-newsletter">
+    <div class="container footer-newsletter__inner">
+      <div class="footer-newsletter__copy">
+        <p>Recevoir nos actualités</p>
+        <p>Un e-mail occasionnel : nouveaux projets livrés, distinctions, participations à des concours.</p>
+      </div>
+      <form class="newsletter-form" novalidate>
+        <input type="text" name="company" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
+        <div class="newsletter-form__row">
+          <input type="email" name="email" placeholder="Votre e-mail" autocomplete="email" required aria-label="Adresse e-mail">
+        </div>
+        <button type="submit">S'inscrire</button>
+        <p class="newsletter-msg" role="status"></p>
+      </form>
+    </div>
+  </div>
+
   <div class="container footer-bottom">
     <span>© <span data-year></span> Atelier Méridien — Tous droits réservés</span>
     <span>49.4938° N, 0.1077° E · Le Havre</span>

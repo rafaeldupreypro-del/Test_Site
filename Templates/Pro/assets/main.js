@@ -126,11 +126,24 @@
   }
 
   /* -------------------------------------------------------------------
-     Formulaire de contact — validation + état de succès (sans backend)
+     Configuration de l'API backend
+     Déployé sur Vercel, le site statique et les fonctions /api sont
+     servis sous le même domaine : un chemin relatif suffit, en local
+     comme en production. Pour tester en local, utiliser `vercel dev`
+     (un simple `python -m http.server` ne fait pas tourner les
+     fonctions /api).
+     ------------------------------------------------------------------- */
+  var API_BASE = '';
+
+  /* -------------------------------------------------------------------
+     Formulaire de contact — validation + envoi au backend
      ------------------------------------------------------------------- */
   var form = document.querySelector('#contact-form');
   if (form) {
     var success = document.querySelector('.form-success');
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var submitLabel = submitBtn ? submitBtn.innerHTML : '';
+    var formErrorEl = form.querySelector('.form-global-error');
 
     function setError(field, message) {
       var wrap = field.closest('.field');
@@ -140,6 +153,16 @@
         if (errorEl) errorEl.textContent = message;
       } else {
         wrap.classList.remove('has-error');
+      }
+    }
+
+    function setGlobalError(message) {
+      if (!formErrorEl) return;
+      if (message) {
+        formErrorEl.textContent = message;
+        formErrorEl.style.display = 'block';
+      } else {
+        formErrorEl.style.display = 'none';
       }
     }
 
@@ -168,18 +191,119 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      setGlobalError('');
+
       if (!validate()) {
         var firstError = form.querySelector('.has-error input, .has-error select, .has-error textarea');
         if (firstError) firstError.focus();
         return;
       }
-      form.style.display = 'none';
-      if (success) success.classList.add('is-visible');
+
+      var payload = {
+        name: form.querySelector('#name').value.trim(),
+        email: form.querySelector('#email').value.trim(),
+        phone: form.querySelector('#phone').value.trim(),
+        subject: form.querySelector('#subject').value,
+        budget: form.querySelector('#budget').value,
+        message: form.querySelector('#message').value.trim(),
+        company: form.querySelector('#company') ? form.querySelector('#company').value : '' // honeypot
+      };
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Envoi en cours…';
+      }
+
+      fetch(API_BASE + '/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) { return res.json().then(function (data) { return { status: res.status, data: data }; }); })
+        .then(function (result) {
+          if (result.data && result.data.ok) {
+            form.style.display = 'none';
+            if (success) success.classList.add('is-visible');
+          } else if (result.data && result.data.errors) {
+            Object.keys(result.data.errors).forEach(function (key) {
+              var field = form.querySelector('#' + key);
+              if (field) setError(field, result.data.errors[key]);
+            });
+          } else {
+            setGlobalError((result.data && result.data.error) || 'Une erreur est survenue. Merci de réessayer, ou appelez-nous directement au 02 35 12 00 34.');
+          }
+        })
+        .catch(function () {
+          setGlobalError('Impossible de contacter le serveur. Vérifiez votre connexion, ou appelez-nous directement au 02 35 12 00 34.');
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = submitLabel;
+          }
+        });
     });
 
     form.querySelectorAll('input, textarea, select').forEach(function (field) {
       field.addEventListener('blur', validate);
     });
   }
+
+  /* -------------------------------------------------------------------
+     Newsletter (pied de page) — inscription via le backend
+     ------------------------------------------------------------------- */
+  var newsletterForms = document.querySelectorAll('.newsletter-form');
+  newsletterForms.forEach(function (nlForm) {
+    var input = nlForm.querySelector('input[type="email"]');
+    var btn = nlForm.querySelector('button');
+    var msg = nlForm.querySelector('.newsletter-msg');
+    var btnLabel = btn ? btn.innerHTML : '';
+
+    function setMsg(text, isError) {
+      if (!msg) return;
+      msg.textContent = text;
+      msg.classList.toggle('is-error', !!isError);
+      msg.classList.toggle('is-visible', !!text);
+    }
+
+    nlForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var value = input.value.trim();
+      var honeypot = nlForm.querySelector('input[name="company"]');
+
+      if (honeypot && honeypot.value) return; // bot
+
+      if (!emailPattern.test(value)) {
+        setMsg('Adresse e-mail invalide.', true);
+        input.focus();
+        return;
+      }
+
+      if (btn) { btn.disabled = true; btn.innerHTML = '…'; }
+      setMsg('');
+
+      fetch(API_BASE + '/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: value, company: honeypot ? honeypot.value : '' })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (data && data.ok) {
+            setMsg(data.alreadySubscribed ? 'Cette adresse est déjà inscrite.' : 'Merci, votre inscription est confirmée.', false);
+            nlForm.reset();
+          } else {
+            setMsg((data && data.error) || 'Une erreur est survenue.', true);
+          }
+        })
+        .catch(function () {
+          setMsg('Impossible de contacter le serveur pour le moment.', true);
+        })
+        .finally(function () {
+          if (btn) { btn.disabled = false; btn.innerHTML = btnLabel; }
+        });
+    });
+  });
 
 })();

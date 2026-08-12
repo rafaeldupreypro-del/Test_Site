@@ -33,6 +33,12 @@
 }
 </script>
 
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#ece6da">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -270,6 +276,23 @@
       </ul>
     </div>
   </div>
+  <div class="footer-newsletter">
+    <div class="container footer-newsletter__inner">
+      <div class="footer-newsletter__copy">
+        <p>Recevoir nos actualités</p>
+        <p>Un e-mail occasionnel : nouveaux projets livrés, distinctions, participations à des concours.</p>
+      </div>
+      <form class="newsletter-form" novalidate>
+        <input type="text" name="company" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
+        <div class="newsletter-form__row">
+          <input type="email" name="email" placeholder="Votre e-mail" autocomplete="email" required aria-label="Adresse e-mail">
+        </div>
+        <button type="submit">S'inscrire</button>
+        <p class="newsletter-msg" role="status"></p>
+      </form>
+    </div>
+  </div>
+
   <div class="container footer-bottom">
     <span>© <span data-year></span> Atelier Méridien — Tous droits réservés</span>
     <span>49.4938° N, 0.1077° E · Le Havre</span>
