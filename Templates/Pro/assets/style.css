@@ -252,7 +252,9 @@ section { position: relative; }
   .nav-toggle { display: block; }
   .mobile-panel {
     position: fixed;
-    inset: 76px 0 0 0;
+    top: 76px;
+    left: 0;
+    right: 0;
     background-color: #ece6da; /* filet de sécurité si la variable ne se charge pas */
     background-color: var(--paper);
     isolation: isolate; /* garantit son propre contexte d'empilement */
@@ -260,20 +262,19 @@ section { position: relative; }
     transform: translateY(-8px);
     opacity: 0;
     pointer-events: none;
-    transition: opacity .3s var(--ease), transform .3s var(--ease);
-    padding: 1.5rem var(--gutter);
+    transition: opacity .25s var(--ease), transform .25s var(--ease);
+    padding: 1.75rem var(--gutter) 2.25rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
     gap: 1.1rem;
-    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
     box-shadow: 0 20px 40px -20px rgba(28, 25, 20, .25);
   }
   .mobile-panel.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
   .mobile-panel a {
     font-family: var(--serif);
-    font-size: clamp(1.3rem, 7vw, 1.7rem);
+    font-size: 1.4rem;
     line-height: 1.2;
     color: #1c1914; /* filet de sécurité */
     color: var(--ink);
