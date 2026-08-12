@@ -298,8 +298,8 @@ a.group:hover, .bg-panel.border-hairline:hover {
   z-index: -1;
   opacity: 0.9;
   background-image:
-    linear-gradient(115deg, transparent 47%, rgba(169,134,62,0.16) 49.5%, rgba(169,134,62,0.16) 50.5%, transparent 53%),
-    linear-gradient(65deg, transparent 47%, rgba(169,134,62,0.13) 49.5%, rgba(169,134,62,0.13) 50.5%, transparent 53%);
+    linear-gradient(115deg, transparent 47%, rgba(140,78,84,0.18) 49.5%, rgba(140,78,84,0.18) 50.5%, transparent 53%),
+    linear-gradient(65deg, transparent 47%, rgba(140,78,84,0.14) 49.5%, rgba(140,78,84,0.14) 50.5%, transparent 53%);
   background-size: 120px 120px;
 }
 
