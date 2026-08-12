@@ -1,0 +1,513 @@
+/* ===================================================================
+   Atelier Nora — Feuille de style
+   Direction : la lumière atlantique du Havre rencontre la taille de
+   la pierre précieuse. Ivoire chaud, or satiné, rose profond, et un
+   motif de facettes qui revient en signature à travers tout le site.
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Fond & surfaces */
+  --bone: #F4EEE6;
+  --bone-deep: #ECE1D3;
+  --panel: #E2CFCB;
+  --panel-soft: #E9DAD6;
+  --hairline: #C9AA9E;
+
+  /* Texte */
+  --ink: #241D18;
+  --ink-soft: #6A5C52;
+  --ink-faint: #9C8C80;
+
+  /* Accent rose (identité historique de la maison) */
+  --accent: #8C4E54;
+  --accent-dark: #6A393E;
+  --accent-soft: #B98D8C;
+  --accent-tint: #DCC3BD;
+
+  /* Or satiné — le métal, la matière première */
+  --gold: #A9863E;
+  --gold-light: #CBA75F;
+  --gold-deep: #7C5F26;
+  --gold-tint: #EFE3C6;
+
+  /* Beige / marron clair */
+  --beige: #DBC7AC;
+  --beige-soft: #E8DCC7;
+  --beige-line: #BFA37D;
+
+  /* Argile */
+  --clay: #A9785C;
+  --clay-dark: #8B5E45;
+  --clay-tint: #EFE1D4;
+
+  /* Sauge — rare, réservé aux notes "éthique / local" */
+  --tide: #48594F;
+  --tide-tint: #E3E7DE;
+
+  /* Carte */
+  --card: #FDFBF7;
+  --card-line: rgba(36, 29, 24, 0.08);
+
+  /* États */
+  --success: #5F7A64;
+  --danger: #A04434;
+
+  --header-h: 116px; /* hauteur de repli : bandeau d'annonce + nav ; recalculée en JS sur index.html */
+
+  --shadow-soft: 0 1px 3px rgba(36, 29, 24, 0.10);
+  --shadow-lift: 0 14px 30px -14px rgba(36, 29, 24, 0.34);
+  --shadow-gold: 0 10px 26px -12px rgba(124, 95, 38, 0.45);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bone);
+  background-image: linear-gradient(180deg, var(--accent-tint) 0%, var(--bone) 560px);
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-family: 'Jost', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+h1 { font-style: italic; }
+
+.font-serif { font-family: 'Cormorant Garamond', 'Times New Roman', serif; }
+
+[data-lucide], svg.lucide { color: inherit; }
+
+/* ---------- Couleurs utilitaires ---------- */
+.text-accent { color: var(--accent); }
+.text-accent-dark { color: var(--accent-dark); }
+.bg-accent   { background-color: var(--accent); }
+.border-accent { border-color: var(--accent); }
+
+.text-gold { color: var(--gold-deep); }
+.bg-gold { background-color: var(--gold); }
+
+.bg-bone       { background-color: var(--bone); }
+.bg-bone-deep  { background-color: var(--bone-deep); }
+.bg-panel      { background-color: var(--panel); box-shadow: var(--shadow-soft); border-color: var(--hairline) !important; }
+.bg-panel-soft { background-color: var(--panel-soft); }
+.border-hairline { border-color: var(--hairline); }
+.text-ink       { color: var(--ink); }
+.text-ink-soft  { color: var(--ink-soft); }
+.text-ink-faint { color: var(--ink-faint); }
+
+.bg-beige      { background-color: var(--beige); }
+.bg-beige-soft { background-color: var(--beige-soft); }
+.border-beige  { border-color: var(--beige-line); }
+
+.bg-clay      { background-color: var(--clay); }
+.bg-clay-tint { background-color: var(--clay-tint); }
+.text-clay    { color: var(--clay); }
+.border-clay  { border-color: var(--clay); }
+
+.bg-tide-tint { background-color: var(--tide-tint); }
+.text-tide { color: var(--tide); }
+
+.text-card { color: var(--card); }
+.bg-card { background-color: var(--card); }
+
+/* ---------- Carte ---------- */
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--card-line);
+  border-top: 3px solid var(--clay-dark);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.35s var(--ease), transform 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-3px);
+  border-top-color: var(--accent-dark);
+}
+
+.icon-badge {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  background-color: var(--clay-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Navigation ---------- */
+.nav-pill {
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.25rem;
+}
+.nav-pill a {
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.nav-pill a:hover { color: var(--accent-dark); }
+.nav-pill a.active {
+  background-color: var(--accent-dark);
+  color: var(--card);
+  box-shadow: var(--shadow-soft);
+}
+
+a, button, .transition-all {
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+/* Bandeau d'annonce */
+.announce-bar {
+  background-color: var(--ink);
+  color: var(--gold-tint);
+}
+.announce-bar .sep { color: var(--gold-deep); }
+
+/* Transparences */
+.bg-bone\/80  { background-color: rgb(244 238 230 / 0.88); }
+.bg-bone\/70  { background-color: rgb(244 238 230 / 0.8); }
+.bg-bone\/90  { background-color: rgb(244 238 230 / 0.94); }
+.bg-bone\/10  { background-color: rgb(244 238 230 / 0.1); }
+.bg-bone\/0   { background-color: rgb(244 238 230 / 0); }
+.bg-panel\/60 { background-color: rgb(226 207 203 / 0.7); }
+.border-hairline\/60 { border-color: rgb(201 170 158 / 0.6); }
+.border-accent\/40 { border-color: rgb(140 78 84 / 0.4); }
+
+nav.bg-bone\/80, nav.bg-bone\/70 { border-bottom: 1px solid var(--hairline); }
+
+/* ---------- Boutons ---------- */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--accent);
+  color: #F7EFEC;
+  border: 1px solid var(--accent);
+  box-shadow: var(--shadow-soft);
+}
+.btn-gold::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.32) 48%, transparent 66%);
+  transform: translateX(-120%);
+  transition: transform 0.65s var(--ease);
+}
+.btn-gold:hover {
+  background-color: var(--accent-dark);
+  border-color: var(--accent-dark);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-1px);
+}
+.btn-gold:hover::after { transform: translateX(120%); }
+.btn-gold:disabled::after { display: none; }
+
+.btn-outline {
+  background-color: var(--bone);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+}
+.btn-outline:hover {
+  background-color: var(--panel-soft);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.btn-ghost-gold {
+  background-color: transparent;
+  color: var(--gold-deep);
+  border: 1px solid var(--gold);
+}
+.btn-ghost-gold:hover {
+  background-color: var(--gold);
+  color: #FBF6E9;
+  transform: translateY(-1px);
+}
+
+.btn-success {
+  background-color: var(--success) !important;
+  color: #F7EFEC !important;
+  border: 1px solid var(--success) !important;
+}
+
+/* ---------- Cartes produits / collections ---------- */
+a.group, div.group { transition: box-shadow 0.4s var(--ease), transform 0.4s var(--ease), border-color 0.4s var(--ease); }
+a.group:hover, .bg-panel.border-hairline:hover {
+  box-shadow: var(--shadow-lift);
+  border-color: var(--accent) !important;
+  transform: translateY(-3px);
+}
+
+/* ---------- Signature : facette ---------- */
+.divider-gem {
+  position: relative;
+  background-color: var(--accent-dark) !important;
+  height: 2px !important;
+}
+.divider-gem::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 8px; height: 8px;
+  background: var(--accent-dark);
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0 0 5px var(--bone);
+}
+
+.facet-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  color: var(--gold-deep);
+}
+.facet-rule::before, .facet-rule::after {
+  content: "";
+  height: 1px;
+  width: 44px;
+  background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+}
+
+.facet-mark { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* Motif de fond "facettes" très discret, réutilisable en section */
+.facet-field {
+  position: relative;
+  isolation: isolate;
+}
+.facet-field::before {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: -1;
+  opacity: 0.55;
+  background-image:
+    linear-gradient(115deg, transparent 47%, rgba(140,78,84,0.22) 49.5%, rgba(140,78,84,0.22) 50.5%, transparent 53%),
+    linear-gradient(65deg, transparent 47%, rgba(140,78,84,0.17) 49.5%, rgba(140,78,84,0.17) 50.5%, transparent 53%);
+  background-size: 120px 120px;
+}
+
+/* Balayage lumineux au survol (cartes, panneaux d'illustration) */
+.sheen { position: relative; overflow: hidden; }
+.sheen::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,0.35) 50%, transparent 65%);
+  transform: translateX(-130%);
+  transition: transform 0.9s var(--ease);
+  pointer-events: none;
+}
+.sheen:hover::after { transform: translateX(130%); }
+
+/* Panneau d'illustration (remplace les blocs "image" vides par du trait doré) */
+.art-panel {
+  background: radial-gradient(120% 140% at 15% 0%, var(--beige-soft), var(--beige) 70%);
+  border: 1px solid var(--beige-line);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.art-panel svg { width: 46%; height: 46%; color: var(--gold-deep); opacity: 0.85; }
+.art-panel.deep { background: radial-gradient(120% 140% at 85% 100%, var(--clay-tint), var(--beige) 75%); }
+
+/* ---------- Bande valeurs / logos presse (marquee) ---------- */
+.press-track {
+  display: flex;
+  gap: 3.5rem;
+  width: max-content;
+  animation: press-scroll 32s linear infinite;
+}
+@keyframes press-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Timeline (processus atelier, réellement séquentiel) ---------- */
+.timeline { position: relative; }
+.timeline::before {
+  content: "";
+  position: absolute; left: 27px; top: 6px; bottom: 6px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--gold), var(--hairline) 90%);
+}
+.timeline-item { position: relative; padding-left: 4.5rem; }
+.timeline-num {
+  position: absolute; left: 0; top: 0;
+  width: 56px; height: 56px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--gold);
+  color: var(--gold-deep);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ---------- Témoignages ---------- */
+.testimonial-card {
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+.testimonial-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.stars { color: var(--gold); letter-spacing: 0.15em; }
+
+/* ---------- Newsletter ---------- */
+.newsletter-band {
+  background: linear-gradient(135deg, var(--ink) 0%, #35281F 100%);
+  color: var(--gold-tint);
+}
+.newsletter-band input::placeholder { color: rgba(239,227,198,0.55); }
+
+/* ---------- Modale newsletter (nouveau) ---------- */
+.nl-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(36, 29, 24, 0.6);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+}
+.nl-modal-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+.nl-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--card);
+  border: 1px solid var(--card-line);
+  border-top: 3px solid var(--gold);
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.4s var(--ease);
+  box-shadow: var(--shadow-lift);
+}
+.nl-modal-overlay.is-open .nl-modal { transform: translateY(0) scale(1); }
+
+.nl-modal__close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink-soft);
+  border-radius: 999px;
+}
+.nl-modal__close:hover { color: var(--accent-dark); background: var(--panel-soft); }
+.nl-modal__close svg { width: 16px; height: 16px; }
+
+.nl-modal h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin-top: 0.6rem;
+}
+.nl-modal p.nl-modal__lede {
+  margin-top: 0.75rem;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.nl-modal-form { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.nl-modal-form input[type="email"] {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 0.65rem;
+  background: var(--panel-soft);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+.nl-modal-form input[type="email"]:focus { outline: none; border-color: var(--accent); }
+.nl-modal-form input[type="email"]::placeholder { color: var(--ink-faint); }
+
+.nl-modal__fine { margin-top: 1rem; font-size: 0.68rem; color: var(--ink-faint); line-height: 1.5; }
+
+.nl-modal__success { display: none; margin-top: 1.5rem; font-size: 0.9rem; color: var(--ink-soft); }
+.nl-modal__success strong { display: block; margin-bottom: 0.35rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.15rem; color: var(--ink); }
+.nl-modal-overlay.has-success .nl-modal-form,
+.nl-modal-overlay.has-success .nl-modal__fine { display: none; }
+.nl-modal-overlay.has-success .nl-modal__success { display: block; }
+
+/* ---------- Pied de page ---------- */
+.site-footer { background-color: var(--ink); color: var(--bone-deep); }
+.site-footer a { color: rgb(244 238 230 / 0.72); }
+.site-footer a:hover { color: var(--gold-light); }
+.footer-title { color: var(--gold-tint); font-family: 'Cormorant Garamond', serif; letter-spacing: 0.08em; }
+.footer-hr { border-color: rgba(244,238,230,0.14); }
+.social-dot {
+  width: 2.25rem; height: 2.25rem; border-radius: 999px;
+  border: 1px solid rgba(244,238,230,0.28);
+  display: flex; align-items: center; justify-content: center;
+}
+.social-dot:hover { border-color: var(--gold); background: rgba(169,134,62,0.14); }
+
+/* ---------- Bandeau teinté ---------- */
+.band-tint { background-color: var(--panel-soft); border: 1px solid var(--hairline); }
+
+/* ---------- Utilitaires ---------- */
+.text-readable { max-width: 42rem; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.pt-header { padding-top: var(--header-h); }
+.kicker { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); font-weight: 500; }
+
+/* ---------- Révélation au scroll ---------- */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .press-track { animation: none; }
+  .btn-gold::after, .sheen::after { display: none; }
+  * { transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bone); }
+::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
