@@ -253,8 +253,10 @@ section { position: relative; }
   .mobile-panel {
     position: fixed;
     inset: 76px 0 0 0;
-    background: var(--paper);
-    z-index: 190;
+    background-color: #ece6da; /* filet de sécurité si la variable ne se charge pas */
+    background-color: var(--paper);
+    isolation: isolate; /* garantit son propre contexte d'empilement */
+    z-index: 400; /* au-dessus de tout, y compris .progress-rule (300) */
     transform: translateY(-8px);
     opacity: 0;
     pointer-events: none;
@@ -264,9 +266,16 @@ section { position: relative; }
     flex-direction: column;
     gap: 1.75rem;
     border-top: 1px solid var(--line);
+    box-shadow: 0 20px 40px -20px rgba(28, 25, 20, .25);
+    overflow-y: auto;
   }
   .mobile-panel.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
-  .mobile-panel a { font-family: var(--serif); font-size: 1.8rem; }
+  .mobile-panel a {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    color: #1c1914; /* filet de sécurité */
+    color: var(--ink);
+  }
   .mobile-panel a[aria-current="page"] { color: var(--accent); }
 }
 @media (min-width: 861px) { .mobile-panel { display: none; } }
