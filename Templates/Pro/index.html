@@ -45,6 +45,34 @@
 <a class="skip-link" href="#main">Aller au contenu</a>
 <div class="progress-rule" aria-hidden="true"></div>
 
+<!-- ============================ MODALE NEWSLETTER ============================ -->
+<div id="newsletter-modal" class="nl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="nl-modal-title">
+  <div class="nl-modal">
+    <button type="button" class="nl-modal__close" id="nl-modal-close" aria-label="Fermer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <p class="eyebrow no-rule">Newsletter</p>
+    <h3 id="nl-modal-title">Recevoir nos actualités</h3>
+    <p class="nl-modal__lede">Un e-mail occasionnel : nouveaux projets livrés, distinctions et participations à des concours. Rien d'autre.</p>
+
+    <form id="nl-modal-form" class="nl-modal-form" novalidate>
+      <input type="text" name="company" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
+      <div class="nl-modal-form__row">
+        <input type="email" name="email" placeholder="Votre e-mail" autocomplete="email" required aria-label="Adresse e-mail">
+      </div>
+      <button type="submit" class="btn btn-primary">S'inscrire
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </form>
+    <p class="nl-modal__fine">En vous inscrivant, vous acceptez de recevoir nos e-mails. Désinscription possible à tout moment.</p>
+
+    <div class="nl-modal__success" role="status">
+      <strong>Merci !</strong>
+      Votre inscription est confirmée — à bientôt dans votre boîte de réception.
+    </div>
+  </div>
+</div>
+
 <!-- ============================= NAVIGATION ============================= -->
 <header class="site-header">
   <div class="site-header__bar">
@@ -304,5 +332,50 @@
 </button>
 
 <script src="assets/main.js"></script>
+
+<!-- Modale newsletter : ouverture automatique à l'arrivée sur l'accueil (nouveau) -->
+<script>
+(function () {
+  var overlay = document.getElementById('newsletter-modal');
+  var closeBtn = document.getElementById('nl-modal-close');
+  var form = document.getElementById('nl-modal-form');
+  if (!overlay) return;
+
+  function openModal() {
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  // Une seule apparition par session de navigation, pour ne pas gêner
+  if (!sessionStorage.getItem('nlModalShown')) {
+    setTimeout(function () {
+      openModal();
+      sessionStorage.setItem('nlModalShown', '1');
+    }, 1400);
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+  });
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // Honeypot anti-spam
+      if (form.company.value) return;
+      overlay.classList.add('has-success');
+      setTimeout(closeModal, 2200);
+    });
+  }
+})();
+</script>
 </body>
 </html>

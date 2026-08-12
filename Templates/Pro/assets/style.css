@@ -323,6 +323,112 @@ section { position: relative; }
 .btn:hover svg { transform: translateX(3px); }
 
 /* -------------------------------------------------------------------------
+   6bis. MODALE NEWSLETTER
+   ------------------------------------------------------------------------- */
+.nl-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500; /* au-dessus de la nav mobile (400) et de .progress-rule (300) */
+  background: rgba(28, 25, 20, .55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
+}
+.nl-modal-overlay.is-open { opacity: 1; pointer-events: auto; }
+
+.nl-modal {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background-color: #ece6da;
+  background-color: var(--paper);
+  border: 1px solid var(--line-strong);
+  padding: 2.75rem 2.25rem 2.25rem;
+  transform: translateY(14px) scale(.98);
+  transition: transform .35s var(--ease);
+  box-shadow: 0 30px 60px -20px rgba(28, 25, 20, .35);
+}
+.nl-modal-overlay.is-open .nl-modal { transform: translateY(0) scale(1); }
+
+.nl-modal__close {
+  position: absolute;
+  top: .9rem;
+  right: .9rem;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink);
+}
+.nl-modal__close svg { width: 16px; height: 16px; }
+.nl-modal__close:hover { color: var(--accent); }
+
+.nl-modal h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-style: italic;
+  margin-top: .75rem;
+  max-width: 22ch;
+}
+.nl-modal p.nl-modal__lede {
+  margin-top: .85rem;
+  color: var(--ink-70);
+  font-size: .95rem;
+  line-height: 1.6;
+  max-width: 36ch;
+}
+
+.nl-modal-form { margin-top: 1.75rem; }
+.nl-modal-form__row {
+  display: flex;
+  border-bottom: 1px solid var(--line-strong);
+}
+.nl-modal-form input[type="email"] {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: .75rem .1rem;
+  font-family: var(--sans);
+  font-size: .95rem;
+  color: var(--ink);
+}
+.nl-modal-form input[type="email"]:focus { outline: none; }
+.nl-modal-form input[type="email"]::placeholder { color: rgba(28, 25, 20, .45); }
+
+.nl-modal-form .btn {
+  margin-top: 1.1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.nl-modal__fine {
+  margin-top: 1rem;
+  font-size: .72rem;
+  color: rgba(28, 25, 20, .45);
+  line-height: 1.5;
+}
+
+.nl-modal__success {
+  display: none;
+  margin-top: 1.75rem;
+  font-size: .92rem;
+  color: var(--ink);
+}
+.nl-modal__success strong { display: block; margin-bottom: .35rem; font-family: var(--serif); font-style: italic; font-size: 1.1rem; }
+.nl-modal-overlay.has-success .nl-modal-form,
+.nl-modal-overlay.has-success .nl-modal__fine { display: none; }
+.nl-modal-overlay.has-success .nl-modal__success { display: block; }
+
+
    7. FRAME / CORNER TICKS — motif de plan technique
    ------------------------------------------------------------------------- */
 .frame { position: relative; }
