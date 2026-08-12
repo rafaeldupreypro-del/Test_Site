@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conditions Générales de Vente d'Atelier Nora.">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>CGV | Atelier Nora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-bone text-ink antialiased">
+
+    <nav class="fixed top-0 w-full bg-bone/80 backdrop-blur-md z-50">
+        <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light text-accent">Atelier Nora</a>
+            <div class="hidden md:flex nav-pill text-[10px] tracking-widest uppercase font-light">
+                <a href="collections.html">Collections</a>
+                <a href="index.html#boutique">E-Boutique</a>
+                <a href="atelier.html">L'Atelier</a>
+                <a href="aide.html">Aide</a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" onclick="openContactModal(); return false;" class="hidden md:inline-flex items-center gap-2 text-[10px] tracking-widest uppercase font-light text-ink hover:text-accent-dark transition-colors">Contactez-nous</a>
+                <a href="#" onclick="openContactModal(); return false;" aria-label="Contactez-nous" class="md:hidden p-2 flex items-center"><i data-lucide="mail" class="w-5 h-5 text-ink"></i></a>
+                <a href="panier.html" class="relative p-2 flex items-center">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="menu-btn" class="md:hidden p-2 flex items-center"><i data-lucide="menu" class="w-6 h-6 text-ink"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-panel border-b border-hairline p-6 space-y-6 text-center z-40">
+        <a href="collections.html" class="block text-xs uppercase tracking-widest text-ink-soft">Collections</a>
+        <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-ink-soft">E-Boutique</a>
+        <a href="atelier.html" class="block text-xs uppercase tracking-widest text-ink-soft">L'Atelier</a>
+        <a href="aide.html" class="block text-xs uppercase tracking-widest text-ink-soft">Aide</a>
+        <a href="#" onclick="openContactModal(); return false;" class="block text-xs uppercase tracking-widest text-ink-soft">Contactez-nous</a>
+    </div>
+
+    <div id="contact-modal" class="fixed inset-0 z-[100] hidden bg-bone/90 backdrop-blur-sm items-center justify-center p-4" onclick="if(event.target === this) closeContactModal()">
+        <div class="card p-6 rounded-2xl w-full max-w-sm relative">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-ink-soft"><i data-lucide="x"></i></button>
+            <p class="text-[10px] tracking-[0.3em] uppercase text-accent font-medium mb-2">Contact</p>
+            <h2 class="text-lg font-medium text-ink uppercase tracking-widest mb-6">Contactez-nous</h2>
+            <form id="contact-form" class="space-y-4">
+                <div>
+                    <label for="contact-name" class="block text-[10px] uppercase tracking-widest text-ink-soft mb-1.5">Nom</label>
+                    <input type="text" id="contact-name" name="name" required class="w-full px-4 py-3 rounded-lg bg-panel-soft border border-hairline text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-accent">
+                </div>
+                <div>
+                    <label for="contact-email" class="block text-[10px] uppercase tracking-widest text-ink-soft mb-1.5">Email</label>
+                    <input type="email" id="contact-email" name="email" required class="w-full px-4 py-3 rounded-lg bg-panel-soft border border-hairline text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-accent">
+                </div>
+                <div>
+                    <label for="contact-message" class="block text-[10px] uppercase tracking-widest text-ink-soft mb-1.5">Message</label>
+                    <textarea id="contact-message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-panel-soft border border-hairline text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-accent resize-none"></textarea>
+                </div>
+                <button type="submit" class="btn-gold w-full py-3 rounded-lg text-xs uppercase tracking-widest font-bold"><span>Envoyer</span></button>
+                <p class="text-center text-sm text-ink font-medium leading-relaxed">Si l'envoi ne fonctionne pas depuis un ordinateur, essayez depuis votre téléphone.</p>
+                <p id="contact-status" class="hidden text-center text-[11px] uppercase tracking-widest"></p>
+            </form>
+        </div>
+    </div>
+
+    <header class="pt-40 pb-16 px-6 text-center">
+        <div class="max-w-2xl mx-auto space-y-6">
+            <p class="kicker">Informations légales</p>
+            <h1 class="text-4xl font-extralight tracking-[0.12em] uppercase text-ink -mt-2">Conditions Générales de Vente</h1>
+            <div class="facet-rule"><svg class="facet-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l6 6-6 14L6 8l6-6z"/></svg></div>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto pb-24 px-6">
+        <div class="card p-8 md:p-10 space-y-8 text-[14px] text-ink-soft leading-relaxed">
+
+            <div>
+                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 1 — Objet</h2>
+                <p>Les présentes conditions régissent les ventes de bijoux réalisées par Atelier Nora sur ce site à destination de tout acheteur, particulier ou professionnel. Toute commande implique l'acceptation pleine et entière des présentes CGV.</p>
+            </div>
+
+            <div>
+                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 2 — Prix</h2>
+                <p>Les prix sont indiqués en euros, toutes taxes comprises. Atelier Nora se réserve le droit de modifier ses prix à tout moment, étant entendu que le prix figurant au récapitulatif de commande au moment de la validation sera le seul applicable.</p>
+            </div>
+
+            <div>
+                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 3 — Paiement</h2>
+                <p>Le paiement est exigible immédiatement à la commande et s'effectue de manière sécurisée via Stripe. Aucune donnée bancaire n'est conservée par Atelier Nora.</p>
+            </div>
+
+            <div>
+                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 4 — Livraison</h2>
+                <p>Les délais et modalités de livraison sont détaillés dans notre page <a href="livraison-retours.html" class="text-accent-dark underline">Livraison &amp; retours</a>. Le transfert des risques s'opère à la remise du colis au transporteur.</p>
+            </div>
+
+            <div>
+                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 5 — Droit de rétractation</h2>
+                <p>Conformément au Code de la consommation, vous disposez d'un délai de 14 jours à compter de la réception pour exercer votre droit de rétractation, hors pièces personnalisées ou gravées. Notre politique de retour étendue vous accorde 30 jours, dans les conditions décrites page <a href="livraison-retours.html" class="text-accent-dark underline">Livraison &amp; retours</a>.</p>
+            </div>
+
+            <div>
+                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 6 — Garantie</h2>
+                <p>Toutes nos créations bénéficient d'une garantie à vie couvrant les défauts de fabrication (sertissage, soudure), incluant le réajustement de taille et le polissage. Cette garantie ne couvre pas l'usure normale ni les chocs.</p>
+            </div>
+
+            <div>
+                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 7 — Litiges</h2>
+                <p>Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée avant toute action judiciaire, notamment via le médiateur de la consommation mentionné dans nos <a href="mentions-legales.html" class="text-accent-dark underline">mentions légales</a>.</p>
+            </div>
+
+            <p class="text-[12px] text-ink-faint pt-4 border-t border-hairline">Ce document sera relu et complété par un professionnel du droit avant la mise en ligne définitive du site.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer pt-20 pb-10 px-4">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-[1.3fr_1fr_1fr_1.2fr] gap-12">
+            <div>
+                <p class="text-lg tracking-[0.2em] uppercase font-light text-[color:var(--gold-tint)] mb-4">Atelier Nora</p>
+                <p class="text-sm opacity-70 font-light leading-relaxed max-w-xs">Haute joaillerie artisanale façonnée au Havre. Or recyclé, pierres sourcées avec intégrité, pièces uniques faites pour durer.</p>
+                <div class="flex gap-3 mt-6">
+                    <a href="#" aria-label="Instagram" class="social-dot"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="#" aria-label="Facebook" class="social-dot"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                    <a href="#" aria-label="Pinterest" class="social-dot"><i data-lucide="image" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+            <div>
+                <p class="footer-title text-sm uppercase mb-4">Boutique</p>
+                <ul class="space-y-2.5 text-sm font-light">
+                    <li><a href="collections.html">Collections</a></li>
+                    <li><a href="index.html#boutique">E-Boutique</a></li>
+                    <li><a href="panier.html">Votre panier</a></li>
+                    <li><a href="atelier.html">L'Atelier</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="footer-title text-sm uppercase mb-4">Service</p>
+                <ul class="space-y-2.5 text-sm font-light">
+                    <li><a href="#" onclick="openContactModal(); return false;">Nous contacter</a></li>
+                    <li><a href="livraison-retours.html">Livraison &amp; retours</a></li>
+                    <li><a href="guide-tailles.html">Guide des tailles</a></li>
+                    <li><a href="entretien.html">Entretien des bijoux</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="footer-title text-sm uppercase mb-4">Nous trouver</p>
+                <ul class="space-y-3 text-sm font-light opacity-90">
+                    <li class="flex gap-2"><i data-lucide="map-pin" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--gold-light)"></i> Le Havre, Normandie</li>
+                    <li class="flex gap-2"><i data-lucide="clock" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--gold-light)"></i> Atelier sur rendez-vous</li>
+                    <li class="flex gap-2"><i data-lucide="mail" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--gold-light)"></i> contact@ateliernora.fr</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="footer-hr my-10 max-w-6xl mx-auto">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] tracking-wide opacity-60 font-light">
+            <p>&copy; 2026 Atelier Nora. Tous droits réservés.</p>
+            <div class="flex gap-6">
+                <a href="mentions-legales.html">Mentions légales</a>
+                <a href="confidentialite.html">Confidentialité</a>
+                <a href="cgv.html">CGV</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openContactModal() { const m = document.getElementById('contact-modal'); m.classList.remove('hidden'); m.classList.add('flex'); }
+        function closeContactModal() { const m = document.getElementById('contact-modal'); m.classList.add('hidden'); m.classList.remove('flex'); }
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const status = document.getElementById('contact-status');
+                const btn = contactForm.querySelector('button[type="submit"]');
+                const btnSpan = btn.querySelector('span');
+                const originalText = btnSpan.innerText;
+                const name = document.getElementById('contact-name').value;
+                const email = document.getElementById('contact-email').value;
+                const message = document.getElementById('contact-message').value;
+                const emailSubject = `[Atelier Nora] Nouveau message de ${name}`;
+                const emailBody = `Nom : ${name}\nEmail : ${email}\n\nMessage :\n${message}`;
+                const mailtoLink = `mailto:rafaelduprey689@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                window.location.href = mailtoLink;
+                status.innerText = "Ouverture de votre messagerie...";
+                status.classList.remove('hidden', 'text-red-600');
+                status.classList.add('text-accent-dark');
+                contactForm.reset();
+                setTimeout(() => { closeContactModal(); status.classList.add('hidden'); btnSpan.innerText = originalText; btn.disabled = false; }, 1800);
+            });
+        }
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeContactModal(); });
+        function updateCartCount() {
+            const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+            const el = document.getElementById('cart-count');
+            if (el) { el.innerText = count; el.classList.toggle('hidden', count === 0); }
+        }
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.onclick = () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = menuBtn.querySelector('i');
+                if (icon) { icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x'); lucide.createIcons(); }
+            };
+        }
+        updateCartCount();
+        lucide.createIcons();
+    </script>
+</body>
+</html>

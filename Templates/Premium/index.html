@@ -13,13 +13,16 @@
 </head>
 <body class="bg-bone text-ink antialiased">
 
+    <!-- En-tête fixe (bandeau d'annonce + navigation) -->
+    <div id="site-header" class="fixed top-0 inset-x-0 z-50">
+
     <!-- Bandeau d'annonce -->
     <div class="announce-bar text-[10px] tracking-[0.25em] uppercase font-light py-2 text-center px-4">
         Pièces façonnées à la main au Havre <span class="sep mx-3">◆</span> Or recyclé 18 carats <span class="sep mx-3">◆</span> Livraison assurée offerte dès 300&nbsp;€
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-[29px] w-full bg-bone/80 backdrop-blur-md z-50">
+    <nav class="w-full bg-bone/80 backdrop-blur-md border-b border-hairline/60">
         <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
             <!-- Logo -->
             <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light text-accent">Atelier Nora</a>
@@ -29,6 +32,7 @@
                 <a href="collections.html">Collections</a>
                 <a href="index.html#boutique" class="active">E-Boutique</a>
                 <a href="atelier.html">L'Atelier</a>
+                <a href="aide.html">Aide</a>
             </div>
 
             <!-- Icônes (Contact + Panier + Menu) -->
@@ -55,16 +59,20 @@
         </div>
     </nav>
 
+    </div>
+    <!-- /En-tête fixe -->
+
     <!-- Menu Mobile -->
-    <div id="mobile-menu" class="hidden md:hidden fixed top-[108px] left-0 w-full bg-panel border-b border-hairline p-6 space-y-6 text-center z-40">
+    <div id="mobile-menu" class="hidden md:hidden fixed top-[116px] left-0 w-full bg-panel border-b border-hairline p-6 space-y-6 text-center z-40">
         <a href="collections.html" class="block text-xs uppercase tracking-widest text-ink-soft">Collections</a>
         <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-ink-soft">E-Boutique</a>
         <a href="atelier.html" class="block text-xs uppercase tracking-widest text-ink-soft">L'Atelier</a>
+        <a href="aide.html" class="block text-xs uppercase tracking-widest text-ink-soft">Aide</a>
         <a href="#" onclick="openContactModal(); return false;" class="block text-xs uppercase tracking-widest text-ink-soft">Contactez-nous</a>
     </div>
 
     <!-- Hero -->
-    <section class="min-h-screen flex items-center justify-center px-4 text-center bg-panel-soft facet-field relative overflow-hidden pt-16">
+    <section class="min-h-screen flex items-center justify-center px-4 text-center bg-panel-soft facet-field relative overflow-hidden pt-header">
         <div class="max-w-2xl space-y-7 relative z-10">
             <span class="inline-block bg-accent text-[#F7EFEC] text-[10px] tracking-[0.3em] uppercase font-medium px-4 py-1.5 rounded-full">Haute joaillerie artisanale &mdash; Le Havre</span>
             <h1 class="text-4xl md:text-6xl font-extralight tracking-tight uppercase leading-[1.15]">Façonné à la main.<br>Porté pour l'éternité.</h1>
@@ -207,6 +215,36 @@
         </div>
     </section>
 
+    <!-- Aide & Service (nouveau) -->
+    <section class="py-16 px-4 bg-bone-deep border-y border-hairline/60">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center kicker mb-10">Besoin d'aide ?</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="livraison-retours.html" class="group card p-6 text-center">
+                    <i data-lucide="truck" class="w-5 h-5 text-gold mx-auto mb-3"></i>
+                    <p class="text-[11px] uppercase tracking-widest font-medium text-ink group-hover:text-accent-dark">Livraison &amp; retours</p>
+                </a>
+                <a href="guide-tailles.html" class="group card p-6 text-center">
+                    <i data-lucide="ruler" class="w-5 h-5 text-gold mx-auto mb-3"></i>
+                    <p class="text-[11px] uppercase tracking-widest font-medium text-ink group-hover:text-accent-dark">Guide des tailles</p>
+                </a>
+                <a href="entretien.html" class="group card p-6 text-center">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-gold mx-auto mb-3"></i>
+                    <p class="text-[11px] uppercase tracking-widest font-medium text-ink group-hover:text-accent-dark">Entretien des bijoux</p>
+                </a>
+                <a href="sur-mesure.html" class="group card p-6 text-center">
+                    <i data-lucide="pencil-ruler" class="w-5 h-5 text-gold mx-auto mb-3"></i>
+                    <p class="text-[11px] uppercase tracking-widest font-medium text-ink group-hover:text-accent-dark">Créations sur-mesure</p>
+                </a>
+            </div>
+            <p class="text-center mt-8">
+                <a href="aide.html" class="inline-flex items-center gap-2 text-[11px] uppercase tracking-widest text-accent-dark font-medium">
+                    Voir tout le centre d'aide <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </p>
+        </div>
+    </section>
+
     <!-- Newsletter -->
     <section class="newsletter-band py-20 px-4">
         <div class="max-w-xl mx-auto text-center">
@@ -293,9 +331,9 @@
                 <p class="footer-title text-sm uppercase mb-4">Service</p>
                 <ul class="space-y-2.5 text-sm font-light">
                     <li><a href="#" onclick="openContactModal(); return false;">Nous contacter</a></li>
-                    <li><a href="#">Livraison &amp; retours</a></li>
-                    <li><a href="#">Guide des tailles</a></li>
-                    <li><a href="#">Entretien des bijoux</a></li>
+                    <li><a href="livraison-retours.html">Livraison &amp; retours</a></li>
+                    <li><a href="guide-tailles.html">Guide des tailles</a></li>
+                    <li><a href="entretien.html">Entretien des bijoux</a></li>
                 </ul>
             </div>
             <div>
@@ -311,9 +349,9 @@
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] tracking-wide opacity-60 font-light">
             <p>&copy; 2026 Atelier Nora. Tous droits réservés.</p>
             <div class="flex gap-6">
-                <a href="#">Mentions légales</a>
-                <a href="#">Confidentialité</a>
-                <a href="#">CGV</a>
+                <a href="mentions-legales.html">Mentions légales</a>
+                <a href="confidentialite.html">Confidentialité</a>
+                <a href="cgv.html">CGV</a>
             </div>
         </div>
     </footer>
@@ -582,6 +620,22 @@
                 newsletterForm.reset();
             });
         }
+    </script>
+
+    <!-- Ajuste dynamiquement la hauteur réservée à l'en-tête fixe (nouveau) -->
+    <script>
+        function setHeaderOffset() {
+            const header = document.getElementById('site-header');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (header) {
+                const h = header.offsetHeight;
+                document.documentElement.style.setProperty('--header-h', h + 'px');
+                if (mobileMenu) mobileMenu.style.top = h + 'px';
+            }
+        }
+        window.addEventListener('load', setHeaderOffset);
+        window.addEventListener('resize', setHeaderOffset);
+        document.addEventListener('DOMContentLoaded', setHeaderOffset);
     </script>
 
     <!-- Révélation au scroll (nouveau) -->

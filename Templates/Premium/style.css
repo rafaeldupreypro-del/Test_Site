@@ -54,6 +54,8 @@
   --success: #5F7A64;
   --danger: #A04434;
 
+  --header-h: 116px; /* hauteur de repli : bandeau d'annonce + nav ; recalculée en JS sur index.html */
+
   --shadow-soft: 0 1px 3px rgba(36, 29, 24, 0.10);
   --shadow-lift: 0 14px 30px -14px rgba(36, 29, 24, 0.34);
   --shadow-gold: 0 10px 26px -12px rgba(124, 95, 38, 0.45);
@@ -399,6 +401,7 @@ a.group:hover, .bg-panel.border-hairline:hover {
 
 /* ---------- Utilitaires ---------- */
 .text-readable { max-width: 42rem; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.pt-header { padding-top: var(--header-h); }
 .kicker { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); font-weight: 500; }
 
 /* ---------- Révélation au scroll ---------- */
