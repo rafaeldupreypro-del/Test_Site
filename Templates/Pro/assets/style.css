@@ -182,6 +182,71 @@ section { position: relative; }
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
+
+/* ---------- Bande de réassurance (nouveau, CRO header) ---------- */
+.trust-bar {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 210;
+  height: 34px;
+  background: var(--dark-bg);
+  color: var(--dark-ink-70);
+}
+.trust-bar__inner {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.trust-bar__points { display: flex; align-items: center; gap: 1.4rem; }
+.trust-bar__points span, .trust-bar__call {
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.trust-bar__points span::before {
+  content: "";
+  display: inline-block;
+  width: 3px; height: 3px;
+  border-radius: 999px;
+  background: var(--accent);
+  margin-right: .9rem;
+  vertical-align: middle;
+}
+.trust-bar__points span:first-child::before { display: none; }
+.trust-bar__call { display: flex; align-items: center; gap: .45rem; color: var(--dark-ink); }
+.trust-bar__call svg { width: 13px; height: 13px; color: var(--accent); flex-shrink: 0; }
+.trust-bar__call:hover { color: var(--paper); }
+
+@media (min-width: 861px) {
+  .trust-bar { display: block; }
+  .site-header { top: 34px; }
+  .progress-rule { top: 34px; }
+}
+
+/* ---------- Téléphone permanent dans le header (nouveau, CRO header) ---------- */
+.header-call {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-family: var(--mono);
+  font-size: .74rem;
+  letter-spacing: .06em;
+  color: var(--ink-70);
+  flex-shrink: 0;
+}
+.header-call svg { width: 15px; height: 15px; color: var(--accent); flex-shrink: 0; }
+.header-call:hover { color: var(--ink); }
+.header-call .header-call__num { display: none; }
+@media (min-width: 481px) { .header-call .header-call__num { display: inline; } }
+
 .site-header__bar {
   max-width: var(--container);
   margin-inline: auto;
@@ -191,6 +256,7 @@ section { position: relative; }
   align-items: center;
   justify-content: space-between;
 }
+.site-header__actions { display: flex; align-items: center; gap: 1.1rem; }
 .brand {
   font-family: var(--serif);
   font-size: 1.15rem;
@@ -225,11 +291,14 @@ section { position: relative; }
   font-size: .7rem;
   letter-spacing: .1em;
   text-transform: uppercase;
-  border: 1px solid var(--line-strong);
+  background: var(--accent);
+  color: var(--paper);
+  border: 1px solid var(--accent);
   padding: .65rem 1.1rem;
-  transition: border-color .25s ease, background .25s ease, color .25s ease;
+  transition: border-color .25s ease, background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+  box-shadow: 0 6px 16px -8px rgba(44, 74, 134, .5);
 }
-.nav-cta:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.nav-cta:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(28,25,20,.35); }
 
 .nav-toggle {
   display: none;
