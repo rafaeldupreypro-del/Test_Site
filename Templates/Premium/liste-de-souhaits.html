@@ -36,6 +36,9 @@
             <div class="flex items-center gap-6">
                 <a href="#" onclick="openContactModal(); return false;" class="hidden md:inline-flex items-center gap-2 text-[10px] tracking-widest uppercase font-light text-ink hover:text-accent-dark transition-colors">Contactez-nous</a>
                 <a href="#" onclick="openContactModal(); return false;" aria-label="Contactez-nous" class="md:hidden p-2 flex items-center"><i data-lucide="mail" class="w-5 h-5 text-ink"></i></a>
+                <!-- CTA Boutique (nouveau, CRO header) -->
+                <a href="index.html#boutique" class="hidden lg:inline-flex nav-cta-btn">Voir la boutique</a>
+
                 <div class="relative">
                     <button type="button" id="search-toggle" aria-label="Rechercher" class="p-2 flex items-center">
                         <i data-lucide="search" class="w-5 h-5 text-ink"></i>
@@ -49,10 +52,15 @@
                     <i data-lucide="heart" class="w-5 h-5 text-accent"></i>
                     <span id="wishlist-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
                 </a>
-                <a href="panier.html" class="relative p-2 flex items-center">
-                    <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
-                    <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
-                </a>
+                <div class="relative">
+                    <button type="button" id="cart-toggle" class="relative p-2 flex items-center" aria-label="Voir le panier">
+                        <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
+                        <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
+                    </button>
+                    <div id="cart-panel" class="cart-panel hidden">
+                        <div id="cart-panel-body"></div>
+                    </div>
+                </div>
                 <button id="menu-btn" class="md:hidden p-2 flex items-center"><i data-lucide="menu" class="w-6 h-6 text-ink"></i></button>
             </div>
         </div>
@@ -366,6 +374,55 @@
                 e.preventDefault();
                 const q = document.getElementById('search-input').value.trim();
                 if (q) window.location.href = 'index.html?q=' + encodeURIComponent(q) + '#boutique';
+            });
+        }
+
+        function renderCartPreview() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const body = document.getElementById('cart-panel-body');
+            if (!body) return;
+            if (cart.length === 0) {
+                body.innerHTML = '<p class="cart-panel__empty">Votre panier est vide.</p>';
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            let html = cart.slice(0, 4).map(item => `
+                <div class="cart-panel__item">
+                    <div>
+                        <p class="cart-panel__item-name">${item.name}</p>
+                        <p class="cart-panel__item-qty">Qté : ${item.quantity}</p>
+                    </div>
+                    <span class="cart-panel__item-price">${item.price * item.quantity} €</span>
+                </div>
+            `).join('');
+            if (cart.length > 4) {
+                html += `<p class="cart-panel__item-qty" style="text-align:center;padding-top:.5rem;">+ ${cart.length - 4} autre(s) pièce(s)</p>`;
+            }
+            html += `
+                <div class="cart-panel__total">
+                    <span class="text-ink-soft">Sous-total</span>
+                    <span class="text-ink font-semibold">${total} €</span>
+                </div>
+                <div class="cart-panel__actions">
+                    <a href="panier.html" class="btn-outline">Voir le panier</a>
+                    <a href="panier.html" class="btn-gold">Commander</a>
+                </div>
+            `;
+            body.innerHTML = html;
+        }
+
+        const cartToggle = document.getElementById('cart-toggle');
+        const cartPanel = document.getElementById('cart-panel');
+        if (cartToggle && cartPanel) {
+            cartToggle.addEventListener('click', () => {
+                renderCartPreview();
+                cartPanel.classList.toggle('hidden');
+                if (typeof searchForm !== 'undefined' && searchForm) searchForm.classList.add('hidden');
+            });
+            document.addEventListener('click', (e) => {
+                if (!cartPanel.contains(e.target) && e.target !== cartToggle && !cartToggle.contains(e.target)) {
+                    cartPanel.classList.add('hidden');
+                }
             });
         }
 

@@ -508,6 +508,62 @@ a.group:hover, .bg-panel.border-hairline:hover {
 }
 .search-panel button:hover { background: var(--accent-dark); }
 
+/* ---------- Mini-panier (nouveau, CRO header) ---------- */
+.cart-panel {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  width: 320px;
+  max-width: calc(100vw - 2rem);
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 0.85rem;
+  box-shadow: var(--shadow-lift);
+  padding: 1.1rem;
+  z-index: 60;
+}
+.cart-panel__item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 0.8rem;
+}
+.cart-panel__item:last-of-type { border-bottom: none; }
+.cart-panel__item-name { color: var(--ink); }
+.cart-panel__item-qty { color: var(--ink-faint); font-size: 0.72rem; }
+.cart-panel__item-price { color: var(--accent-dark); font-weight: 600; flex-shrink: 0; }
+.cart-panel__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  margin-top: 0.4rem;
+  border-top: 1px solid var(--hairline);
+  font-size: 0.85rem;
+}
+.cart-panel__empty { text-align: center; padding: 1.25rem 0; font-size: 0.82rem; color: var(--ink-faint); }
+.cart-panel__actions { display: flex; gap: 0.6rem; margin-top: 1rem; }
+.cart-panel__actions a { flex: 1; text-align: center; padding: 0.65rem; border-radius: 0.55rem; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+
+/* ---------- CTA boutique dans le header (nouveau, CRO header) ---------- */
+.nav-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--accent);
+  color: #F7EFEC;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+}
+.nav-cta-btn:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: var(--shadow-lift); }
+
 /* ---------- Liste de souhaits (nouveau) ---------- */
 .wishlist-btn {
   position: absolute;
