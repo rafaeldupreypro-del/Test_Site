@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Découvrez les collections Atelier Nora : Alliances, Pendentifs, Boucles, Bracelets, Bagues et Créations sur-mesure — haute joaillerie faite main au Havre.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.ateliernora.fr/collections.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Atelier Nora">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Collections | Atelier Nora">
+    <meta property="og:description" content="Découvrez les collections Atelier Nora : Alliances, Pendentifs, Boucles, Bracelets, Bagues et Créations sur-mesure — haute joaillerie faite main au Havre.">
+    <meta property="og:url" content="https://www.ateliernora.fr/collections.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#F4EEE6">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <title>Collections | Atelier Nora</title>
@@ -12,6 +22,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-bone text-ink">
+<!-- Bannière cookies (nouveau) -->
+<div id="cookie-banner" class="cookie-banner hidden">
+    <div class="cookie-banner__inner">
+        <p>Ce site utilise des cookies techniques nécessaires à son fonctionnement (panier, préférences d'affichage). <a href="confidentialite.html">En savoir plus</a>.</p>
+        <div class="cookie-banner__actions">
+            <button type="button" id="cookie-decline" class="btn-outline">Refuser</button>
+            <button type="button" id="cookie-accept" class="btn-gold">Accepter</button>
+        </div>
+    </div>
+</div>
+
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-bone/80 backdrop-blur-md z-50">
@@ -38,6 +59,23 @@
                 </a>
 
                 <!-- Lien Panier -->
+                <!-- Recherche (nouveau) -->
+                <div class="relative">
+                    <button type="button" id="search-toggle" aria-label="Rechercher" class="p-2 flex items-center">
+                        <i data-lucide="search" class="w-5 h-5 text-ink"></i>
+                    </button>
+                    <form id="search-form" class="search-panel hidden" role="search">
+                        <input type="search" id="search-input" placeholder="Rechercher une pièce…" aria-label="Rechercher une pièce" autocomplete="off">
+                        <button type="submit" aria-label="Lancer la recherche"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </form>
+                </div>
+
+                <!-- Liste de souhaits (nouveau) -->
+                <a href="liste-de-souhaits.html" class="relative p-2 flex items-center" aria-label="Liste de souhaits">
+                    <i data-lucide="heart" class="w-5 h-5 text-ink"></i>
+                    <span id="wishlist-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
+                </a>
+
                 <a href="panier.html" class="relative p-2 flex items-center">
                     <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
                     <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
@@ -338,6 +376,57 @@
                 revealEls.forEach(el => el.classList.add('is-visible'));
             }
         });
+    </script>
+
+    <!-- Recherche, liste de souhaits & cookies (nouveau) -->
+    <script>
+        const searchToggle = document.getElementById('search-toggle');
+        const searchForm = document.getElementById('search-form');
+        if (searchToggle && searchForm) {
+            searchToggle.addEventListener('click', () => {
+                searchForm.classList.toggle('hidden');
+                if (!searchForm.classList.contains('hidden')) {
+                    document.getElementById('search-input').focus();
+                }
+            });
+            document.addEventListener('click', (e) => {
+                if (!searchForm.contains(e.target) && e.target !== searchToggle && !searchToggle.contains(e.target)) {
+                    searchForm.classList.add('hidden');
+                }
+            });
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const q = document.getElementById('search-input').value.trim();
+                if (q) window.location.href = 'index.html?q=' + encodeURIComponent(q) + '#boutique';
+            });
+        }
+
+        function updateWishlistCount() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const el = document.getElementById('wishlist-count');
+            if (el) {
+                el.innerText = wishlist.length;
+                el.classList.toggle('hidden', wishlist.length === 0);
+            }
+        }
+        updateWishlistCount();
+
+        const cookieBanner = document.getElementById('cookie-banner');
+        if (cookieBanner) {
+            if (!localStorage.getItem('cookieConsent')) {
+                cookieBanner.classList.remove('hidden');
+            }
+            const acceptBtn = document.getElementById('cookie-accept');
+            const declineBtn = document.getElementById('cookie-decline');
+            if (acceptBtn) acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'accepted');
+                cookieBanner.classList.add('hidden');
+            });
+            if (declineBtn) declineBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'declined');
+                cookieBanner.classList.add('hidden');
+            });
+        }
     </script>
 </body>
 </html>

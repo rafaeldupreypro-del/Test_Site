@@ -3,20 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Conditions Générales de Vente d'Atelier Nora.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.ateliernora.fr/cgv.html">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Atelier Nora">
-    <meta property="og:locale" content="fr_FR">
-    <meta property="og:title" content="CGV | Atelier Nora">
-    <meta property="og:description" content="Conditions Générales de Vente d'Atelier Nora.">
-    <meta property="og:url" content="https://www.ateliernora.fr/cgv.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#F4EEE6">
+    <meta name="description" content="Retrouvez les pièces Atelier Nora que vous avez enregistrées dans votre liste de souhaits.">
+    <meta name="robots" content="noindex, follow">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <title>CGV | Atelier Nora</title>
+    <title>Liste de Souhaits | Atelier Nora</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
@@ -33,7 +24,6 @@
     </div>
 </div>
 
-
     <nav class="fixed top-0 w-full bg-bone/80 backdrop-blur-md z-50">
         <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
             <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light text-accent">Atelier Nora</a>
@@ -46,7 +36,6 @@
             <div class="flex items-center gap-6">
                 <a href="#" onclick="openContactModal(); return false;" class="hidden md:inline-flex items-center gap-2 text-[10px] tracking-widest uppercase font-light text-ink hover:text-accent-dark transition-colors">Contactez-nous</a>
                 <a href="#" onclick="openContactModal(); return false;" aria-label="Contactez-nous" class="md:hidden p-2 flex items-center"><i data-lucide="mail" class="w-5 h-5 text-ink"></i></a>
-                <!-- Recherche (nouveau) -->
                 <div class="relative">
                     <button type="button" id="search-toggle" aria-label="Rechercher" class="p-2 flex items-center">
                         <i data-lucide="search" class="w-5 h-5 text-ink"></i>
@@ -56,13 +45,10 @@
                         <button type="submit" aria-label="Lancer la recherche"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
                     </form>
                 </div>
-
-                <!-- Liste de souhaits (nouveau) -->
-                <a href="liste-de-souhaits.html" class="relative p-2 flex items-center" aria-label="Liste de souhaits">
-                    <i data-lucide="heart" class="w-5 h-5 text-ink"></i>
+                <a href="liste-de-souhaits.html" class="relative p-2 flex items-center active" aria-label="Liste de souhaits">
+                    <i data-lucide="heart" class="w-5 h-5 text-accent"></i>
                     <span id="wishlist-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
                 </a>
-
                 <a href="panier.html" class="relative p-2 flex items-center">
                     <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
                     <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
@@ -105,54 +91,26 @@
         </div>
     </div>
 
-    <header class="pt-40 pb-16 px-6 text-center">
-        <div class="max-w-2xl mx-auto space-y-6">
-            <p class="kicker">Informations légales</p>
-            <h1 class="text-4xl font-extralight tracking-[0.12em] uppercase text-ink -mt-2">Conditions Générales de Vente</h1>
-            <div class="facet-rule"><svg class="facet-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l6 6-6 14L6 8l6-6z"/></svg></div>
+    <header class="pt-40 pb-12 px-6 text-center">
+        <div class="max-w-2xl mx-auto space-y-4">
+            <p class="kicker">Vos favoris</p>
+            <h1 class="text-4xl font-extralight tracking-[0.12em] uppercase text-ink -mt-2">Liste de Souhaits</h1>
         </div>
     </header>
 
-    <main class="max-w-3xl mx-auto pb-24 px-6">
-        <div class="card p-8 md:p-10 space-y-8 text-[14px] text-ink-soft leading-relaxed">
-
-            <div>
-                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 1 — Objet</h2>
-                <p>Les présentes conditions régissent les ventes de bijoux réalisées par Atelier Nora sur ce site à destination de tout acheteur, particulier ou professionnel. Toute commande implique l'acceptation pleine et entière des présentes CGV.</p>
-            </div>
-
-            <div>
-                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 2 — Prix</h2>
-                <p>Les prix sont indiqués en euros, toutes taxes comprises. Atelier Nora se réserve le droit de modifier ses prix à tout moment, étant entendu que le prix figurant au récapitulatif de commande au moment de la validation sera le seul applicable.</p>
-            </div>
-
-            <div>
-                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 3 — Paiement</h2>
-                <p>Le paiement est exigible immédiatement à la commande et s'effectue de manière sécurisée via Stripe. Aucune donnée bancaire n'est conservée par Atelier Nora.</p>
-            </div>
-
-            <div>
-                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 4 — Livraison</h2>
-                <p>Les délais et modalités de livraison sont détaillés dans notre page <a href="livraison-retours.html" class="text-accent-dark underline">Livraison &amp; retours</a>. Le transfert des risques s'opère à la remise du colis au transporteur.</p>
-            </div>
-
-            <div>
-                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 5 — Droit de rétractation</h2>
-                <p>Conformément au Code de la consommation, vous disposez d'un délai de 14 jours à compter de la réception pour exercer votre droit de rétractation, hors pièces personnalisées ou gravées. Notre politique de retour étendue vous accorde 30 jours, dans les conditions décrites page <a href="livraison-retours.html" class="text-accent-dark underline">Livraison &amp; retours</a>.</p>
-            </div>
-
-            <div>
-                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 6 — Garantie</h2>
-                <p>Toutes nos créations bénéficient d'une garantie à vie couvrant les défauts de fabrication (sertissage, soudure), incluant le réajustement de taille et le polissage. Cette garantie ne couvre pas l'usure normale ni les chocs.</p>
-            </div>
-
-            <div>
-                <h2 class="text-sm uppercase tracking-widest font-medium text-ink mb-3">Article 7 — Litiges</h2>
-                <p>Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée avant toute action judiciaire, notamment via le médiateur de la consommation mentionné dans nos <a href="mentions-legales.html" class="text-accent-dark underline">mentions légales</a>.</p>
-            </div>
-
-            <p class="text-[12px] text-ink-faint pt-4 border-t border-hairline">Ce document sera relu et complété par un professionnel du droit avant la mise en ligne définitive du site.</p>
+    <main class="max-w-6xl mx-auto pb-24 px-6">
+        <div id="wishlist-loading" class="text-center py-16">
+            <p class="text-xs uppercase tracking-widest text-ink-faint">Chargement…</p>
         </div>
+
+        <div id="wishlist-empty" class="wishlist-empty hidden">
+            <i data-lucide="heart" class="w-8 h-8 text-ink-faint mx-auto mb-4"></i>
+            <p class="text-ink-soft text-sm mb-1">Votre liste de souhaits est vide.</p>
+            <p class="text-ink-faint text-xs mb-8">Cliquez sur le cœur d'une pièce pour l'enregistrer ici.</p>
+            <a href="index.html#boutique" class="btn-gold inline-block text-[10px] uppercase tracking-widest px-8 py-3 rounded-full">Découvrir la boutique</a>
+        </div>
+
+        <div id="wishlist-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </main>
 
     <footer class="site-footer pt-20 pb-10 px-4">
@@ -247,6 +205,145 @@
         }
         updateCartCount();
         lucide.createIcons();
+    </script>
+
+    <!-- Logique de la liste de souhaits (nouveau) -->
+    <script>
+    (function () {
+        function triggerSuccess(buttonElement) {
+            const spanEl = buttonElement.querySelector('span');
+            const originalText = spanEl ? spanEl.innerText : "Ajouter au panier";
+            buttonElement.classList.remove('btn-gold');
+            buttonElement.classList.add('btn-success');
+            if (spanEl) spanEl.innerText = "Ajouté !";
+            setTimeout(() => {
+                buttonElement.classList.remove('btn-success');
+                buttonElement.classList.add('btn-gold');
+                if (spanEl) spanEl.innerText = originalText;
+            }, 1000);
+        }
+
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItem = cart.find(item => item.id === product.id);
+            let currentQty = cartItem ? cartItem.quantity : 0;
+            if (currentQty + 1 > product.maxStock) {
+                alert("Vous avez atteint la limite du stock disponible pour ce produit.");
+                return false;
+            }
+            if (cartItem) { cartItem.quantity += 1; }
+            else { cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1, maxStock: product.maxStock }); }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            return true;
+        }
+
+        function removeFromWishlist(id) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist = wishlist.filter(x => x !== id);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            if (typeof updateWishlistCount === 'function') updateWishlistCount();
+        }
+
+        async function getCatalog() {
+            try {
+                const cachedP = sessionStorage.getItem('noraProducts');
+                const cachedS = sessionStorage.getItem('noraStocks');
+                if (cachedP && cachedS) return { products: JSON.parse(cachedP), stocks: JSON.parse(cachedS) };
+            } catch (e) { /* ignore */ }
+            const [pRes, sRes] = await Promise.all([
+                fetch('/api/products'),
+                fetch('https://script.google.com/macros/s/AKfycbwOpBAd2WzT-fzdYcnKZS9qYyzR6tzTzoMCPDROqsNPBOSbhElvz5ReD9MWAweoYh4JnQ/exec')
+            ]);
+            const products = await pRes.json();
+            const stocks = await sRes.json();
+            try {
+                sessionStorage.setItem('noraProducts', JSON.stringify(products));
+                sessionStorage.setItem('noraStocks', JSON.stringify(stocks));
+            } catch (e) { /* ignore */ }
+            return { products, stocks };
+        }
+
+        function renderWishlist(products, stocks) {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const grid = document.getElementById('wishlist-grid');
+            const emptyEl = document.getElementById('wishlist-empty');
+            const items = products.filter(p => wishlist.includes(p.id));
+
+            document.getElementById('wishlist-loading').classList.add('hidden');
+
+            if (items.length === 0) {
+                emptyEl.classList.remove('hidden');
+                lucide.createIcons();
+                return;
+            }
+
+            grid.innerHTML = '';
+            items.forEach(p => {
+                const stockItem = stocks.find(s => s.id === p.id);
+                const stock = stockItem ? parseInt(stockItem.stock, 10) : 0;
+                const isRupture = stock <= 0;
+
+                const card = document.createElement('div');
+                card.className = "group card p-4 relative";
+                card.innerHTML = `
+                    <div class="aspect-square bg-beige border border-beige rounded-xl mb-4 overflow-hidden relative">
+                        <button type="button" class="wishlist-btn is-active" aria-label="Retirer de la liste de souhaits">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.8-10-9.3C.3 8 2 4.5 5.5 4c2-.3 3.8.6 6.5 3.2C14.7 4.6 16.5 3.7 18.5 4c3.5.5 5.2 4 3.5 7.7C19.5 16.2 12 21 12 21z"/></svg>
+                        </button>
+                        <a href="produit.html?id=${p.id}" class="block w-full h-full">
+                            ${p.image ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover ${isRupture ? 'opacity-40 grayscale' : ''}">` : '<span class="text-xs text-ink-faint flex items-center justify-center h-full">Image</span>'}
+                        </a>
+                    </div>
+                    <a href="produit.html?id=${p.id}" class="block mb-2">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-medium text-ink hover:text-accent-dark transition-colors">${p.name}</h3>
+                            <span class="text-sm font-semibold text-accent-dark">${p.price} €</span>
+                        </div>
+                    </a>
+                    <div class="mb-4 text-xs">
+                        ${isRupture ? '<span class="text-red-600">Épuisé</span>' : `<span class="text-ink-soft">En stock : <strong class="text-ink">${stock}</strong></span>`}
+                    </div>
+                    <button class="${isRupture ? 'bg-panel-soft text-ink-faint cursor-not-allowed' : 'btn-gold'} w-full py-3 rounded-lg font-bold uppercase tracking-widest transition-all duration-300" ${isRupture ? 'disabled' : ''}>
+                        <span>${isRupture ? 'Indisponible' : 'Ajouter au panier'}</span>
+                    </button>
+                `;
+
+                if (!isRupture) {
+                    card.querySelector('button:last-of-type').onclick = (e) => {
+                        const ok = addToCart({ id: p.id, name: p.name, price: p.price, maxStock: stock });
+                        if (ok) triggerSuccess(e.currentTarget);
+                    };
+                }
+
+                card.querySelector('.wishlist-btn').onclick = (e) => {
+                    e.preventDefault();
+                    removeFromWishlist(p.id);
+                    card.remove();
+                    if ((JSON.parse(localStorage.getItem('wishlist')) || []).length === 0) {
+                        document.getElementById('wishlist-empty').classList.remove('hidden');
+                        lucide.createIcons();
+                    }
+                };
+
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const { products, stocks } = await getCatalog();
+                renderWishlist(products || [], stocks || []);
+            } catch (error) {
+                console.error('Erreur chargement liste de souhaits :', error);
+                document.getElementById('wishlist-loading').classList.add('hidden');
+                document.getElementById('wishlist-empty').classList.remove('hidden');
+                lucide.createIcons();
+            }
+        });
+    })();
     </script>
 
     <!-- Recherche, liste de souhaits & cookies (nouveau) -->

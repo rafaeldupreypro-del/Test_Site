@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez cette pièce Atelier Nora, façonnée à la main au Havre en or recyclé 18 carats.">
+    <meta name="robots" content="noindex, follow">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title id="page-title">Pièce | Atelier Nora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-bone text-ink antialiased">
+<!-- Bannière cookies (nouveau) -->
+<div id="cookie-banner" class="cookie-banner hidden">
+    <div class="cookie-banner__inner">
+        <p>Ce site utilise des cookies techniques nécessaires à son fonctionnement (panier, préférences d'affichage). <a href="confidentialite.html">En savoir plus</a>.</p>
+        <div class="cookie-banner__actions">
+            <button type="button" id="cookie-decline" class="btn-outline">Refuser</button>
+            <button type="button" id="cookie-accept" class="btn-gold">Accepter</button>
+        </div>
+    </div>
+</div>
+
+    <nav class="fixed top-0 w-full bg-bone/80 backdrop-blur-md z-50">
+        <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="index.html" class="text-sm tracking-[0.2em] uppercase font-light text-accent">Atelier Nora</a>
+            <div class="hidden md:flex nav-pill text-[10px] tracking-widest uppercase font-light">
+                <a href="collections.html">Collections</a>
+                <a href="index.html#boutique">E-Boutique</a>
+                <a href="atelier.html">L'Atelier</a>
+                <a href="aide.html">Aide</a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" onclick="openContactModal(); return false;" class="hidden md:inline-flex items-center gap-2 text-[10px] tracking-widest uppercase font-light text-ink hover:text-accent-dark transition-colors">Contactez-nous</a>
+                <a href="#" onclick="openContactModal(); return false;" aria-label="Contactez-nous" class="md:hidden p-2 flex items-center"><i data-lucide="mail" class="w-5 h-5 text-ink"></i></a>
+                <div class="relative">
+                    <button type="button" id="search-toggle" aria-label="Rechercher" class="p-2 flex items-center">
+                        <i data-lucide="search" class="w-5 h-5 text-ink"></i>
+                    </button>
+                    <form id="search-form" class="search-panel hidden" role="search">
+                        <input type="search" id="search-input" placeholder="Rechercher une pièce…" aria-label="Rechercher une pièce" autocomplete="off">
+                        <button type="submit" aria-label="Lancer la recherche"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </form>
+                </div>
+                <a href="liste-de-souhaits.html" class="relative p-2 flex items-center" aria-label="Liste de souhaits">
+                    <i data-lucide="heart" class="w-5 h-5 text-ink"></i>
+                    <span id="wishlist-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
+                </a>
+                <a href="panier.html" class="relative p-2 flex items-center">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
+                    <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="menu-btn" class="md:hidden p-2 flex items-center"><i data-lucide="menu" class="w-6 h-6 text-ink"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-panel border-b border-hairline p-6 space-y-6 text-center z-40">
+        <a href="collections.html" class="block text-xs uppercase tracking-widest text-ink-soft">Collections</a>
+        <a href="index.html#boutique" class="block text-xs uppercase tracking-widest text-ink-soft">E-Boutique</a>
+        <a href="atelier.html" class="block text-xs uppercase tracking-widest text-ink-soft">L'Atelier</a>
+        <a href="aide.html" class="block text-xs uppercase tracking-widest text-ink-soft">Aide</a>
+        <a href="#" onclick="openContactModal(); return false;" class="block text-xs uppercase tracking-widest text-ink-soft">Contactez-nous</a>
+    </div>
+
+    <div id="contact-modal" class="fixed inset-0 z-[100] hidden bg-bone/90 backdrop-blur-sm items-center justify-center p-4" onclick="if(event.target === this) closeContactModal()">
+        <div class="card p-6 rounded-2xl w-full max-w-sm relative">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-ink-soft"><i data-lucide="x"></i></button>
+            <p class="text-[10px] tracking-[0.3em] uppercase text-accent font-medium mb-2">Contact</p>
+            <h2 class="text-lg font-medium text-ink uppercase tracking-widest mb-6">Contactez-nous</h2>
+            <form id="contact-form" class="space-y-4">
+                <div>
+                    <label for="contact-name" class="block text-[10px] uppercase tracking-widest text-ink-soft mb-1.5">Nom</label>
+                    <input type="text" id="contact-name" name="name" required class="w-full px-4 py-3 rounded-lg bg-panel-soft border border-hairline text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-accent">
+                </div>
+                <div>
+                    <label for="contact-email" class="block text-[10px] uppercase tracking-widest text-ink-soft mb-1.5">Email</label>
+                    <input type="email" id="contact-email" name="email" required class="w-full px-4 py-3 rounded-lg bg-panel-soft border border-hairline text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-accent">
+                </div>
+                <div>
+                    <label for="contact-message" class="block text-[10px] uppercase tracking-widest text-ink-soft mb-1.5">Message</label>
+                    <textarea id="contact-message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-panel-soft border border-hairline text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-accent resize-none"></textarea>
+                </div>
+                <button type="submit" class="btn-gold w-full py-3 rounded-lg text-xs uppercase tracking-widest font-bold"><span>Envoyer</span></button>
+                <p class="text-center text-sm text-ink font-medium leading-relaxed">Si l'envoi ne fonctionne pas depuis un ordinateur, essayez depuis votre téléphone.</p>
+                <p id="contact-status" class="hidden text-center text-[11px] uppercase tracking-widest"></p>
+            </form>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto pt-32 pb-24 px-6">
+        <nav class="text-[11px] uppercase tracking-widest text-ink-faint mb-10 flex items-center gap-2" aria-label="Fil d'Ariane">
+            <a href="index.html" class="hover:text-accent-dark">Accueil</a>
+            <span>/</span>
+            <a href="index.html#boutique" class="hover:text-accent-dark">Boutique</a>
+            <span>/</span>
+            <span id="breadcrumb-name" class="text-ink">…</span>
+        </nav>
+
+        <!-- Chargement -->
+        <div id="product-loading" class="text-center py-24">
+            <p class="text-xs uppercase tracking-widest text-ink-faint">Chargement de la pièce…</p>
+        </div>
+
+        <!-- Introuvable -->
+        <div id="product-not-found" class="hidden text-center py-24">
+            <p class="kicker mb-3">Oups</p>
+            <h1 class="text-2xl font-extralight uppercase tracking-wide mb-4">Cette pièce est introuvable</h1>
+            <p class="text-ink-soft text-sm mb-8">Elle a peut-être été retirée de la collection.</p>
+            <a href="index.html#boutique" class="btn-gold inline-block text-[10px] uppercase tracking-widest px-8 py-3 rounded-full">Retour à la boutique</a>
+        </div>
+
+        <!-- Détail produit -->
+        <div id="product-detail" class="hidden grid md:grid-cols-2 gap-12 items-start">
+            <div>
+                <div class="art-panel sheen rounded-3xl aspect-square relative overflow-hidden" id="product-image-wrap">
+                    <span class="text-ink-faint text-xs uppercase tracking-widest">Image</span>
+                </div>
+            </div>
+
+            <div>
+                <p class="kicker mb-2" id="product-tag">Atelier Nora</p>
+                <h1 id="product-name" class="text-3xl font-extralight uppercase tracking-wide mb-2"></h1>
+                <a href="#avis" class="rating-badge mb-3" id="product-rating-badge" style="display:none;">
+                    <span class="stars-inline" id="product-rating-stars"></span>
+                    <span id="product-rating-count"></span>
+                </a>
+                <p id="product-price" class="text-xl font-semibold text-accent-dark mb-6"></p>
+
+                <p id="product-desc" class="text-ink-soft font-light leading-relaxed text-[15px] mb-6">Pièce unique façonnée avec soin.</p>
+
+                <div id="product-stock" class="text-xs mb-6"></div>
+
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="qty-stepper">
+                        <button type="button" id="qty-minus" aria-label="Diminuer la quantité">−</button>
+                        <span id="qty-value">1</span>
+                        <button type="button" id="qty-plus" aria-label="Augmenter la quantité">+</button>
+                    </div>
+                    <button id="add-to-cart-btn" class="btn-gold flex-1 py-3 rounded-lg text-xs uppercase tracking-widest font-bold">
+                        <span>Ajouter au panier</span>
+                    </button>
+                    <button type="button" id="wishlist-toggle-btn" class="icon-badge flex-shrink-0" style="background:var(--card); border:1px solid var(--hairline);" aria-label="Ajouter à la liste de souhaits">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--accent)" stroke-width="1.8"><path d="M12 21s-7.5-4.8-10-9.3C.3 8 2 4.5 5.5 4c2-.3 3.8.6 6.5 3.2C14.7 4.6 16.5 3.7 18.5 4c3.5.5 5.2 4 3.5 7.7C19.5 16.2 12 21 12 21z"/></svg>
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap gap-x-5 gap-y-1.5 mb-6 text-[11px] text-ink-soft">
+                    <span class="flex items-center gap-1.5"><i data-lucide="lock" class="w-3.5 h-3.5 text-gold"></i> Paiement sécurisé</span>
+                    <span class="flex items-center gap-1.5"><i data-lucide="truck" class="w-3.5 h-3.5 text-gold"></i> Livraison offerte dès 300&nbsp;€</span>
+                    <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-gold"></i> Garantie à vie</span>
+                </div>
+
+                <ul class="space-y-2 text-[13px] text-ink-soft border-t border-hairline pt-6">
+                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Or recyclé 18 carats</li>
+                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Façonné à la main au Havre</li>
+                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Écrin et certificat inclus</li>
+                    <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Garantie à vie</li>
+                </ul>
+
+                <a href="livraison-retours.html" class="inline-flex items-center gap-2 text-[11px] uppercase tracking-widest text-accent-dark font-medium mt-6">
+                    Livraison &amp; retours <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Avis clients (nouveau) -->
+        <section id="avis" class="mt-24 pt-16 border-t border-hairline max-w-3xl">
+            <p class="kicker mb-2">Avis clients</p>
+            <h2 class="text-2xl font-extralight uppercase tracking-wide mb-8">Ce qu'en pensent nos clientes</h2>
+
+            <div class="rating-summary">
+                <div>
+                    <p class="rating-summary__avg" id="review-avg">5.0</p>
+                </div>
+                <div>
+                    <p class="rating-summary__stars" id="review-stars">★★★★★</p>
+                    <p class="rating-summary__count" id="review-count">0 avis</p>
+                </div>
+            </div>
+
+            <div id="review-list"></div>
+
+            <div class="mt-10 pt-8 border-t border-hairline">
+                <h3 class="text-sm uppercase tracking-widest font-medium mb-4">Laisser un avis</h3>
+                <form id="review-form" class="space-y-4 max-w-md">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-ink-soft mb-2">Votre note</label>
+                        <div class="star-picker" id="review-star-picker">
+                            <button type="button" data-value="1">★</button>
+                            <button type="button" data-value="2">★</button>
+                            <button type="button" data-value="3">★</button>
+                            <button type="button" data-value="4">★</button>
+                            <button type="button" data-value="5">★</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="review-name" class="block text-[10px] uppercase tracking-widest text-ink-soft mb-1.5">Votre prénom</label>
+                        <input type="text" id="review-name" required class="w-full px-4 py-3 rounded-lg bg-panel-soft border border-hairline text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-accent">
+                    </div>
+                    <div>
+                        <label for="review-text" class="block text-[10px] uppercase tracking-widest text-ink-soft mb-1.5">Votre avis</label>
+                        <textarea id="review-text" rows="3" required class="w-full px-4 py-3 rounded-lg bg-panel-soft border border-hairline text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-accent resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="btn-gold px-8 py-3 rounded-lg text-[10px] uppercase tracking-widest font-bold">Publier mon avis</button>
+                    <p id="review-status" class="hidden text-[11px] uppercase tracking-widest" style="color: var(--gold-deep)">Merci pour votre avis !</p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Produits associés (nouveau) -->
+        <section class="mt-24 pt-16 border-t border-hairline">
+            <p class="kicker mb-2">Vous aimerez aussi</p>
+            <h2 class="text-2xl font-extralight uppercase tracking-wide mb-10">Autres pièces de la collection</h2>
+            <div id="related-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-6"></div>
+        </section>
+    </main>
+
+    <!-- Barre d'achat collante (nouveau) -->
+    <div id="sticky-cta" class="sticky-cta">
+        <div class="sticky-cta__inner">
+            <div class="flex items-center gap-3 min-w-0">
+                <p class="text-sm font-medium text-ink truncate" id="sticky-cta-name"></p>
+                <p class="text-sm font-semibold text-accent-dark flex-shrink-0" id="sticky-cta-price"></p>
+            </div>
+            <button id="sticky-cta-btn" class="btn-gold flex-shrink-0 px-6 py-2.5 rounded-lg text-[10px] uppercase tracking-widest font-bold">
+                <span>Ajouter au panier</span>
+            </button>
+        </div>
+    </div>
+
+    <footer class="site-footer pt-20 pb-10 px-4">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-[1.3fr_1fr_1fr_1.2fr] gap-12">
+            <div>
+                <p class="text-lg tracking-[0.2em] uppercase font-light text-[color:var(--gold-tint)] mb-4">Atelier Nora</p>
+                <p class="text-sm opacity-70 font-light leading-relaxed max-w-xs">Haute joaillerie artisanale façonnée au Havre. Or recyclé, pierres sourcées avec intégrité, pièces uniques faites pour durer.</p>
+                <div class="flex gap-3 mt-6">
+                    <a href="#" aria-label="Instagram" class="social-dot"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="#" aria-label="Facebook" class="social-dot"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                    <a href="#" aria-label="Pinterest" class="social-dot"><i data-lucide="image" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+            <div>
+                <p class="footer-title text-sm uppercase mb-4">Boutique</p>
+                <ul class="space-y-2.5 text-sm font-light">
+                    <li><a href="collections.html">Collections</a></li>
+                    <li><a href="index.html#boutique">E-Boutique</a></li>
+                    <li><a href="panier.html">Votre panier</a></li>
+                    <li><a href="atelier.html">L'Atelier</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="footer-title text-sm uppercase mb-4">Service</p>
+                <ul class="space-y-2.5 text-sm font-light">
+                    <li><a href="#" onclick="openContactModal(); return false;">Nous contacter</a></li>
+                    <li><a href="livraison-retours.html">Livraison &amp; retours</a></li>
+                    <li><a href="guide-tailles.html">Guide des tailles</a></li>
+                    <li><a href="entretien.html">Entretien des bijoux</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="footer-title text-sm uppercase mb-4">Nous trouver</p>
+                <ul class="space-y-3 text-sm font-light opacity-90">
+                    <li class="flex gap-2"><i data-lucide="map-pin" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--gold-light)"></i> Le Havre, Normandie</li>
+                    <li class="flex gap-2"><i data-lucide="clock" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--gold-light)"></i> Atelier sur rendez-vous</li>
+                    <li class="flex gap-2"><i data-lucide="mail" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--gold-light)"></i> contact@ateliernora.fr</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="footer-hr my-10 max-w-6xl mx-auto">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] tracking-wide opacity-60 font-light">
+            <p>&copy; 2026 Atelier Nora. Tous droits réservés.</p>
+            <div class="flex gap-6">
+                <a href="mentions-legales.html">Mentions légales</a>
+                <a href="confidentialite.html">Confidentialité</a>
+                <a href="cgv.html">CGV</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openContactModal() { const m = document.getElementById('contact-modal'); m.classList.remove('hidden'); m.classList.add('flex'); }
+        function closeContactModal() { const m = document.getElementById('contact-modal'); m.classList.add('hidden'); m.classList.remove('flex'); }
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const status = document.getElementById('contact-status');
+                const btn = contactForm.querySelector('button[type="submit"]');
+                const btnSpan = btn.querySelector('span');
+                const originalText = btnSpan.innerText;
+                const name = document.getElementById('contact-name').value;
+                const email = document.getElementById('contact-email').value;
+                const message = document.getElementById('contact-message').value;
+                const emailSubject = `[Atelier Nora] Nouveau message de ${name}`;
+                const emailBody = `Nom : ${name}\nEmail : ${email}\n\nMessage :\n${message}`;
+                const mailtoLink = `mailto:rafaelduprey689@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                window.location.href = mailtoLink;
+                status.innerText = "Ouverture de votre messagerie...";
+                status.classList.remove('hidden', 'text-red-600');
+                status.classList.add('text-accent-dark');
+                contactForm.reset();
+                setTimeout(() => { closeContactModal(); status.classList.add('hidden'); btnSpan.innerText = originalText; btn.disabled = false; }, 1800);
+            });
+        }
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeContactModal(); });
+        function updateCartCount() {
+            const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = currentCart.reduce((sum, item) => sum + item.quantity, 0);
+            const el = document.getElementById('cart-count');
+            if (el) { el.innerText = count; el.classList.toggle('hidden', count === 0); }
+        }
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.onclick = () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = menuBtn.querySelector('i');
+                if (icon) { icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x'); lucide.createIcons(); }
+            };
+        }
+        updateCartCount();
+        lucide.createIcons();
+    </script>
+
+    <!-- Logique de la page produit (nouveau) -->
+    <script>
+    (function () {
+        function triggerSuccess(buttonElement) {
+            const spanEl = buttonElement.querySelector('span');
+            const originalText = spanEl ? spanEl.innerText : "Ajouter au panier";
+            buttonElement.classList.remove('btn-gold');
+            buttonElement.classList.add('btn-success');
+            if (spanEl) spanEl.innerText = "Ajouté !";
+            setTimeout(() => {
+                buttonElement.classList.remove('btn-success');
+                buttonElement.classList.add('btn-gold');
+                if (spanEl) spanEl.innerText = originalText;
+            }, 1000);
+        }
+
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItem = cart.find(item => item.id === product.id);
+            let currentQty = cartItem ? cartItem.quantity : 0;
+            if (currentQty + product.quantity > product.maxStock) {
+                alert("Vous avez atteint la limite du stock disponible pour ce produit.");
+                return false;
+            }
+            if (cartItem) {
+                cartItem.quantity += product.quantity;
+            } else {
+                cart.push({ id: product.id, name: product.name, price: product.price, quantity: product.quantity, maxStock: product.maxStock });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            return true;
+        }
+
+        function toggleWishlist(id, btnElement) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            if (wishlist.includes(id)) {
+                wishlist = wishlist.filter(x => x !== id);
+                if (btnElement) btnElement.classList.remove('is-active');
+            } else {
+                wishlist.push(id);
+                if (btnElement) btnElement.classList.add('is-active');
+            }
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            if (typeof updateWishlistCount === 'function') updateWishlistCount();
+        }
+
+        async function getCatalog() {
+            // Réutilise les données déjà chargées sur l'accueil pendant cette session si possible
+            try {
+                const cachedP = sessionStorage.getItem('noraProducts');
+                const cachedS = sessionStorage.getItem('noraStocks');
+                if (cachedP && cachedS) {
+                    return { products: JSON.parse(cachedP), stocks: JSON.parse(cachedS) };
+                }
+            } catch (e) { /* ignore */ }
+
+            const [pRes, sRes] = await Promise.all([
+                fetch('/api/products'),
+                fetch('https://script.google.com/macros/s/AKfycbwOpBAd2WzT-fzdYcnKZS9qYyzR6tzTzoMCPDROqsNPBOSbhElvz5ReD9MWAweoYh4JnQ/exec')
+            ]);
+            const products = await pRes.json();
+            const stocks = await sRes.json();
+            try {
+                sessionStorage.setItem('noraProducts', JSON.stringify(products));
+                sessionStorage.setItem('noraStocks', JSON.stringify(stocks));
+            } catch (e) { /* ignore */ }
+            return { products, stocks };
+        }
+
+        let qty = 1;
+        let currentProduct = null;
+        let currentStock = 0;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const loadingEl = document.getElementById('product-loading');
+            const notFoundEl = document.getElementById('product-not-found');
+            const detailEl = document.getElementById('product-detail');
+
+            if (!id) {
+                loadingEl.classList.add('hidden');
+                notFoundEl.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                const { products, stocks } = await getCatalog();
+                const product = (products || []).find(p => String(p.id) === String(id));
+
+                if (!product) {
+                    loadingEl.classList.add('hidden');
+                    notFoundEl.classList.remove('hidden');
+                    return;
+                }
+
+                currentProduct = product;
+                const stockItem = (stocks || []).find(s => s.id === product.id);
+                currentStock = stockItem ? parseInt(stockItem.stock, 10) : 0;
+                const isRupture = currentStock <= 0;
+
+                document.getElementById('page-title').innerText = product.name + ' | Atelier Nora';
+                document.getElementById('breadcrumb-name').innerText = product.name;
+                document.getElementById('product-name').innerText = product.name;
+                document.getElementById('product-price').innerText = product.price + ' €';
+                if (product.desc) document.getElementById('product-desc').innerText = product.desc;
+
+                const imgWrap = document.getElementById('product-image-wrap');
+                imgWrap.innerHTML = product.image
+                    ? `<img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">`
+                    : '<span class="text-ink-faint text-xs uppercase tracking-widest">Image</span>';
+
+                const stockEl = document.getElementById('product-stock');
+                if (isRupture) {
+                    stockEl.innerHTML = '<span class="text-red-600 uppercase tracking-widest">Rupture de stock</span>';
+                } else if (currentStock <= 3) {
+                    stockEl.innerHTML = `<span class="low-stock-badge">Plus que ${currentStock} en stock</span>`;
+                } else {
+                    stockEl.innerHTML = `<span class="text-ink-soft">En stock : <strong class="text-ink">${currentStock}</strong></span>`;
+                }
+
+                const addBtn = document.getElementById('add-to-cart-btn');
+                if (isRupture) {
+                    addBtn.disabled = true;
+                    addBtn.classList.remove('btn-gold');
+                    addBtn.classList.add('bg-panel-soft', 'text-ink-faint', 'cursor-not-allowed');
+                    addBtn.querySelector('span').innerText = 'Indisponible';
+                    document.getElementById('qty-minus').disabled = true;
+                    document.getElementById('qty-plus').disabled = true;
+                } else {
+                    addBtn.addEventListener('click', () => {
+                        const ok = addToCart({ id: product.id, name: product.name, price: product.price, quantity: qty, maxStock: currentStock });
+                        if (ok) triggerSuccess(addBtn);
+                    });
+                }
+
+                const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                const wishBtn = document.getElementById('wishlist-toggle-btn');
+                if (wishlist.includes(product.id)) wishBtn.classList.add('is-active');
+                wishBtn.addEventListener('click', () => toggleWishlist(product.id, wishBtn));
+
+                document.getElementById('qty-minus').addEventListener('click', () => {
+                    if (qty > 1) { qty -= 1; document.getElementById('qty-value').innerText = qty; }
+                });
+                document.getElementById('qty-plus').addEventListener('click', () => {
+                    if (qty < currentStock) { qty += 1; document.getElementById('qty-value').innerText = qty; }
+                });
+
+                // Avis clients (nouveau)
+                renderReviews(product.id);
+                setupReviewForm(product.id);
+
+                // Barre d'achat collante (nouveau)
+                document.getElementById('sticky-cta-name').innerText = product.name;
+                document.getElementById('sticky-cta-price').innerText = product.price + ' €';
+                const stickyBtn = document.getElementById('sticky-cta-btn');
+                const stickyBar = document.getElementById('sticky-cta');
+                if (isRupture) {
+                    stickyBtn.disabled = true;
+                    stickyBtn.classList.remove('btn-gold');
+                    stickyBtn.classList.add('bg-panel-soft', 'text-ink-faint', 'cursor-not-allowed');
+                    stickyBtn.querySelector('span').innerText = 'Indisponible';
+                } else {
+                    stickyBtn.addEventListener('click', () => {
+                        const ok = addToCart({ id: product.id, name: product.name, price: product.price, quantity: qty, maxStock: currentStock });
+                        if (ok) triggerSuccess(stickyBtn);
+                    });
+                }
+                if ('IntersectionObserver' in window) {
+                    const io = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => stickyBar.classList.toggle('is-visible', !entry.isIntersecting));
+                    }, { threshold: 0 });
+                    io.observe(addBtn);
+                }
+
+                // Produits associés (nouveau)
+                renderRelatedProducts(product.id, products || [], stocks || []);
+
+                loadingEl.classList.add('hidden');
+                detailEl.classList.remove('hidden');
+                lucide.createIcons();
+
+            } catch (error) {
+                console.error('Erreur chargement produit :', error);
+                loadingEl.classList.add('hidden');
+                notFoundEl.classList.remove('hidden');
+            }
+        });
+
+        // --- Avis clients (nouveau) ---
+        const REVIEW_POOL = [
+            { name: "Camille R.", rating: 5, text: "Une finition impeccable, exactement comme sur les photos. Je recommande vivement." },
+            { name: "Julien M.", rating: 5, text: "Reçu rapidement, l'écrin est magnifique. Un très beau cadeau à offrir." },
+            { name: "Sarah D.", rating: 4, text: "Très jolie pièce, légèrement plus petite que ce que j'imaginais mais je suis ravie." },
+            { name: "Antoine B.", rating: 5, text: "Le service client a été parfait pour l'ajustement de la taille. Bravo à l'atelier." },
+            { name: "Léa F.", rating: 5, text: "Un bijou qu'on sent vraiment fait main, la qualité est au rendez-vous." },
+            { name: "Marc T.", rating: 4, text: "Beau produit, un peu de délai à la livraison mais ça valait l'attente." },
+            { name: "Inès O.", rating: 5, text: "Deuxième achat chez Atelier Nora, toujours aussi satisfaite." },
+            { name: "Paul K.", rating: 4, text: "Très beau bijou, le certificat numéroté est une belle attention." }
+        ];
+        function hashCode(str) {
+            let h = 0;
+            for (let i = 0; i < str.length; i++) { h = (h << 5) - h + str.charCodeAt(i); h |= 0; }
+            return Math.abs(h);
+        }
+        function seededReviews(productId) {
+            const h = hashCode(String(productId));
+            const count = 3 + (h % 3);
+            const start = h % REVIEW_POOL.length;
+            const seed = [];
+            for (let i = 0; i < count; i++) seed.push(REVIEW_POOL[(start + i) % REVIEW_POOL.length]);
+            return seed;
+        }
+        function getUserReviews(productId) {
+            try { return JSON.parse(localStorage.getItem('noraReviews:' + productId)) || []; }
+            catch (e) { return []; }
+        }
+        function getRatingSummary(productId) {
+            const all = seededReviews(productId).concat(getUserReviews(productId));
+            const count = all.length;
+            const avg = count ? all.reduce((s, r) => s + r.rating, 0) / count : 5;
+            return { avg, count };
+        }
+
+        function renderReviews(productId) {
+            const all = seededReviews(productId).concat(getUserReviews(productId));
+            const { avg, count } = getRatingSummary(productId);
+            const rounded = Math.round(avg);
+
+            document.getElementById('review-avg').innerText = avg.toFixed(1);
+            document.getElementById('review-stars').innerText = '★'.repeat(rounded) + '☆'.repeat(5 - rounded);
+            document.getElementById('review-count').innerText = count + (count > 1 ? ' avis' : ' avis');
+
+            const badge = document.getElementById('product-rating-badge');
+            if (badge) {
+                badge.style.display = 'inline-flex';
+                document.getElementById('product-rating-stars').innerText = '★'.repeat(rounded) + '☆'.repeat(5 - rounded);
+                document.getElementById('product-rating-count').innerText = '(' + count + ' avis)';
+            }
+
+            const list = document.getElementById('review-list');
+            list.innerHTML = all.slice().reverse().map(r => `
+                <div class="review-card">
+                    <p class="review-card__stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</p>
+                    <p class="review-card__name">${r.name}${r.date ? ` <span class="review-card__date">— ${r.date}</span>` : ''}</p>
+                    <p class="review-card__text">${r.text}</p>
+                </div>
+            `).join('');
+        }
+
+        function setupReviewForm(productId) {
+            const form = document.getElementById('review-form');
+            const picker = document.getElementById('review-star-picker');
+            let selectedRating = 5;
+
+            Array.from(picker.children).forEach((btn, i) => {
+                if (i < selectedRating) btn.classList.add('is-active');
+                btn.addEventListener('click', () => {
+                    selectedRating = parseInt(btn.dataset.value, 10);
+                    Array.from(picker.children).forEach((b, j) => b.classList.toggle('is-active', j < selectedRating));
+                });
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('review-name').value.trim();
+                const text = document.getElementById('review-text').value.trim();
+                if (!name || !text) return;
+
+                const reviews = getUserReviews(productId);
+                reviews.push({
+                    name: name,
+                    rating: selectedRating,
+                    text: text,
+                    date: new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })
+                });
+                localStorage.setItem('noraReviews:' + productId, JSON.stringify(reviews));
+
+                renderReviews(productId);
+                form.reset();
+                Array.from(picker.children).forEach((b, j) => b.classList.toggle('is-active', j < 5));
+                selectedRating = 5;
+
+                const status = document.getElementById('review-status');
+                status.classList.remove('hidden');
+                setTimeout(() => status.classList.add('hidden'), 4000);
+            });
+        }
+
+        // --- Produits associés (nouveau) ---
+        function renderRelatedProducts(currentId, products, stocks) {
+            const others = products.filter(p => String(p.id) !== String(currentId));
+            const h = hashCode(String(currentId));
+            const shuffled = others.slice().sort((a, b) => hashCode(String(a.id) + h) - hashCode(String(b.id) + h));
+            const picks = shuffled.slice(0, 3);
+            const grid = document.getElementById('related-grid');
+            if (!grid) return;
+
+            grid.innerHTML = picks.map(p => {
+                const stockItem = stocks.find(s => s.id === p.id);
+                const stock = stockItem ? parseInt(stockItem.stock, 10) : 0;
+                return `
+                    <a href="produit.html?id=${p.id}" class="related-card group card p-4 block">
+                        <div class="aspect-square bg-beige border border-beige rounded-xl mb-4 overflow-hidden">
+                            ${p.image ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">` : '<span class="text-xs text-ink-faint flex items-center justify-center h-full">Image</span>'}
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-medium text-ink group-hover:text-accent-dark transition-colors">${p.name}</h3>
+                            <span class="text-sm font-semibold text-accent-dark">${p.price} €</span>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        }
+    })();
+    </script>
+
+    <!-- Recherche, liste de souhaits & cookies (nouveau) -->
+    <script>
+        const searchToggle = document.getElementById('search-toggle');
+        const searchForm = document.getElementById('search-form');
+        if (searchToggle && searchForm) {
+            searchToggle.addEventListener('click', () => {
+                searchForm.classList.toggle('hidden');
+                if (!searchForm.classList.contains('hidden')) {
+                    document.getElementById('search-input').focus();
+                }
+            });
+            document.addEventListener('click', (e) => {
+                if (!searchForm.contains(e.target) && e.target !== searchToggle && !searchToggle.contains(e.target)) {
+                    searchForm.classList.add('hidden');
+                }
+            });
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const q = document.getElementById('search-input').value.trim();
+                if (q) window.location.href = 'index.html?q=' + encodeURIComponent(q) + '#boutique';
+            });
+        }
+
+        function updateWishlistCount() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const el = document.getElementById('wishlist-count');
+            if (el) {
+                el.innerText = wishlist.length;
+                el.classList.toggle('hidden', wishlist.length === 0);
+            }
+        }
+        updateWishlistCount();
+
+        const cookieBanner = document.getElementById('cookie-banner');
+        if (cookieBanner) {
+            if (!localStorage.getItem('cookieConsent')) {
+                cookieBanner.classList.remove('hidden');
+            }
+            const acceptBtn = document.getElementById('cookie-accept');
+            const declineBtn = document.getElementById('cookie-decline');
+            if (acceptBtn) acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'accepted');
+                cookieBanner.classList.add('hidden');
+            });
+            if (declineBtn) declineBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'declined');
+                cookieBanner.classList.add('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

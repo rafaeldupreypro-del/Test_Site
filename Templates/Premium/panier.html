@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Atelier Nora — haute joaillerie artisanale façonnée au Havre.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://www.ateliernora.fr/panier.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Atelier Nora">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Votre Panier | Atelier Nora">
+    <meta property="og:description" content="Atelier Nora — haute joaillerie artisanale façonnée au Havre.">
+    <meta property="og:url" content="https://www.ateliernora.fr/panier.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#F4EEE6">
     <title>Votre Panier | Atelier Nora</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -11,6 +22,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-bone text-ink antialiased">
+<!-- Bannière cookies (nouveau) -->
+<div id="cookie-banner" class="cookie-banner hidden">
+    <div class="cookie-banner__inner">
+        <p>Ce site utilise des cookies techniques nécessaires à son fonctionnement (panier, préférences d'affichage). <a href="confidentialite.html">En savoir plus</a>.</p>
+        <div class="cookie-banner__actions">
+            <button type="button" id="cookie-decline" class="btn-outline">Refuser</button>
+            <button type="button" id="cookie-accept" class="btn-gold">Accepter</button>
+        </div>
+    </div>
+</div>
+
 
     <nav class="fixed top-0 w-full bg-bone/70 backdrop-blur-lg z-50 border-b border-hairline/60">
         <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -24,7 +46,15 @@
     <main class="max-w-2xl mx-auto pt-32 pb-24 px-6">
         <p class="kicker mb-2">Étape 1 sur 2</p>
         <h1 class="text-3xl font-extralight uppercase tracking-widest mb-2 text-ink">Votre Panier</h1>
-        <p class="text-ink-faint text-xs uppercase tracking-widest mb-10">Vérifiez votre sélection avant paiement</p>
+        <p class="text-ink-faint text-xs uppercase tracking-widest mb-6">Vérifiez votre sélection avant paiement</p>
+
+        <!-- Barre de livraison offerte (nouveau) -->
+        <div id="shipping-progress" class="shipping-progress hidden">
+            <p class="shipping-progress__msg" id="shipping-progress-msg"></p>
+            <div class="shipping-progress__bar">
+                <div class="shipping-progress__fill" id="shipping-progress-fill" style="width:0%"></div>
+            </div>
+        </div>
 
         <div id="cart-items" class="space-y-6 border-b border-hairline pb-6"></div>
 
@@ -35,7 +65,7 @@
             </div>
             <div class="flex justify-between items-center text-ink-soft text-sm">
                 <span>Livraison assurée</span>
-                <span class="text-tide font-medium">Offerte</span>
+                <span id="cart-shipping-display" class="text-tide font-medium">Offerte</span>
             </div>
             <div class="flex justify-between items-center text-ink pt-2 border-t border-hairline/60">
                 <span class="text-sm uppercase tracking-widest">Total</span>
@@ -88,6 +118,38 @@
     </footer>
 
     <script>
+        const FREE_SHIPPING_THRESHOLD = 300;
+        const SHIPPING_FEE = 8;
+
+        function updateShippingProgress(subtotal) {
+            const wrap = document.getElementById('shipping-progress');
+            const msg = document.getElementById('shipping-progress-msg');
+            const fill = document.getElementById('shipping-progress-fill');
+            const shippingDisplay = document.getElementById('cart-shipping-display');
+            if (!wrap) return { shipping: 0 };
+
+            if (subtotal <= 0) {
+                wrap.classList.add('hidden');
+                if (shippingDisplay) shippingDisplay.innerText = "Offerte";
+                return { shipping: 0 };
+            }
+
+            wrap.classList.remove('hidden');
+            const pct = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
+            fill.style.width = pct + '%';
+
+            if (subtotal >= FREE_SHIPPING_THRESHOLD) {
+                msg.innerHTML = '<strong>✓ Livraison offerte débloquée !</strong>';
+                if (shippingDisplay) shippingDisplay.innerText = "Offerte";
+                return { shipping: 0 };
+            } else {
+                const remaining = (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2).replace(/\.00$/, '');
+                msg.innerHTML = `Plus que <strong>${remaining} €</strong> d'achat pour la livraison offerte`;
+                if (shippingDisplay) shippingDisplay.innerText = SHIPPING_FEE + " €";
+                return { shipping: SHIPPING_FEE };
+            }
+        }
+
         function renderCart() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const container = document.getElementById('cart-items');
@@ -106,6 +168,7 @@
                     </div>`;
                 totalElement.innerText = "0 €";
                 if (subtotalDisplay) subtotalDisplay.innerText = "0 €";
+                updateShippingProgress(0);
                 if (typeof lucide !== 'undefined') lucide.createIcons();
                 return;
             }
@@ -129,8 +192,9 @@
                     </div>`;
             });
 
-            totalElement.innerText = total + " €";
+            const { shipping } = updateShippingProgress(total);
             if (subtotalDisplay) subtotalDisplay.innerText = total + " €";
+            totalElement.innerText = (total + shipping) + " €";
         }
 
         function removeItem(index) {
@@ -174,6 +238,57 @@
 
         renderCart();
         if (typeof lucide !== 'undefined') lucide.createIcons();
+    </script>
+
+    <!-- Recherche, liste de souhaits & cookies (nouveau) -->
+    <script>
+        const searchToggle = document.getElementById('search-toggle');
+        const searchForm = document.getElementById('search-form');
+        if (searchToggle && searchForm) {
+            searchToggle.addEventListener('click', () => {
+                searchForm.classList.toggle('hidden');
+                if (!searchForm.classList.contains('hidden')) {
+                    document.getElementById('search-input').focus();
+                }
+            });
+            document.addEventListener('click', (e) => {
+                if (!searchForm.contains(e.target) && e.target !== searchToggle && !searchToggle.contains(e.target)) {
+                    searchForm.classList.add('hidden');
+                }
+            });
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const q = document.getElementById('search-input').value.trim();
+                if (q) window.location.href = 'index.html?q=' + encodeURIComponent(q) + '#boutique';
+            });
+        }
+
+        function updateWishlistCount() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const el = document.getElementById('wishlist-count');
+            if (el) {
+                el.innerText = wishlist.length;
+                el.classList.toggle('hidden', wishlist.length === 0);
+            }
+        }
+        updateWishlistCount();
+
+        const cookieBanner = document.getElementById('cookie-banner');
+        if (cookieBanner) {
+            if (!localStorage.getItem('cookieConsent')) {
+                cookieBanner.classList.remove('hidden');
+            }
+            const acceptBtn = document.getElementById('cookie-accept');
+            const declineBtn = document.getElementById('cookie-decline');
+            if (acceptBtn) acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'accepted');
+                cookieBanner.classList.add('hidden');
+            });
+            if (declineBtn) declineBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'declined');
+                cookieBanner.classList.add('hidden');
+            });
+        }
     </script>
 </body>
 </html>

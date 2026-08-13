@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Atelier Nora — haute joaillerie artisanale façonnée au Havre. Or recyclé 18 carats, pierres sourcées avec intégrité, pièces uniques faites main.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.ateliernora.fr/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Atelier Nora">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Atelier Nora | Haute Joaillerie Artisanale">
+    <meta property="og:description" content="Atelier Nora — haute joaillerie artisanale façonnée au Havre. Or recyclé 18 carats, pierres sourcées avec intégrité, pièces uniques faites main.">
+    <meta property="og:url" content="https://www.ateliernora.fr/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#F4EEE6">
     <title>Atelier Nora | Haute Joaillerie Artisanale</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,6 +22,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-bone text-ink antialiased">
+<!-- Bannière cookies (nouveau) -->
+<div id="cookie-banner" class="cookie-banner hidden">
+    <div class="cookie-banner__inner">
+        <p>Ce site utilise des cookies techniques nécessaires à son fonctionnement (panier, préférences d'affichage). <a href="confidentialite.html">En savoir plus</a>.</p>
+        <div class="cookie-banner__actions">
+            <button type="button" id="cookie-decline" class="btn-outline">Refuser</button>
+            <button type="button" id="cookie-accept" class="btn-gold">Accepter</button>
+        </div>
+    </div>
+</div>
+
 
     <!-- En-tête fixe (bandeau d'annonce + navigation) -->
     <div id="site-header" class="fixed top-0 inset-x-0 z-50">
@@ -46,6 +67,23 @@
                 </a>
 
                 <!-- Lien Panier -->
+                <!-- Recherche (nouveau) -->
+                <div class="relative">
+                    <button type="button" id="search-toggle" aria-label="Rechercher" class="p-2 flex items-center">
+                        <i data-lucide="search" class="w-5 h-5 text-ink"></i>
+                    </button>
+                    <form id="search-form" class="search-panel hidden" role="search">
+                        <input type="search" id="search-input" placeholder="Rechercher une pièce…" aria-label="Rechercher une pièce" autocomplete="off">
+                        <button type="submit" aria-label="Lancer la recherche"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </form>
+                </div>
+
+                <!-- Liste de souhaits (nouveau) -->
+                <a href="liste-de-souhaits.html" class="relative p-2 flex items-center" aria-label="Liste de souhaits">
+                    <i data-lucide="heart" class="w-5 h-5 text-ink"></i>
+                    <span id="wishlist-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
+                </a>
+
                 <a href="panier.html" class="relative p-2 flex items-center">
                     <i data-lucide="shopping-bag" class="w-5 h-5 text-ink"></i>
                     <span id="cart-count" class="absolute top-0 right-0 w-4 h-4 bg-accent rounded-full text-[9px] font-bold text-ink flex items-center justify-center hidden">0</span>
@@ -167,7 +205,13 @@
         <div class="max-w-6xl mx-auto">
             <p class="text-center kicker mb-3">Atelier Nora</p>
             <h2 class="text-center text-lg tracking-widest uppercase mb-4">La Collection Permanente</h2>
-            <div class="w-24 h-[3px] bg-accent mx-auto divider-gem mb-16"></div>
+            <div class="w-24 h-[3px] bg-accent mx-auto divider-gem mb-10"></div>
+            <div class="max-w-sm mx-auto mb-12">
+                <div class="flex gap-2">
+                    <input type="search" id="shop-search-input" placeholder="Rechercher une pièce…" aria-label="Rechercher dans la boutique" class="flex-1 px-4 py-3 rounded-lg bg-panel-soft border border-hairline text-ink text-sm placeholder:text-ink-faint focus:outline-none focus:border-accent">
+                </div>
+                <p id="shop-search-empty" class="hidden text-center text-xs text-ink-faint uppercase tracking-widest mt-6">Aucune pièce ne correspond à votre recherche.</p>
+            </div>
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Injection JS -->
             </div>
@@ -283,21 +327,6 @@
         </div>
     </section>
 
-    <!-- Modale produit -->
-    <div id="product-modal" class="fixed inset-0 z-[100] hidden bg-bone/90 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-panel border border-hairline p-6 rounded-2xl w-full max-w-sm relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-ink-soft"><i data-lucide="x"></i></button>
-            <div id="modal-image" class="aspect-square bg-beige border border-beige rounded-xl mb-4 flex items-center justify-center overflow-hidden">
-                <span class="text-ink-faint text-xs uppercase tracking-widest">Image</span>
-            </div>
-            <h2 id="modal-name" class="text-lg font-medium mb-1"></h2>
-            <p id="modal-desc" class="text-xs text-ink-soft mb-6 font-light"></p>
-            <button id="modal-btn" class="w-full bg-accent text-ink py-3 rounded-lg text-xs uppercase tracking-widest font-bold">
-                <span>Ajouter au panier</span>
-            </button>
-        </div>
-    </div>
-
     <!-- Modale Contact -->
     <div id="contact-modal" class="fixed inset-0 z-[100] hidden bg-bone/90 backdrop-blur-sm items-center justify-center p-4" onclick="if(event.target === this) closeContactModal()">
         <div class="card p-6 rounded-2xl w-full max-w-sm relative">
@@ -382,6 +411,9 @@
 
     <script>
     // 1. Fonction pour charger les produits dynamiquement depuis Stripe / votre API
+    let allProducts = [];
+    let allStocks = [];
+
     async function loadProducts() {
         const grid = document.getElementById('product-grid');
         grid.innerHTML = '<p class="text-black font-bold text-xs tracking-widest uppercase col-span-full text-center py-10">Chargement de la collection...</p>';
@@ -393,71 +425,143 @@
             ]);
 
             const products = await stripeResponse.json();
-            const stocksData = await stockResponse.json(); 
+            const stocksData = await stockResponse.json();
 
-            grid.innerHTML = ''; 
+            allProducts = products || [];
+            allStocks = stocksData || [];
 
-            if (!products || products.length === 0) {
+            // Rend accessibles les données produits aux autres pages (produit.html, liste-de-souhaits.html)
+            try {
+                sessionStorage.setItem('noraProducts', JSON.stringify(allProducts));
+                sessionStorage.setItem('noraStocks', JSON.stringify(allStocks));
+            } catch (e) { /* stockage indisponible, tant pis */ }
+
+            if (!allProducts || allProducts.length === 0) {
                 grid.innerHTML = '<p class="text-ink-faint text-xs tracking-widest uppercase col-span-full text-center py-10">Aucun produit disponible pour le moment.</p>';
                 return;
             }
 
-            products.forEach(p => {
-                const stockItem = stocksData.find(s => s.id === p.id);
-                const stock = stockItem ? parseInt(stockItem.stock, 10) : 0; 
-                const isRupture = stock <= 0;
+            // Pré-remplit le champ de recherche si on arrive avec ?q=... (depuis une autre page)
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialQuery = urlParams.get('q') || '';
+            const searchInput = document.getElementById('shop-search-input');
+            if (searchInput && initialQuery) searchInput.value = initialQuery;
 
-                const card = document.createElement('div');
-                card.className = "group card p-4";
-                
-                card.innerHTML = `
-                    <div class="aspect-square bg-beige border border-beige rounded-xl mb-4 cursor-pointer overflow-hidden flex items-center justify-center relative">
-                        ${p.image ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover ${isRupture ? 'opacity-40 grayscale' : ''}">` : '<span class="text-xs text-ink-faint">Image</span>'}
-                        ${isRupture ? '<span class="absolute bg-bone/80 text-ink text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-accent/40">Rupture de stock</span>' : ''}
-                    </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="text-sm font-medium text-ink">${p.name}</h3>
-                        <span class="text-sm font-semibold text-accent-dark">
-                            ${p.price} €
-                        </span>
-                    </div>
-                    <div class="mb-4 text-xs">
-                        ${isRupture 
-                            ? '<span class="text-red-600">Épuisé</span>' 
-                            : `<span class="text-ink-soft">En stock : <strong class="text-ink">${stock}</strong></span>`
-                        }
-                    </div>
-                    <button class="${isRupture ? 'bg-panel-soft text-ink-faint cursor-not-allowed' : 'btn-gold'} w-full py-3 rounded-lg font-bold uppercase tracking-widest transition-all duration-300" ${isRupture ? 'disabled' : ''}>
-                        <span>${isRupture ? 'Indisponible' : 'Ajouter au panier'}</span>
-                    </button>
-                `;
-                
-                const imgContainer = card.querySelector('.aspect-square');
-                if (!isRupture) {
-                    imgContainer.onclick = () => openModal(p, stock);
-                    
-                    card.querySelector('button').onclick = (e) => {
-                        addToCart({ 
-                            id: p.id, 
-                            name: p.name, 
-                            price: p.price,
-                            maxStock: stock 
-                        }, e.currentTarget);
-                        triggerSuccess(e.currentTarget);
-                    };
-                } else {
-                    imgContainer.style.cursor = "default";
-                }
-                
-                grid.appendChild(card);
-            });
-
-            lucide.createIcons();
+            renderProducts(initialQuery);
 
         } catch (error) {
             console.error("Erreur lors du chargement des produits :", error);
             grid.innerHTML = '<p class="text-red-600 text-xs tracking-widest uppercase col-span-full text-center py-10">Impossible de charger le catalogue.</p>';
         }
+    }
+
+    // 1bis. Rendu de la grille, avec filtrage par recherche
+    // 1ter. Avis clients — génération déterministe + avis déposés localement (nouveau)
+    const REVIEW_POOL = [
+        { name: "Camille R.", rating: 5, text: "Une finition impeccable, exactement comme sur les photos. Je recommande vivement." },
+        { name: "Julien M.", rating: 5, text: "Reçu rapidement, l'écrin est magnifique. Un très beau cadeau à offrir." },
+        { name: "Sarah D.", rating: 4, text: "Très jolie pièce, légèrement plus petite que ce que j'imaginais mais je suis ravie." },
+        { name: "Antoine B.", rating: 5, text: "Le service client a été parfait pour l'ajustement de la taille. Bravo à l'atelier." },
+        { name: "Léa F.", rating: 5, text: "Un bijou qu'on sent vraiment fait main, la qualité est au rendez-vous." },
+        { name: "Marc T.", rating: 4, text: "Beau produit, un peu de délai à la livraison mais ça valait l'attente." },
+        { name: "Inès O.", rating: 5, text: "Deuxième achat chez Atelier Nora, toujours aussi satisfaite." },
+        { name: "Paul K.", rating: 4, text: "Très beau bijou, le certificat numéroté est une belle attention." }
+    ];
+    function hashCode(str) {
+        let h = 0;
+        for (let i = 0; i < str.length; i++) { h = (h << 5) - h + str.charCodeAt(i); h |= 0; }
+        return Math.abs(h);
+    }
+    function seededReviews(productId) {
+        const h = hashCode(String(productId));
+        const count = 3 + (h % 3); // 3 à 5 avis générés
+        const start = h % REVIEW_POOL.length;
+        const seed = [];
+        for (let i = 0; i < count; i++) {
+            seed.push(REVIEW_POOL[(start + i) % REVIEW_POOL.length]);
+        }
+        return seed;
+    }
+    function getUserReviews(productId) {
+        try { return JSON.parse(localStorage.getItem('noraReviews:' + productId)) || []; }
+        catch (e) { return []; }
+    }
+    function getRatingSummary(productId) {
+        const all = seededReviews(productId).concat(getUserReviews(productId));
+        const count = all.length;
+        const avg = count ? all.reduce((s, r) => s + r.rating, 0) / count : 5;
+        return { avg, count };
+    }
+
+    function renderProducts(query) {
+        const grid = document.getElementById('product-grid');
+        const emptyMsg = document.getElementById('shop-search-empty');
+        const q = (query || '').trim().toLowerCase();
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+        const filtered = q
+            ? allProducts.filter(p => (p.name || '').toLowerCase().includes(q) || (p.desc || '').toLowerCase().includes(q))
+            : allProducts;
+
+        grid.innerHTML = '';
+        if (emptyMsg) emptyMsg.classList.toggle('hidden', filtered.length > 0);
+
+        filtered.forEach(p => {
+            const stockItem = allStocks.find(s => s.id === p.id);
+            const stock = stockItem ? parseInt(stockItem.stock, 10) : 0; 
+            const isRupture = stock <= 0;
+            const isWished = wishlist.includes(p.id);
+
+            const card = document.createElement('div');
+            card.className = "group card p-4 relative";
+            
+            card.innerHTML = `
+                <div class="aspect-square bg-beige border border-beige rounded-xl mb-4 overflow-hidden relative">
+                    <button type="button" class="wishlist-btn ${isWished ? 'is-active' : ''}" data-id="${p.id}" aria-label="Ajouter à la liste de souhaits">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.8-10-9.3C.3 8 2 4.5 5.5 4c2-.3 3.8.6 6.5 3.2C14.7 4.6 16.5 3.7 18.5 4c3.5.5 5.2 4 3.5 7.7C19.5 16.2 12 21 12 21z"/></svg>
+                    </button>
+                    <a href="produit.html?id=${p.id}" class="block w-full h-full">
+                        ${p.image ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover ${isRupture ? 'opacity-40 grayscale' : ''}">` : '<span class="text-xs text-ink-faint flex items-center justify-center h-full">Image</span>'}
+                        ${isRupture ? '<span class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-bone/90 text-ink text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-accent/40">Rupture de stock</span>' : ''}
+                    </a>
+                </div>
+                <a href="produit.html?id=${p.id}" class="block mb-1">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-sm font-medium text-ink hover:text-accent-dark transition-colors">${p.name}</h3>
+                        <span class="text-sm font-semibold text-accent-dark">${p.price} €</span>
+                    </div>
+                </a>
+                <div class="rating-badge mb-2">
+                    <span class="stars-inline">${'★'.repeat(Math.round(getRatingSummary(p.id).avg))}${'☆'.repeat(5 - Math.round(getRatingSummary(p.id).avg))}</span>
+                    <span>(${getRatingSummary(p.id).count})</span>
+                </div>
+                <div class="mb-4 text-xs">
+                    ${isRupture 
+                        ? '<span class="text-red-600">Épuisé</span>' 
+                        : (stock <= 3 ? `<span class="low-stock-badge">Plus que ${stock} en stock</span>` : `<span class="text-ink-soft">En stock : <strong class="text-ink">${stock}</strong></span>`)
+                    }
+                </div>
+                <button class="${isRupture ? 'bg-panel-soft text-ink-faint cursor-not-allowed' : 'btn-gold'} w-full py-3 rounded-lg font-bold uppercase tracking-widest transition-all duration-300" ${isRupture ? 'disabled' : ''}>
+                    <span>${isRupture ? 'Indisponible' : 'Ajouter au panier'}</span>
+                </button>
+            `;
+
+            if (!isRupture) {
+                card.querySelector('button:last-of-type').onclick = (e) => {
+                    addToCart({ id: p.id, name: p.name, price: p.price, maxStock: stock }, e.currentTarget);
+                    triggerSuccess(e.currentTarget);
+                };
+            }
+
+            card.querySelector('.wishlist-btn').onclick = (e) => {
+                e.preventDefault();
+                toggleWishlist(p.id, e.currentTarget);
+            };
+
+            grid.appendChild(card);
+        });
+
+        lucide.createIcons();
     }
 
     // 2. Animation de succès sur le bouton d'ajout au panier
@@ -516,24 +620,18 @@
         }
     }
 
-    // 4. Gestion de la modale produit
-    function openModal(p, stock) {
-        document.getElementById('modal-name').innerText = p.name;
-        document.getElementById('modal-desc').innerText = p.desc || "Pièce unique façonnée avec soin.";
-        const imgContainer = document.getElementById('modal-image');
-        imgContainer.innerHTML = p.image
-            ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">`
-            : '<span class="text-ink-faint text-xs uppercase tracking-widest">Image</span>';
-        const btn = document.getElementById('modal-btn');
-        btn.onclick = () => {
-            addToCart({ id: p.id, name: p.name, price: p.price, maxStock: stock }, btn);
-            triggerSuccess(btn);
-        };
-        document.getElementById('product-modal').classList.remove('hidden');
-    }
-
-    function closeModal() { 
-        document.getElementById('product-modal').classList.add('hidden'); 
+    // 4. Liste de souhaits (nouveau)
+    function toggleWishlist(id, btnElement) {
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        if (wishlist.includes(id)) {
+            wishlist = wishlist.filter(x => x !== id);
+            if (btnElement) btnElement.classList.remove('is-active');
+        } else {
+            wishlist.push(id);
+            if (btnElement) btnElement.classList.add('is-active');
+        }
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        updateWishlistCount();
     }
 
     // 4bis. Gestion de la modale contact (Formspree)
@@ -604,6 +702,12 @@
         updateCartCount();
         loadProducts(); 
         lucide.createIcons();
+
+        // Recherche en direct dans la boutique (nouveau)
+        const shopSearchInput = document.getElementById('shop-search-input');
+        if (shopSearchInput) {
+            shopSearchInput.addEventListener('input', (e) => renderProducts(e.target.value));
+        }
 
         // Vérifie si on revient d'un paiement Stripe réussi
         const urlParams = new URLSearchParams(window.location.search);
@@ -722,6 +826,57 @@
             });
         }
     })();
+    </script>
+
+    <!-- Recherche, liste de souhaits & cookies (nouveau) -->
+    <script>
+        const searchToggle = document.getElementById('search-toggle');
+        const searchForm = document.getElementById('search-form');
+        if (searchToggle && searchForm) {
+            searchToggle.addEventListener('click', () => {
+                searchForm.classList.toggle('hidden');
+                if (!searchForm.classList.contains('hidden')) {
+                    document.getElementById('search-input').focus();
+                }
+            });
+            document.addEventListener('click', (e) => {
+                if (!searchForm.contains(e.target) && e.target !== searchToggle && !searchToggle.contains(e.target)) {
+                    searchForm.classList.add('hidden');
+                }
+            });
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const q = document.getElementById('search-input').value.trim();
+                if (q) window.location.href = 'index.html?q=' + encodeURIComponent(q) + '#boutique';
+            });
+        }
+
+        function updateWishlistCount() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            const el = document.getElementById('wishlist-count');
+            if (el) {
+                el.innerText = wishlist.length;
+                el.classList.toggle('hidden', wishlist.length === 0);
+            }
+        }
+        updateWishlistCount();
+
+        const cookieBanner = document.getElementById('cookie-banner');
+        if (cookieBanner) {
+            if (!localStorage.getItem('cookieConsent')) {
+                cookieBanner.classList.remove('hidden');
+            }
+            const acceptBtn = document.getElementById('cookie-accept');
+            const declineBtn = document.getElementById('cookie-decline');
+            if (acceptBtn) acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'accepted');
+                cookieBanner.classList.add('hidden');
+            });
+            if (declineBtn) declineBtn.addEventListener('click', () => {
+                localStorage.setItem('cookieConsent', 'declined');
+                cookieBanner.classList.add('hidden');
+            });
+        }
     </script>
 </body>
 </html>
