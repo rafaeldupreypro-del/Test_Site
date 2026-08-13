@@ -45,8 +45,58 @@
 <a class="skip-link" href="#main">Aller au contenu</a>
 <div class="progress-rule" aria-hidden="true"></div>
 
-<!-- ============================ MODALE NEWSLETTER ============================ -->
-<div id="newsletter-modal" class="nl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="nl-modal-title">
+<!-- ============================ BANDEAU NEWSLETTER (discret, non bloquant) ============================ -->
+<style>
+  /* Bandeau ancré en bas à droite : ne recouvre pas la page, ne bloque jamais le scroll */
+  .nl-modal-overlay{
+    position:fixed;
+    inset:auto 1.25rem 1.25rem auto;
+    top:auto; left:auto;
+    width:min(320px, calc(100vw - 2.5rem));
+    background:transparent;
+    display:block;
+    pointer-events:none;
+    z-index:60;
+  }
+  .nl-modal{
+    pointer-events:auto;
+    position:relative;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 8px 30px rgba(0,0,0,.15);
+    padding:1.1rem 1.1rem 1rem;
+    transform:translateY(16px);
+    opacity:0;
+    transition:transform .35s ease, opacity .35s ease;
+    max-width:100%;
+  }
+  .nl-modal-overlay.is-open .nl-modal{
+    transform:translateY(0);
+    opacity:1;
+  }
+  .nl-modal__close{
+    position:absolute;
+    top:.5rem; right:.5rem;
+    width:1.75rem; height:1.75rem;
+    display:flex; align-items:center; justify-content:center;
+    background:none; border:none; cursor:pointer; opacity:.6;
+  }
+  .nl-modal__close:hover{ opacity:1; }
+  .nl-modal__close svg{ width:16px; height:16px; }
+  .nl-modal .eyebrow{ font-size:.7rem; margin:0 0 .15rem; }
+  .nl-modal #nl-modal-title{ font-size:1rem; margin:0 0 .35rem; padding-right:1.5rem; }
+  .nl-modal__lede{ font-size:.85rem; line-height:1.4; margin:0 0 .75rem; }
+  .nl-modal-form__row{ margin-bottom:.5rem; }
+  .nl-modal-form__row input{ width:100%; box-sizing:border-box; font-size:.85rem; padding:.5rem .6rem; }
+  .nl-modal-form .btn{ width:100%; justify-content:center; font-size:.85rem; padding:.5rem .8rem; }
+  .nl-modal__fine{ font-size:.7rem; opacity:.65; margin:.6rem 0 0; line-height:1.35; }
+  .nl-modal__success{ display:none; font-size:.85rem; }
+  .nl-modal-overlay.has-success .nl-modal-form,
+  .nl-modal-overlay.has-success .nl-modal__lede,
+  .nl-modal-overlay.has-success .nl-modal__fine{ display:none; }
+  .nl-modal-overlay.has-success .nl-modal__success{ display:block; }
+</style>
+<div id="newsletter-modal" class="nl-modal-overlay" role="dialog" aria-modal="false" aria-labelledby="nl-modal-title">
   <div class="nl-modal">
     <button type="button" class="nl-modal__close" id="nl-modal-close" aria-label="Fermer">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -354,7 +404,7 @@
 
 <script src="assets/main.js"></script>
 
-<!-- Modale newsletter : ouverture automatique à l'arrivée sur l'accueil (nouveau) -->
+<!-- Bandeau newsletter : apparition discrète en coin d'écran, sans bloquer la lecture -->
 <script>
 (function () {
   var overlay = document.getElementById('newsletter-modal');
@@ -362,27 +412,39 @@
   var form = document.getElementById('nl-modal-form');
   if (!overlay) return;
 
+  var STORAGE_KEY = 'nlBannerLastSeen';
+  var DAYS_BETWEEN_APPARITIONS = 14; // ne se propose plus qu'une fois toutes les 2 semaines
+
   function openModal() {
     overlay.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
+    // Le scroll et l'interaction avec le reste de la page restent libres
   }
   function closeModal() {
     overlay.classList.remove('is-open');
-    document.body.style.overflow = '';
+  }
+  function dismissForAWhile() {
+    try { localStorage.setItem(STORAGE_KEY, Date.now().toString()); } catch (e) {}
+  }
+  function shouldShow() {
+    try {
+      var last = localStorage.getItem(STORAGE_KEY);
+      if (!last) return true;
+      var elapsedDays = (Date.now() - parseInt(last, 10)) / 86400000;
+      return elapsedDays >= DAYS_BETWEEN_APPARITIONS;
+    } catch (e) {
+      return true;
+    }
   }
 
-  // Une seule apparition par session de navigation, pour ne pas gêner
-  if (!sessionStorage.getItem('nlModalShown')) {
+  // Apparition tardive et discrète, une fois toutes les DAYS_BETWEEN_APPARITIONS jours max
+  if (shouldShow()) {
     setTimeout(function () {
       openModal();
-      sessionStorage.setItem('nlModalShown', '1');
-    }, 1400);
+      dismissForAWhile();
+    }, 8000);
   }
 
   closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) closeModal();
-  });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
   });
