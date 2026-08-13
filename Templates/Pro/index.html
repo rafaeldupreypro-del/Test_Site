@@ -412,9 +412,6 @@
   var form = document.getElementById('nl-modal-form');
   if (!overlay) return;
 
-  var STORAGE_KEY = 'nlBannerLastSeen';
-  var DAYS_BETWEEN_APPARITIONS = 14; // ne se propose plus qu'une fois toutes les 2 semaines
-
   function openModal() {
     overlay.classList.add('is-open');
     // Le scroll et l'interaction avec le reste de la page restent libres
@@ -422,25 +419,12 @@
   function closeModal() {
     overlay.classList.remove('is-open');
   }
-  function dismissForAWhile() {
-    try { localStorage.setItem(STORAGE_KEY, Date.now().toString()); } catch (e) {}
-  }
-  function shouldShow() {
-    try {
-      var last = localStorage.getItem(STORAGE_KEY);
-      if (!last) return true;
-      var elapsedDays = (Date.now() - parseInt(last, 10)) / 86400000;
-      return elapsedDays >= DAYS_BETWEEN_APPARITIONS;
-    } catch (e) {
-      return true;
-    }
-  }
 
-  // Apparition tardive et discrète, une fois toutes les DAYS_BETWEEN_APPARITIONS jours max
-  if (shouldShow()) {
+  // Apparition une fois par visite (pas à chaque changement de page pendant la même visite)
+  if (!sessionStorage.getItem('nlBannerShown')) {
     setTimeout(function () {
       openModal();
-      dismissForAWhile();
+      sessionStorage.setItem('nlBannerShown', '1');
     }, 1000);
   }
 
