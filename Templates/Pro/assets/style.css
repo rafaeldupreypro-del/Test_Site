@@ -12,22 +12,22 @@
   --paper: #ece6da;
   --paper-alt: #e2dac9;
   --card: #f4efe4;
-  --ink: #1c1914;
-  --ink-85: rgba(28, 25, 20, .85);
-  --ink-70: rgba(28, 25, 20, .68);
-  --ink-55: rgba(28, 25, 20, .55);
-  --ink-35: rgba(28, 25, 20, .35);
-  --line: rgba(28, 25, 20, .14);
-  --line-strong: rgba(28, 25, 20, .3);
+  --ink: #1c2b4a;
+  --ink-85: rgba(28, 43, 74, .85);
+  --ink-70: rgba(28, 43, 74, .68);
+  --ink-55: rgba(28, 43, 74, .55);
+  --ink-35: rgba(28, 43, 74, .35);
+  --line: rgba(28, 43, 74, .14);
+  --line-strong: rgba(28, 43, 74, .3);
 
-  --accent: #2c4a86;          /* bleu cyanotype */
-  --accent-dim: rgba(44, 74, 134, .1);
-  --accent-line: rgba(44, 74, 134, .35);
+  --accent: #1d5fe0;          /* bleu vif */
+  --accent-dim: rgba(29, 95, 224, .1);
+  --accent-line: rgba(29, 95, 224, .35);
   --brass: #8a6a34;           /* laiton */
   --brass-dim: rgba(138, 106, 52, .12);
 
-  --dark-bg: #15130f;
-  --dark-bg-alt: #1c1a15;
+  --dark-bg: #0f1a30;
+  --dark-bg-alt: #14213b;
   --dark-ink: #ece6da;
   --dark-ink-70: rgba(236, 230, 218, .7);
   --dark-ink-45: rgba(236, 230, 218, .45);
@@ -298,7 +298,7 @@ section { position: relative; }
   transition: border-color .25s ease, background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
   box-shadow: 0 6px 16px -8px rgba(44, 74, 134, .5);
 }
-.nav-cta:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(28,25,20,.35); }
+.nav-cta:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(28,43,74,.35); }
 
 .nav-toggle {
   display: none;
@@ -338,14 +338,14 @@ section { position: relative; }
     align-items: flex-start;
     gap: 1.1rem;
     border-bottom: 1px solid var(--line);
-    box-shadow: 0 20px 40px -20px rgba(28, 25, 20, .25);
+    box-shadow: 0 20px 40px -20px rgba(28, 43, 74, .25);
   }
   .mobile-panel.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
   .mobile-panel a {
     font-family: var(--serif);
     font-size: 1.4rem;
     line-height: 1.2;
-    color: #1c1914; /* filet de sécurité */
+    color: #1c2b4a; /* filet de sécurité */
     color: var(--ink);
   }
   .mobile-panel a[aria-current="page"] { color: var(--accent); }
@@ -398,7 +398,7 @@ section { position: relative; }
   position: fixed;
   inset: 0;
   z-index: 500; /* au-dessus de la nav mobile (400) et de .progress-rule (300) */
-  background: rgba(28, 25, 20, .55);
+  background: rgba(28, 43, 74, .55);
   backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
@@ -420,7 +420,7 @@ section { position: relative; }
   padding: 2.75rem 2.25rem 2.25rem;
   transform: translateY(14px) scale(.98);
   transition: transform .35s var(--ease);
-  box-shadow: 0 30px 60px -20px rgba(28, 25, 20, .35);
+  box-shadow: 0 30px 60px -20px rgba(28, 43, 74, .35);
 }
 .nl-modal-overlay.is-open .nl-modal { transform: translateY(0) scale(1); }
 
@@ -471,7 +471,7 @@ section { position: relative; }
   color: var(--ink);
 }
 .nl-modal-form input[type="email"]:focus { outline: none; }
-.nl-modal-form input[type="email"]::placeholder { color: rgba(28, 25, 20, .45); }
+.nl-modal-form input[type="email"]::placeholder { color: rgba(28, 43, 74, .45); }
 
 .nl-modal-form .btn {
   margin-top: 1.1rem;
@@ -482,7 +482,7 @@ section { position: relative; }
 .nl-modal__fine {
   margin-top: 1rem;
   font-size: .72rem;
-  color: rgba(28, 25, 20, .45);
+  color: rgba(28, 43, 74, .45);
   line-height: 1.5;
 }
 
@@ -704,7 +704,7 @@ section { position: relative; }
   color: var(--ink);
   transition: border-color .25s ease;
 }
-.field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231c1914' fill-opacity='.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .3rem center; }
+.field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231c2b4a' fill-opacity='.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .3rem center; }
 .field textarea { resize: vertical; min-height: 120px; }
 .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--accent); outline: none; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
