@@ -135,6 +135,7 @@
             </a>
             
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-400">
+                <a href="#realisations" class="nav-link hover:text-white transition-colors">Réalisations</a>
                 <a href="#concept" class="nav-link hover:text-white transition-colors">Notre Concept</a>
                 <a href="#offres" class="nav-link hover:text-white transition-colors">Notre Service</a>
                 <a href="#delais" class="nav-link hover:text-white transition-colors">Disponibilités</a>
@@ -179,6 +180,60 @@
                 <button onclick="openExplainModal()" class="btn-pop w-full sm:w-auto border border-zinc-800 text-zinc-300 text-sm font-semibold px-8 py-4 rounded-xl hover:bg-zinc-900 hover:text-white cursor-pointer">
                     Comment ça marche ?
                 </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="realisations" class="relative py-28 border-t border-zinc-900 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-indigo-600/10 rounded-full blur-[130px] pointer-events-none"></div>
+
+        <div class="relative max-w-6xl mx-auto px-6">
+            <div data-reveal class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                <span class="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium px-4 py-1.5 rounded-full">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Portfolio
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-bold tracking-tight">
+                    Découvrez nos <span class="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">réalisations</span>
+                </h2>
+                <p class="text-zinc-400 font-light">Quelques exemples de sites vitrines conçus sur mesure pour nos clients.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <a href="Templates/Standard/index.html" target="_blank"
+                    data-reveal data-reveal-delay="1"
+                    class="lift-on-hover group bg-zinc-900/40 border border-zinc-800/60 hover:border-indigo-500/40 rounded-2xl p-8 sm:p-10 flex flex-col justify-between min-h-[220px] shadow-lg shadow-black/20 hover:shadow-indigo-500/10">
+                    <div class="space-y-3">
+                        <div class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center rounded-xl">
+                            <i data-lucide="layout-template" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Exemple de réalisation 1</h3>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Un aperçu d'un site vitrine livré clé en main pour un client.</p>
+                    </div>
+                    <div class="pt-6">
+                        <span class="btn-pop inline-flex items-center gap-2 bg-indigo-600 group-hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-3 rounded-xl shadow-lg shadow-indigo-600/20">
+                            Voir le site
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="Templates/Pro/index.html" target="_blank"
+                    data-reveal data-reveal-delay="2"
+                    class="lift-on-hover group bg-zinc-900/40 border border-zinc-800/60 hover:border-indigo-500/40 rounded-2xl p-8 sm:p-10 flex flex-col justify-between min-h-[220px] shadow-lg shadow-black/20 hover:shadow-indigo-500/10">
+                    <div class="space-y-3">
+                        <div class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center rounded-xl">
+                            <i data-lucide="layout-template" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">Exemple de réalisation 2</h3>
+                        <p class="text-zinc-400 text-sm font-light leading-relaxed">Un aperçu d'un site vitrine livré clé en main pour un client.</p>
+                    </div>
+                    <div class="pt-6">
+                        <span class="btn-pop inline-flex items-center gap-2 bg-indigo-600 group-hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-3 rounded-xl shadow-lg shadow-indigo-600/20">
+                            Voir le site
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+                        </span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
