@@ -6,6 +6,7 @@ import ProjectCard from '@/components/ProjectCard';
 import EventBanner from '@/components/EventBanner';
 import NewsletterModal from '@/components/NewsletterModal';
 import TrustedByStrip from '@/components/TrustedByStrip';
+import GoogleReviews from '@/components/GoogleReviews';
 
 export const revalidate = 60;
 
@@ -140,6 +141,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <GoogleReviews placeId={settings?.googlePlaceId} />
 
       <section className="section">
         <div className="container text-center" data-reveal>

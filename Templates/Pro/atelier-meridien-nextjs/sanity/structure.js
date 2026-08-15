@@ -24,4 +24,12 @@ export const structure = (S) =>
         .title('Événements & offres')
         .schemaType('event')
         .child(S.documentTypeList('event').title('Événements & offres')),
+      S.listItem()
+        .title('Actualités')
+        .schemaType('post')
+        .child(
+          S.documentTypeList('post')
+            .title('Actualités')
+            .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+        ),
     ]);

@@ -15,6 +15,7 @@ export default {
     { name: 'accueil', title: 'Page d\'accueil' },
     { name: 'seo', title: 'SEO par défaut' },
     { name: 'cro', title: 'Conversion' },
+    { name: 'legal', title: 'Informations légales' },
   ],
   fields: [
     { name: 'agencyName', title: 'Nom de l\'agence', type: 'string', group: 'identite', initialValue: 'Atelier Méridien' },
@@ -68,6 +69,27 @@ export default {
 
     { name: 'whatsappNumber', title: 'Numéro WhatsApp (optionnel)', type: 'string', group: 'cro',
       description: 'Format international sans espaces, ex: +33612345678. Laisser vide pour masquer le bouton de contact rapide.' },
+    { name: 'calendlyUrl', title: 'Lien de prise de rendez-vous (Calendly ou autre)', type: 'url', group: 'cro',
+      description: 'Laisser vide pour ne pas afficher le bloc de prise de rendez-vous sur la page Contact.' },
+    { name: 'googlePlaceId', title: 'Google Place ID (avis Google)', type: 'string', group: 'cro',
+      description: "Identifiant du fiche établissement Google (Google Business Profile), utilisé pour afficher les avis. Laisser vide pour masquer le bloc." },
+    { name: 'instagramFeedUrl', title: 'Compte Instagram (lien complet)', type: 'url', group: 'cro',
+      description: 'Ex : https://www.instagram.com/nom-du-compte. Laisser vide pour masquer le bloc Instagram sur l\'accueil.' },
+
+    // Informations légales — utilisées sur les pages Mentions légales,
+    // Confidentialité et Cookies. Champs à compléter par chaque client :
+    // aucune valeur par défaut n'est pré-remplie (données propres à
+    // l'entreprise), les pages affichent une mention "à compléter" tant
+    // que ces champs sont vides.
+    { name: 'legalCompanyName', title: 'Raison sociale', type: 'string', group: 'legal' },
+    { name: 'legalLegalForm', title: 'Forme juridique (ex: SARL, SASU...)', type: 'string', group: 'legal' },
+    { name: 'legalCapital', title: 'Capital social', type: 'string', group: 'legal' },
+    { name: 'legalSiret', title: 'Numéro SIRET', type: 'string', group: 'legal' },
+    { name: 'legalRcs', title: 'RCS (ville d\'immatriculation)', type: 'string', group: 'legal' },
+    { name: 'legalVatNumber', title: 'Numéro de TVA intracommunautaire', type: 'string', group: 'legal' },
+    { name: 'legalDirector', title: 'Nom du directeur de la publication', type: 'string', group: 'legal' },
+    { name: 'legalHostName', title: 'Nom de l\'hébergeur', type: 'string', group: 'legal', initialValue: 'Vercel Inc.' },
+    { name: 'legalHostAddress', title: 'Adresse de l\'hébergeur', type: 'string', group: 'legal', initialValue: '340 S Lemon Ave #4133, Walnut, CA 91789, USA' },
   ],
   preview: {
     prepare() {

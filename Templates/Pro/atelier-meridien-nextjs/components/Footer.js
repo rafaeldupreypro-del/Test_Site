@@ -59,6 +59,11 @@ export default function Footer({ settings }) {
 
       <div className="container footer-bottom">
         <span>© <span data-year></span> {agencyName} — Tous droits réservés</span>
+        <nav className="footer-legal" aria-label="Informations légales">
+          <Link href="/mentions-legales">Mentions légales</Link>
+          <Link href="/confidentialite">Confidentialité</Link>
+          <Link href="/cookies">Cookies</Link>
+        </nav>
         <span>49.4938° N, 0.1077° E · Le Havre</span>
       </div>
 

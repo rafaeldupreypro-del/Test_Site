@@ -12,6 +12,9 @@
   },
   "dependencies": {
     "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.1.0",
+    "@next/third-parties": "^14.2.15",
+    "@portabletext/react": "^3.1.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.62.3",
     "next": "14.2",

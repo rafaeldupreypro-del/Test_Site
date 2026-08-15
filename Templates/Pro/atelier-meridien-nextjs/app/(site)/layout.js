@@ -1,10 +1,12 @@
 import '../globals.css';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Fraunces, Inter, IBM_Plex_Mono } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SiteChrome from '@/components/SiteChrome';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import CookieConsent from '@/components/CookieConsent';
 import { getSiteSettings } from '@/lib/sanity/queries';
 
 /* -------------------------------------------------------------------------
@@ -59,6 +61,12 @@ export async function generateMetadata() {
       description,
     },
     twitter: { card: 'summary_large_image' },
+    // Google Search Console : coller ici le code de vérification fourni par
+    // Google (propriété "balise HTML"), via la variable d'environnement
+    // GOOGLE_SITE_VERIFICATION. Laisser vide tant que non configuré.
+    verification: process.env.GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+      : undefined,
   };
 }
 
@@ -71,12 +79,17 @@ export default async function RootLayout({ children }) {
     name: settings?.agencyName || 'Atelier Méridien',
     description: settings?.defaultSeoDescription || undefined,
     telephone: settings?.phoneHref || undefined,
+    email: settings?.email || undefined,
+    url: process.env.NEXT_PUBLIC_SITE_URL || undefined,
     address: settings?.addressLine1 ? {
       '@type': 'PostalAddress',
       streetAddress: settings.addressLine1,
       addressLocality: settings.addressLine2,
       addressCountry: 'FR',
     } : undefined,
+    sameAs: (settings?.socialLinks || [])
+      .map((s) => s.url)
+      .filter((url) => url && url !== '#'),
   };
 
   return (
@@ -98,6 +111,8 @@ export default async function RootLayout({ children }) {
         <WhatsAppButton phoneNumber={settings?.whatsappNumber} />
         <SiteChrome />
         <Analytics />
+        <SpeedInsights />
+        <CookieConsent gaId={process.env.NEXT_PUBLIC_GA_ID} />
       </body>
     </html>
   );

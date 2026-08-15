@@ -29,6 +29,20 @@ const ACTIVE_EVENT_QUERY = `*[_type == "event" && active == true
 // renseignés — pas de contenu à saisir en double.
 const CLIENT_NAMES_QUERY = `array::unique(*[_type == "project" && defined(client)].client)`;
 
+// Actualités : seuls les articles déjà publiés (date <= maintenant) sont
+// renvoyés, pour permettre de préparer un article à l'avance.
+const POSTS_QUERY = `*[_type == "post" && publishedAt <= now()] | order(publishedAt desc){
+  title, "slug": slug.current, excerpt, coverImage, publishedAt
+}`;
+
+const RECENT_POSTS_QUERY = `*[_type == "post" && publishedAt <= now()] | order(publishedAt desc)[0...3]{
+  title, "slug": slug.current, excerpt, coverImage, publishedAt
+}`;
+
+const POST_SLUGS_QUERY = `*[_type == "post" && defined(slug.current) && publishedAt <= now()]{ "slug": slug.current }`;
+
+const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug && publishedAt <= now()][0]`;
+
 export async function getSiteSettings() {
   return client.fetch(SITE_SETTINGS_QUERY, {}, { next: { revalidate: 60 } });
 }
@@ -64,4 +78,20 @@ export async function getActiveEvent() {
 
 export async function getClientNames() {
   return client.fetch(CLIENT_NAMES_QUERY, {}, { next: { revalidate: 60 } });
+}
+
+export async function getAllPosts() {
+  return client.fetch(POSTS_QUERY, {}, { next: { revalidate: 60 } });
+}
+
+export async function getRecentPosts() {
+  return client.fetch(RECENT_POSTS_QUERY, {}, { next: { revalidate: 60 } });
+}
+
+export async function getPostSlugs() {
+  return client.fetch(POST_SLUGS_QUERY, {}, { next: { revalidate: 60 } });
+}
+
+export async function getPostBySlug(slug) {
+  return client.fetch(POST_BY_SLUG_QUERY, { slug }, { next: { revalidate: 60 } });
 }

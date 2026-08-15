@@ -206,6 +206,43 @@ const projects = [
   },
 ];
 
+function block(text, style = 'normal') {
+  return {
+    _type: 'block',
+    _key: `b-${Math.random().toString(36).slice(2, 9)}`,
+    style,
+    markDefs: [],
+    children: [{ _type: 'span', _key: `s-${Math.random().toString(36).slice(2, 9)}`, text, marks: [] }],
+  };
+}
+
+const posts = [
+  {
+    slug: 'mediatheque-des-docks-prix-europeen',
+    title: "La Médiathèque des Docks distinguée au Prix Européen d'Architecture",
+    publishedAt: '2026-06-12T09:00:00.000Z',
+    excerpt: "Notre médiathèque livrée pour Le Havre Seine Métropole a reçu une mention au Prix Européen d'Architecture 2026, saluant le traitement de la lumière naturelle et le réemploi des structures existantes.",
+    body: [
+      block("Nous sommes heureux d'annoncer que la Médiathèque des Docks, livrée en 2023 pour Le Havre Seine Métropole, a reçu une mention au Prix Européen d'Architecture 2026.", 'normal'),
+      block('Un jury attentif au réemploi', 'h2'),
+      block("Le jury a particulièrement salué le travail de réemploi des structures portuaires existantes, conservées et réinterprétées plutôt que démolies, ainsi que la gestion de la lumière naturelle dans les espaces de lecture.", 'normal'),
+      block("Ce prix couronne un travail d'équipe mené sur plus de trois ans, en lien étroit avec la maîtrise d'ouvrage et les usagers du quartier des Docks.", 'normal'),
+    ],
+  },
+  {
+    slug: 'lancement-etude-urbaine-bassin-vauban',
+    title: 'Lancement de notre étude urbaine sur le Bassin Vauban',
+    publishedAt: '2026-03-04T09:00:00.000Z',
+    excerpt: "L'agence a été retenue pour élaborer le schéma directeur du Bassin Vauban, une étude urbaine à horizon 20 ans anticipant la montée du niveau marin.",
+    body: [
+      block("Nous démarrons une nouvelle mission d'étude urbaine pour Le Havre Seine Métropole, portant sur le devenir du Bassin Vauban à horizon 2045.", 'normal'),
+      block('Une règle du jeu plutôt qu\'un plan figé', 'h2'),
+      block("Plutôt que de fixer d'emblée hauteurs et gabarits, l'étude commence par dessiner l'armature des espaces publics — quais, places, continuités piétonnes — avant d'en déduire les règles de constructibilité, îlot par îlot.", 'normal'),
+      block("Un sujet auquel nous sommes particulièrement sensibles : l'ensemble des aménagements intègre des revêtements perméables et anticipe les scénarios de montée du niveau marin.", 'normal'),
+    ],
+  },
+];
+
 const sampleEvent = {
   _id: 'event-exemple',
   _type: 'event',
@@ -256,6 +293,20 @@ async function run() {
 
   await client.createIfNotExists(sampleEvent);
   console.log('✓ Exemple de bandeau événement créé (inactif par défaut — à activer dans le Studio).');
+
+  for (const post of posts) {
+    const doc = {
+      _id: `post-${post.slug}`,
+      _type: 'post',
+      title: post.title,
+      slug: { _type: 'slug', current: post.slug },
+      publishedAt: post.publishedAt,
+      excerpt: post.excerpt,
+      body: post.body,
+    };
+    await client.createOrReplace(doc);
+    console.log(`✓ Article importé : ${post.title}`);
+  }
 
   console.log('\nTerminé. Lancez `npm run dev` puis ouvrez /studio pour éditer le contenu.');
 }
