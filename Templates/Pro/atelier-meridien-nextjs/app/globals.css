@@ -497,7 +497,7 @@ section { position: relative; }
 .nl-modal-overlay.has-success .nl-modal__fine { display: none; }
 .nl-modal-overlay.has-success .nl-modal__success { display: block; }
 
-
+/* -------------------------------------------------------------------------
    7. FRAME / CORNER TICKS — motif de plan technique
    ------------------------------------------------------------------------- */
 .frame { position: relative; }
