@@ -250,7 +250,7 @@
                         </ul>
                     </div>
                     <div class="pt-8">
-                        <button onclick="openMailModal('Site sur mesure')" class="btn-pop w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold">
+                        <button onclick="openContactModal('Site sur mesure')" class="btn-pop w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold">
                             Demander mon devis gratuit
                         </button>
                     </div>
@@ -322,11 +322,11 @@
             </button>
             
             <div class="text-center space-y-2">
-                <h2 id="modalTitle" class="text-2xl sm:text-3xl font-bold tracking-tight">Prêt à lancer votre projet ?</h2>
-                <p id="modalSubtitle" class="text-zinc-400 text-xs sm:text-sm font-light">L'équipe NovaWeb revient vers vous en moins de 24h.</p>
+                <h2 id="modalTitle" class="text-2xl sm:text-3xl font-bold tracking-tight">Demandez votre devis gratuit</h2>
+                <p id="modalSubtitle" class="text-zinc-400 text-xs sm:text-sm font-light">Décrivez votre projet, nous revenons vers vous en moins de 24h.</p>
             </div>
 
-            <form action="https://formspree.io/f/votre_id_formspree" method="POST" class="space-y-5">
+            <form id="devisForm" class="space-y-5">
                 <input type="hidden" name="offre_selectionnee" id="hiddenOfferInput">
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -340,17 +340,24 @@
                     </div>
                 </div>
                 <div class="space-y-1.5">
-                    <label for="message" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Votre Message / Question</label>
-                    <textarea name="message" id="message" rows="4" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none"></textarea>
+                    <label for="phone" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Téléphone (optionnel)</label>
+                    <input type="tel" name="phone" id="phone" placeholder="Ex: 06 12 34 56 78" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
                 </div>
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-600/10 flex items-center justify-center gap-2 cursor-pointer">
+                <div class="space-y-1.5">
+                    <label for="message" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Votre Projet / Message</label>
+                    <textarea name="message" id="message" rows="4" required placeholder="Décrivez votre activité et ce que vous souhaitez pour votre site..." class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none"></textarea>
+                </div>
+
+                <p id="formStatus" class="hidden text-xs text-center rounded-xl px-4 py-3"></p>
+
+                <button type="submit" id="devisSubmitBtn" class="btn-pop w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-3.5 rounded-xl shadow-lg shadow-indigo-600/10 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
                     <span>Envoyer ma demande</span><i data-lucide="send" class="w-4 h-4"></i>
                 </button>
             </form>
             <hr class="border-zinc-800">
             <div class="text-center space-y-3">
                 <p class="text-[10px] text-zinc-500 uppercase tracking-widest">Ou réservez un créneau direct</p>
-                <a href="https://calendly.com/" target="_blank" class="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-medium tracking-wider uppercase px-6 py-3 rounded-xl transition-colors text-center">
+                <a href="https://calendly.com/rafaeldupreypro" target="_blank" class="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-medium tracking-wider uppercase px-6 py-3 rounded-xl transition-colors text-center">
                     <i data-lucide="calendar" class="w-4 h-4"></i> Bloquer 15 min sur notre calendrier
                 </a>
             </div>
@@ -500,20 +507,13 @@
         const explainModal = document.getElementById('explainModal');
         const explainContent = document.getElementById('explainContent');
 
-        // --- Fonctions Modale Contact ---
+        // --- Fonctions Modale Contact / Devis ---
         function openContactModal(offerName) {
             hiddenOfferInput.value = offerName;
-
-            if (offerName === 'Général') {
-                modalTitle.innerText = "Prêt à lancer votre projet ?";
-                modalSubtitle.innerText = "Détaillez votre besoin, réponse en moins de 24h.";
-                messageTextarea.placeholder = "Bonjour, je souhaiterais obtenir des informations pour créer un site...";
-                messageTextarea.value = "";
-            } else {
-                modalTitle.innerText = `Intéressé par le Pack ${offerName} ?`;
-                modalSubtitle.innerText = "Remplissez ce formulaire pour nous envoyer vos documents.";
-                messageTextarea.value = `Bonjour, je souhaite lancer mon projet avec le Pack ${offerName}. Merci de me recontacter !`;
-            }
+            modalTitle.innerText = "Demandez votre devis gratuit";
+            modalSubtitle.innerText = "Décrivez votre projet, nous revenons vers vous en moins de 24h.";
+            messageTextarea.placeholder = "Décrivez votre activité et ce que vous souhaitez pour votre site...";
+            messageTextarea.value = "";
 
             contactModal.classList.remove('invisible', 'opacity-0');
             modalContent.classList.remove('scale-95', 'opacity-0');
@@ -572,56 +572,53 @@
             }
         }
 
-        function openMailModal(packName) {
-    const modal = document.getElementById('mailModal');
-    const reqList = document.getElementById('modalRequirements');
-    const mailLink = document.getElementById('mailActionLink');
-    
-    // Configuration
-    const config = {
-        'Site sur mesure': ['Description de votre activité et de vos besoins', 'Images/logo de votre activité', 'Adresse e-mail et numéro de téléphone de contact']
-    };
+        // --- Envoi du formulaire de devis (via API Brevo) ---
+        const devisForm = document.getElementById('devisForm');
+        const devisSubmitBtn = document.getElementById('devisSubmitBtn');
+        const formStatus = document.getElementById('formStatus');
 
-    // Mise à jour de l'affichage
-    document.getElementById('modalTitle').innerText = packName;
-    reqList.innerHTML = config[packName].map(item => `<li>• ${item}</li>`).join('');
+        function showFormStatus(message, isError) {
+            formStatus.textContent = message;
+            formStatus.classList.remove('hidden', 'bg-emerald-500/10', 'text-emerald-400', 'bg-rose-500/10', 'text-rose-400');
+            formStatus.classList.add(isError ? 'bg-rose-500/10' : 'bg-emerald-500/10', isError ? 'text-rose-400' : 'text-emerald-400');
+        }
 
-    // Construction du contenu du mail
-    const subject = encodeURIComponent("Demande de souscription - " + packName);
-    const body = encodeURIComponent(
-        `Bonjour,\n\nJe souhaite souscrire au ${packName}.\n\nVoici les éléments nécessaires :\n` + 
-        config[packName].map(item => `- ${item} : `).join('\n') + 
-        `\n\nMerci.`
-    );
-    
-    mailLink.href = `mailto:rafaeldupreypro@gmail.com?subject=${subject}&body=${body}`;
+        devisForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
 
-    // Affichage instantané
-    modal.classList.remove('hidden');
-}
+            const payload = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                message: document.getElementById('message').value,
+                offer: hiddenOfferInput.value
+            };
 
-function closeMailModal() {
-    document.getElementById('mailModal').classList.add('hidden');
-}
+            devisSubmitBtn.disabled = true;
+            devisSubmitBtn.querySelector('span').innerText = 'Envoi en cours...';
 
-    // Fermer en cliquant sur le flou
-    document.getElementById('modalOverlay').addEventListener('click', closeMailModal);
+            try {
+                const response = await fetch('/api/send-devis', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
+
+                showFormStatus('Votre demande a bien été envoyée ! Nous revenons vers vous très vite.', false);
+                devisForm.reset();
+                setTimeout(closeContactModal, 2000);
+            } catch (err) {
+                console.error(err);
+                showFormStatus('Une erreur est survenue. Merci de réessayer ou de nous écrire directement.', true);
+            } finally {
+                devisSubmitBtn.disabled = false;
+                devisSubmitBtn.querySelector('span').innerText = 'Envoyer ma demande';
+            }
+        });
     </script>
-    <div id="mailModal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 hidden">
-    <div id="modalOverlay" class="absolute inset-0 bg-black/60 backdrop-blur-md"></div>
-    
-    <div id="modalContent" class="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl max-w-lg w-full relative shadow-2xl">
-        <h2 id="modalTitle" class="text-white text-xl font-bold mb-2">Préparez votre demande, n'oubliez pas de joindre vos images.</h2>
-        <p class="text-zinc-400 text-xs mb-4">Pour valider votre demande, préparez les éléments suivants dans votre e-mail :</p>
-        
-        <ul id="modalRequirements" class="text-zinc-300 text-sm space-y-2 mb-6 bg-zinc-950 p-4 rounded-xl border border-zinc-800 font-light">
-        </ul>
-
-        <div class="flex gap-3 pt-2">
-            <button onclick="closeMailModal()" class="flex-1 bg-zinc-800 text-white py-3 rounded-xl text-sm">Annuler</button>
-            <a id="mailActionLink" href="#" class="flex-1 bg-indigo-600 text-white py-3 rounded-xl text-sm font-semibold text-center">Ouvrir mon application mail</a>
-        </div>
-    </div>
-</div>
 </body>
 </html>
