@@ -33,9 +33,9 @@
   --dark-ink-45: rgba(236, 230, 218, .45);
   --dark-line: rgba(236, 230, 218, .14);
 
-  --serif: 'Fraunces', 'Iowan Old Style', serif;
-  --sans: 'Inter', -apple-system, sans-serif;
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --serif: var(--font-fraunces), 'Iowan Old Style', serif;
+  --sans: var(--font-inter), -apple-system, sans-serif;
+  --mono: var(--font-plex-mono), ui-monospace, monospace;
 
   --ease: cubic-bezier(.16, .8, .24, 1);
   --radius-sm: 2px;
