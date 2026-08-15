@@ -12,6 +12,10 @@ export default function ContactForm() {
   const [globalError, setGlobalError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  // CRO : téléphone et budget restent masqués tant que le visiteur ne les
+  // demande pas — moins de champs visibles au premier coup d'œil, meilleur
+  // taux de complétion. Toujours envoyés si déjà remplis avant l'ouverture.
+  const [showMore, setShowMore] = useState(false);
 
   function update(field) {
     return (e) => setValues((v) => ({ ...v, [field]: e.target.value }));
@@ -85,35 +89,18 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div className="field-row">
-        <div className="field">
-          <label htmlFor="phone">Téléphone <span className="coord">(optionnel)</span></label>
-          <input type="tel" id="phone" name="phone" autoComplete="tel" value={values.phone} onChange={update('phone')} />
-        </div>
-        <div className={`field${errors.subject ? ' has-error' : ''}`}>
-          <label htmlFor="subject">Nature du projet</label>
-          <select id="subject" name="subject" required value={values.subject} onChange={update('subject')}>
-            <option value="">Sélectionner…</option>
-            <option value="residentiel">Maison individuelle</option>
-            <option value="collectif">Logement collectif</option>
-            <option value="tertiaire">Bureaux / tertiaire</option>
-            <option value="culturel">Équipement public / culturel</option>
-            <option value="urbanisme">Étude urbaine</option>
-            <option value="autre">Autre</option>
-          </select>
-          <p className="field-error" role="alert">{errors.subject}</p>
-        </div>
-      </div>
-
-      <div className="field">
-        <label htmlFor="budget">Budget prévisionnel <span className="coord">(optionnel)</span></label>
-        <select id="budget" name="budget" value={values.budget} onChange={update('budget')}>
+      <div className={`field${errors.subject ? ' has-error' : ''}`}>
+        <label htmlFor="subject">Nature du projet</label>
+        <select id="subject" name="subject" required value={values.subject} onChange={update('subject')}>
           <option value="">Sélectionner…</option>
-          <option value="lt150">Moins de 150 000 €</option>
-          <option value="150-500">150 000 € — 500 000 €</option>
-          <option value="500-2m">500 000 € — 2 M€</option>
-          <option value="gt2m">Plus de 2 M€</option>
+          <option value="residentiel">Maison individuelle</option>
+          <option value="collectif">Logement collectif</option>
+          <option value="tertiaire">Bureaux / tertiaire</option>
+          <option value="culturel">Équipement public / culturel</option>
+          <option value="urbanisme">Étude urbaine</option>
+          <option value="autre">Autre</option>
         </select>
+        <p className="field-error" role="alert">{errors.subject}</p>
       </div>
 
       <div className={`field${errors.message ? ' has-error' : ''}`}>
@@ -121,6 +108,31 @@ export default function ContactForm() {
         <textarea id="message" name="message" rows={6} required placeholder="Décrivez votre terrain, votre programme et votre calendrier…" value={values.message} onChange={update('message')} />
         <p className="field-error" role="alert">{errors.message}</p>
       </div>
+
+      {!showMore ? (
+        <button type="button" className="field-toggle" onClick={() => setShowMore(true)}>
+          + Ajouter mon téléphone et mon budget <span className="coord">(optionnel, mais ça nous aide à mieux préparer l&rsquo;échange)</span>
+        </button>
+      ) : (
+        <div className="field-row">
+          <div className="field">
+            <label htmlFor="phone">Téléphone <span className="coord">(optionnel)</span></label>
+            <input type="tel" id="phone" name="phone" autoComplete="tel" value={values.phone} onChange={update('phone')} autoFocus />
+          </div>
+          <div className="field">
+            <label htmlFor="budget">Budget prévisionnel <span className="coord">(optionnel)</span></label>
+            <select id="budget" name="budget" value={values.budget} onChange={update('budget')}>
+              <option value="">Sélectionner…</option>
+              <option value="lt150">Moins de 150 000 €</option>
+              <option value="150-500">150 000 € — 500 000 €</option>
+              <option value="500-2m">500 000 € — 2 M€</option>
+              <option value="gt2m">Plus de 2 M€</option>
+            </select>
+          </div>
+        </div>
+      )}
+
+      <p className="form-reassurance">Réponse sous 48 heures ouvrées — sans engagement.</p>
 
       <button type="submit" className="btn btn-primary" style={{ marginTop: '.5rem' }} disabled={submitting}>
         {submitting ? 'Envoi en cours…' : 'Envoyer le message'}

@@ -25,6 +25,10 @@ const ACTIVE_EVENT_QUERY = `*[_type == "event" && active == true
   && (!defined(endDate) || endDate >= now())
 ] | order(_createdAt desc)[0]`;
 
+// Preuve sociale : noms de maîtrise d'ouvrage distincts issus des projets déjà
+// renseignés — pas de contenu à saisir en double.
+const CLIENT_NAMES_QUERY = `array::unique(*[_type == "project" && defined(client)].client)`;
+
 export async function getSiteSettings() {
   return client.fetch(SITE_SETTINGS_QUERY, {}, { next: { revalidate: 60 } });
 }
@@ -56,4 +60,8 @@ export async function getProjectNeighbours(slug) {
 
 export async function getActiveEvent() {
   return client.fetch(ACTIVE_EVENT_QUERY, {}, { next: { revalidate: 30 } });
+}
+
+export async function getClientNames() {
+  return client.fetch(CLIENT_NAMES_QUERY, {}, { next: { revalidate: 60 } });
 }

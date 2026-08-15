@@ -1,18 +1,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getSiteSettings, getFeaturedProjects, getActiveEvent } from '@/lib/sanity/queries';
+import { getSiteSettings, getFeaturedProjects, getActiveEvent, getClientNames } from '@/lib/sanity/queries';
 import { urlFor } from '@/lib/sanity/image';
 import ProjectCard from '@/components/ProjectCard';
 import EventBanner from '@/components/EventBanner';
 import NewsletterModal from '@/components/NewsletterModal';
+import TrustedByStrip from '@/components/TrustedByStrip';
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const [settings, featured, event] = await Promise.all([
+  const [settings, featured, event, clientNames] = await Promise.all([
     getSiteSettings().catch(() => null),
     getFeaturedProjects().catch(() => []),
     getActiveEvent().catch(() => null),
+    getClientNames().catch(() => []),
   ]);
 
   const heroTitle = settings?.heroTitle || "Agence d'architecture & d'urbanisme, au Havre.";
@@ -25,6 +27,12 @@ export default async function HomePage() {
   const awards = settings?.statAwards ?? 5;
   const quoteText = settings?.quoteText || "Ils ont su transformer une contrainte de site en véritable parti pris architectural. Le résultat dépasse largement ce que nous avions imaginé.";
   const quoteAuthor = settings?.quoteAuthor || 'Le Havre Seine Métropole, maîtrise d’ouvrage Médiathèque des Docks';
+  // CRO : plusieurs témoignages renforcent la preuve sociale davantage qu'une
+  // citation unique. On retombe sur l'ancien champ simple si la liste est vide,
+  // pour ne rien casser sur les sites clients pas encore mis à jour.
+  const testimonials = settings?.testimonials?.length > 0
+    ? settings.testimonials
+    : [{ quote: quoteText, author: quoteAuthor }];
 
   return (
     <>
@@ -62,6 +70,8 @@ export default async function HomePage() {
       </section>
 
       {event && <EventBanner event={event} />}
+
+      <TrustedByStrip clients={clientNames} />
 
       <section className="on-dark">
         <div className="stats container" style={{ paddingInline: 0 }}>
@@ -119,9 +129,15 @@ export default async function HomePage() {
       </section>
 
       <section className="section on-dark">
-        <div className="container quote" data-reveal>
-          <blockquote>«&nbsp;{quoteText}&nbsp;»</blockquote>
-          <cite>— {quoteAuthor}</cite>
+        <div className="container" data-reveal>
+          <div className={testimonials.length > 1 ? 'grid grid-3 quote-grid' : undefined}>
+            {testimonials.map((t, i) => (
+              <div className={`quote${testimonials.length > 1 ? ' quote--card' : ''}`} key={t.author || i}>
+                <blockquote>«&nbsp;{t.quote}&nbsp;»</blockquote>
+                <cite>— {t.author}</cite>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

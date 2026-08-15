@@ -1021,3 +1021,100 @@ section { position: relative; }
   .hero-photo__badge--projects { bottom: -1rem; right: 0; }
   .hero-photo__badge--team { display: none; }
 }
+
+/* =========================================================================
+   BOUTON WHATSAPP FLOTTANT — CRO : contact rapide à faible engagement.
+   ========================================================================= */
+.whatsapp-fab {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, .4);
+  z-index: 55;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.whatsapp-fab svg { width: 26px; height: 26px; }
+.whatsapp-fab:hover { transform: scale(1.08); box-shadow: 0 10px 28px rgba(37, 211, 102, .5); }
+@media (max-width: 780px) {
+  .whatsapp-fab { left: 1rem; bottom: 1rem; width: 48px; height: 48px; }
+  .whatsapp-fab svg { width: 24px; height: 24px; }
+}
+
+/* =========================================================================
+   BANDEAU "ILS NOUS ONT FAIT CONFIANCE"
+   ========================================================================= */
+.trusted-by { padding-block: 2.5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.trusted-by__label {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-35);
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+.trusted-by__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 2.5rem;
+}
+.trusted-by__item {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink-55);
+  white-space: nowrap;
+}
+
+/* =========================================================================
+   FORMULAIRE DE CONTACT — divulgation progressive & réassurance (CRO)
+   ========================================================================= */
+.field-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .02em;
+  color: var(--accent);
+  padding: .4rem 0;
+  margin-bottom: .5rem;
+  border-bottom: 1px dashed var(--accent-line);
+}
+.field-toggle:hover { color: var(--ink); border-color: var(--ink); }
+.form-reassurance {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .04em;
+  color: var(--ink-35);
+  margin-top: .75rem;
+}
+
+/* =========================================================================
+   TEMOIGNAGES MULTIPLES — grille de 3 (CRO : preuve sociale renforcée)
+   ========================================================================= */
+.quote-grid { align-items: stretch; }
+.quote--card {
+  max-width: none;
+  margin-inline: 0;
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--dark-line, rgba(255,255,255,.12));
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.quote--card blockquote {
+  font-size: clamp(1rem, 1.5vw, 1.25rem) !important;
+  line-height: 1.55;
+}
+.quote--card cite { margin-top: 1.5rem !important; }

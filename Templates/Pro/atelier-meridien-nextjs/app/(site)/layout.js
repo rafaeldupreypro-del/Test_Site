@@ -1,8 +1,10 @@
 import '../globals.css';
+import { Analytics } from '@vercel/analytics/next';
 import { Fraunces, Inter, IBM_Plex_Mono } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SiteChrome from '@/components/SiteChrome';
+import WhatsAppButton from '@/components/WhatsAppButton';
 import { getSiteSettings } from '@/lib/sanity/queries';
 
 /* -------------------------------------------------------------------------
@@ -93,7 +95,9 @@ export default async function RootLayout({ children }) {
 
         <Footer settings={settings} />
 
+        <WhatsAppButton phoneNumber={settings?.whatsappNumber} />
         <SiteChrome />
+        <Analytics />
       </body>
     </html>
   );

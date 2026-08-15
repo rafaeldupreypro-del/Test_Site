@@ -14,6 +14,7 @@ export default {
     { name: 'chiffres', title: 'Chiffres clés' },
     { name: 'accueil', title: 'Page d\'accueil' },
     { name: 'seo', title: 'SEO par défaut' },
+    { name: 'cro', title: 'Conversion' },
   ],
   fields: [
     { name: 'agencyName', title: 'Nom de l\'agence', type: 'string', group: 'identite', initialValue: 'Atelier Méridien' },
@@ -47,11 +48,26 @@ export default {
     { name: 'heroTitle', title: 'Titre du hero (accueil)', type: 'string', group: 'accueil' },
     { name: 'heroLede', title: 'Chapô du hero', type: 'text', rows: 3, group: 'accueil' },
     { name: 'heroImage', title: 'Photo du hero', type: 'image', options: { hotspot: true }, group: 'accueil' },
-    { name: 'quoteText', title: 'Citation (témoignage accueil)', type: 'text', rows: 3, group: 'accueil' },
-    { name: 'quoteAuthor', title: 'Auteur de la citation', type: 'string', group: 'accueil' },
+    { name: 'quoteText', title: 'Citation (ancien champ, conservé pour compatibilité)', type: 'text', rows: 3, group: 'accueil' },
+    { name: 'quoteAuthor', title: 'Auteur de la citation (ancien champ)', type: 'string', group: 'accueil' },
+    { name: 'testimonials', title: 'Témoignages clients', type: 'array', group: 'accueil',
+      description: 'Affichés sur l\'accueil. Plusieurs témoignages renforcent la preuve sociale — vise 2 à 4.',
+      of: [{
+        type: 'object',
+        name: 'testimonial',
+        fields: [
+          { name: 'quote', title: 'Citation', type: 'text', rows: 3, validation: (Rule) => Rule.required() },
+          { name: 'author', title: 'Auteur (nom, fonction ou organisme)', type: 'string', validation: (Rule) => Rule.required() },
+        ],
+        preview: { select: { title: 'author', subtitle: 'quote' } },
+      }],
+    },
 
     { name: 'defaultSeoDescription', title: 'Meta description par défaut', type: 'text', rows: 2, group: 'seo' },
     { name: 'ogImage', title: 'Image de partage par défaut (OG)', type: 'image', group: 'seo' },
+
+    { name: 'whatsappNumber', title: 'Numéro WhatsApp (optionnel)', type: 'string', group: 'cro',
+      description: 'Format international sans espaces, ex: +33612345678. Laisser vide pour masquer le bouton de contact rapide.' },
   ],
   preview: {
     prepare() {

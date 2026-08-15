@@ -51,6 +51,23 @@ const siteSettings = {
   heroLede: "Depuis 2011, Atelier Méridien dessine des logements, des équipements publics et des bureaux qui prennent le temps de comprendre leur site avant de le transformer.",
   quoteText: "Ils ont su transformer une contrainte de site en véritable parti pris architectural. Le résultat dépasse largement ce que nous avions imaginé.",
   quoteAuthor: "Le Havre Seine Métropole, maîtrise d'ouvrage Médiathèque des Docks",
+  testimonials: [
+    {
+      _key: 'temoignage-lhsm',
+      quote: "Ils ont su transformer une contrainte de site en véritable parti pris architectural. Le résultat dépasse largement ce que nous avions imaginé.",
+      author: "Le Havre Seine Métropole, maîtrise d'ouvrage Médiathèque des Docks",
+    },
+    {
+      _key: 'temoignage-particulier-falaise',
+      quote: "Un accompagnement exigeant du premier croquis jusqu'à la réception de chantier. On sentait une vraie écoute de nos usages, pas seulement une proposition esthétique plaquée sur le terrain.",
+      author: "M. et Mme Delaunay, maîtres d'ouvrage particuliers, Maison sur la Falaise",
+    },
+    {
+      _key: 'temoignage-promoteur',
+      quote: "Un partenaire fiable sur les délais et le budget, avec une vraie capacité à défendre le projet face aux instances et aux riverains lors de la concertation.",
+      author: "Programme immobilier collectif, maîtrise d'ouvrage privée",
+    },
+  ],
   defaultSeoDescription: "Atelier Méridien conçoit des architectures ancrées dans leur territoire : logements, équipements culturels, bureaux et projets urbains, depuis Le Havre.",
 };
 
