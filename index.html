@@ -250,7 +250,7 @@
                         </ul>
                     </div>
                     <div class="pt-8">
-                        <button onclick="openContactModal('Site sur mesure')" class="btn-pop w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold">
+                        <button onclick="openContactModal()" class="btn-pop w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold">
                             Demander mon devis gratuit
                         </button>
                     </div>
@@ -316,51 +316,17 @@
     <div id="contactModal" onclick="closeContactModalOnBackdrop(event)" 
         class="invisible opacity-0 fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 transition-all duration-300 ease-out">
         
-        <div id="modalContent" class="scale-95 opacity-0 bg-zinc-900 border border-zinc-800 p-6 sm:p-10 rounded-3xl max-w-2xl w-full relative max-h-[90vh] overflow-y-auto space-y-8 shadow-2xl shadow-black/80 transition-all duration-300 ease-out delay-75">
-            <button onclick="closeContactModal()" class="absolute top-6 right-6 text-zinc-400 hover:text-white transition-colors cursor-pointer">
+        <div id="modalContent" class="scale-95 opacity-0 bg-zinc-900 border border-zinc-800 p-4 sm:p-6 rounded-3xl max-w-3xl w-full relative max-h-[90vh] overflow-y-auto shadow-2xl shadow-black/80 transition-all duration-300 ease-out delay-75">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 z-10 text-zinc-400 hover:text-white transition-colors cursor-pointer bg-zinc-900/80 rounded-full p-1.5">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
             
-            <div class="text-center space-y-2">
-                <h2 id="modalTitle" class="text-2xl sm:text-3xl font-bold tracking-tight">Demandez votre devis gratuit</h2>
-                <p id="modalSubtitle" class="text-zinc-400 text-xs sm:text-sm font-light">Décrivez votre projet, nous revenons vers vous en moins de 24h.</p>
+            <div class="text-center space-y-1.5 pt-2 pb-4">
+                <h2 class="text-xl sm:text-2xl font-bold tracking-tight">Réservez votre échange gratuit</h2>
+                <p class="text-zinc-400 text-xs sm:text-sm font-light">Choisissez un créneau qui vous convient, sans engagement.</p>
             </div>
 
-            <form id="devisForm" class="space-y-5">
-                <input type="hidden" name="offre_selectionnee" id="hiddenOfferInput">
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="space-y-1.5">
-                        <label for="name" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Nom / Entreprise</label>
-                        <input type="text" name="name" id="name" required placeholder="Ex: Salon InkArt" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
-                    </div>
-                    <div class="space-y-1.5">
-                        <label for="email" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Adresse E-mail</label>
-                        <input type="email" name="email" id="email" required placeholder="Ex: contact@inkart.fr" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
-                    </div>
-                </div>
-                <div class="space-y-1.5">
-                    <label for="phone" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Téléphone (optionnel)</label>
-                    <input type="tel" name="phone" id="phone" placeholder="Ex: 06 12 34 56 78" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all">
-                </div>
-                <div class="space-y-1.5">
-                    <label for="message" class="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">Votre Projet / Message</label>
-                    <textarea name="message" id="message" rows="4" required placeholder="Décrivez votre activité et ce que vous souhaitez pour votre site..." class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none"></textarea>
-                </div>
-
-                <p id="formStatus" class="hidden text-xs text-center rounded-xl px-4 py-3"></p>
-
-                <button type="submit" id="devisSubmitBtn" class="btn-pop w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-3.5 rounded-xl shadow-lg shadow-indigo-600/10 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
-                    <span>Envoyer ma demande</span><i data-lucide="send" class="w-4 h-4"></i>
-                </button>
-            </form>
-            <hr class="border-zinc-800">
-            <div class="text-center space-y-3">
-                <p class="text-[10px] text-zinc-500 uppercase tracking-widest">Ou réservez un créneau direct</p>
-                <a href="https://calendly.com/rafaeldupreypro" target="_blank" class="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-medium tracking-wider uppercase px-6 py-3 rounded-xl transition-colors text-center">
-                    <i data-lucide="calendar" class="w-4 h-4"></i> Bloquer 15 min sur notre calendrier
-                </a>
-            </div>
+            <div id="calendlyModalContainer" style="min-width:280px;height:650px;width:100%;"></div>
         </div>
     </div>
 
@@ -381,15 +347,15 @@
                 <div class="flex gap-4 items-start p-4 bg-zinc-950/40 border border-zinc-800/50 rounded-xl">
                     <div class="w-8 h-8 bg-indigo-500/10 text-indigo-400 flex items-center justify-center rounded-lg font-bold text-sm shrink-0">1</div>
                     <div class="space-y-1">
-                        <h4 class="text-sm font-semibold text-white">Prise de contact</h4>
-                        <p class="text-xs text-zinc-400 font-light leading-relaxed">Cliquez sur "Demander mon devis gratuit" pour ouvrir le formulaire pré-rempli ou écrivez-nous directement.</p>
+                        <h4 class="text-sm font-semibold text-white">Réservation d'un créneau</h4>
+                        <p class="text-xs text-zinc-400 font-light leading-relaxed">Cliquez sur "Demander mon devis gratuit" pour choisir directement un créneau dans notre agenda.</p>
                     </div>
                 </div>
                 <div class="flex gap-4 items-start p-4 bg-zinc-950/40 border border-zinc-800/50 rounded-xl">
                     <div class="w-8 h-8 bg-indigo-500/10 text-indigo-400 flex items-center justify-center rounded-lg font-bold text-sm shrink-0">2</div>
                     <div class="space-y-1">
-                        <h4 class="text-sm font-semibold text-white">Prise de rendez-vous</h4>
-                        <p class="text-xs text-zinc-400 font-light leading-relaxed">Vous êtes recontacté par mail pour convenir d'un rendez-vous (appel ou visio) et échanger sur votre projet.</p>
+                        <h4 class="text-sm font-semibold text-white">Échange (appel ou visio)</h4>
+                        <p class="text-xs text-zinc-400 font-light leading-relaxed">Nous échangeons sur votre projet lors du rendez-vous pour cadrer vos besoins et objectifs.</p>
                     </div>
                 </div>
                 <div class="flex gap-4 items-start p-4 bg-zinc-950/40 border border-zinc-800/50 rounded-xl">
@@ -499,21 +465,29 @@
         // --- Éléments DOM ---
         const contactModal = document.getElementById('contactModal');
         const modalContent = document.getElementById('modalContent');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalSubtitle = document.getElementById('modalSubtitle');
-        const messageTextarea = document.getElementById('message');
-        const hiddenOfferInput = document.getElementById('hiddenOfferInput');
 
         const explainModal = document.getElementById('explainModal');
         const explainContent = document.getElementById('explainContent');
 
-        // --- Fonctions Modale Contact / Devis ---
-        function openContactModal(offerName) {
-            hiddenOfferInput.value = offerName;
-            modalTitle.innerText = "Demandez votre devis gratuit";
-            modalSubtitle.innerText = "Décrivez votre projet, nous revenons vers vous en moins de 24h.";
-            messageTextarea.placeholder = "Décrivez votre activité et ce que vous souhaitez pour votre site...";
-            messageTextarea.value = "";
+        // --- Fonction Modale Contact / Prise de rendez-vous (Calendly) ---
+        let calendlyModalInitialized = false;
+
+        function initCalendlyModalWidget() {
+            if (calendlyModalInitialized) return;
+            if (window.Calendly) {
+                Calendly.initInlineWidget({
+                    url: 'https://calendly.com/rafaeldupreypro?hide_landing_page_details=1&hide_gdpr_banner=1',
+                    parentElement: document.getElementById('calendlyModalContainer')
+                });
+                calendlyModalInitialized = true;
+            } else {
+                // Le script Calendly n'est pas encore chargé, on réessaie brièvement
+                setTimeout(initCalendlyModalWidget, 200);
+            }
+        }
+
+        function openContactModal() {
+            initCalendlyModalWidget();
 
             contactModal.classList.remove('invisible', 'opacity-0');
             modalContent.classList.remove('scale-95', 'opacity-0');
@@ -553,16 +527,9 @@
 
         // --- Utilitaires ---
         function switchModal() {
-            // 1. On appelle votre fonction de fermeture existante
             closeExplainModal();
-
-            // 2. On attend la fin de l'animation de fermeture (200ms) 
-            // avant de lancer le scroll vers le Calendly
             setTimeout(() => {
-                const target = document.getElementById('calendly-anchor');
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
+                openContactModal();
             }, 200);
         }
 
@@ -571,54 +538,6 @@
                 document.body.style.overflow = '';
             }
         }
-
-        // --- Envoi du formulaire de devis (via API Brevo) ---
-        const devisForm = document.getElementById('devisForm');
-        const devisSubmitBtn = document.getElementById('devisSubmitBtn');
-        const formStatus = document.getElementById('formStatus');
-
-        function showFormStatus(message, isError) {
-            formStatus.textContent = message;
-            formStatus.classList.remove('hidden', 'bg-emerald-500/10', 'text-emerald-400', 'bg-rose-500/10', 'text-rose-400');
-            formStatus.classList.add(isError ? 'bg-rose-500/10' : 'bg-emerald-500/10', isError ? 'text-rose-400' : 'text-emerald-400');
-        }
-
-        devisForm.addEventListener('submit', async function (event) {
-            event.preventDefault();
-
-            const payload = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                message: document.getElementById('message').value,
-                offer: hiddenOfferInput.value
-            };
-
-            devisSubmitBtn.disabled = true;
-            devisSubmitBtn.querySelector('span').innerText = 'Envoi en cours...';
-
-            try {
-                const response = await fetch('/api/send-devis', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    throw new Error('Erreur lors de l\'envoi');
-                }
-
-                showFormStatus('Votre demande a bien été envoyée ! Nous revenons vers vous très vite.', false);
-                devisForm.reset();
-                setTimeout(closeContactModal, 2000);
-            } catch (err) {
-                console.error(err);
-                showFormStatus('Une erreur est survenue. Merci de réessayer ou de nous écrire directement.', true);
-            } finally {
-                devisSubmitBtn.disabled = false;
-                devisSubmitBtn.querySelector('span').innerText = 'Envoyer ma demande';
-            }
-        });
     </script>
 </body>
 </html>
