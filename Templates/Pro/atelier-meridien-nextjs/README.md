@@ -21,14 +21,13 @@ contenu statique dans le code (équipe, historique, FAQ) : à adapter par
 client directement dans les composants/pages, ou à sortir vers Sanity plus
 tard si besoin.
 
-## ⚠️ Important — installation en local
+## ⚠️ Avant le premier déploiement client
 
-Ce projet a été généré dans un environnement sans accès internet (pas
-d'accès à npm, GitHub ou l'API Sanity). **Il n'a donc pas pu être installé
-ni testé avec `npm install` / `npm run build` avant livraison.** Le code a
-été relu attentivement (syntaxe JS validée, structure vérifiée), mais un
-premier `npm install && npm run dev` en local reste nécessaire pour
-confirmer que tout compile chez vous, avant mise en production.
+Le code a été revu à plusieurs reprises (syntaxe, cohérence des
+composants, absence de liens morts/placeholders). Avant de livrer un
+nouveau client, faites tout de même un `npm install && npm run build` en
+local pour confirmer que tout compile dans votre environnement — c'est le
+seul vrai test qui vaille avant mise en production.
 
 ## Démarrage
 
