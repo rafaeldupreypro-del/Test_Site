@@ -170,7 +170,7 @@
                 <a href="#concept" class="nav-link hover:text-white transition-colors">Notre Concept</a>
                 <a href="#offres" class="nav-link hover:text-white transition-colors">Notre Service</a>
                 <a href="#delais" class="nav-link hover:text-white transition-colors">Disponibilités</a>
-                <a href="#devis" class="nav-link hover:text-white transition-colors">Devis</a>
+                <a href="#contact" class="nav-link hover:text-white transition-colors">Contact</a>
             </div>
             
             <div class="flex items-center gap-4">
@@ -396,49 +396,48 @@
         </div>
     </section>
 
-    <section id="devis" class="py-20 border-t border-zinc-900">
+    <section id="contact" class="py-20 border-t border-zinc-900">
         <div data-reveal class="max-w-2xl mx-auto px-6">
             <div class="text-center space-y-3 mb-10">
-                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Envoyez-nous votre demande</h2>
-                <p class="text-zinc-400 font-light">Décrivez votre projet en quelques lignes, nous revenons vers vous sous 24h.</p>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Contactez-nous</h2>
+                <p class="text-zinc-400 font-light">Une question, un projet ? Écrivez-nous, nous revenons vers vous sous 24h.</p>
             </div>
 
-            <form id="devisForm" class="bg-zinc-900/40 border border-zinc-800 p-6 sm:p-8 rounded-2xl space-y-4" novalidate>
+            <form id="contactForm" class="bg-zinc-900/40 border border-zinc-800 p-6 sm:p-8 rounded-2xl space-y-4" novalidate>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label for="devisName" class="block text-xs font-medium text-zinc-400 mb-1.5">Nom / Entreprise *</label>
-                        <input id="devisName" name="name" type="text" required
+                        <label for="contactName" class="block text-xs font-medium text-zinc-400 mb-1.5">Nom / Entreprise *</label>
+                        <input id="contactName" name="name" type="text" required
                             class="w-full bg-zinc-950/60 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500">
                     </div>
                     <div>
-                        <label for="devisEmail" class="block text-xs font-medium text-zinc-400 mb-1.5">E-mail *</label>
-                        <input id="devisEmail" name="email" type="email" required
+                        <label for="contactEmail" class="block text-xs font-medium text-zinc-400 mb-1.5">E-mail *</label>
+                        <input id="contactEmail" name="email" type="email" required
                             class="w-full bg-zinc-950/60 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500">
                     </div>
                 </div>
                 <div>
-                    <label for="devisPhone" class="block text-xs font-medium text-zinc-400 mb-1.5">Téléphone (facultatif)</label>
-                    <input id="devisPhone" name="phone" type="tel"
+                    <label for="contactPhone" class="block text-xs font-medium text-zinc-400 mb-1.5">Téléphone (facultatif)</label>
+                    <input id="contactPhone" name="phone" type="tel"
                         class="w-full bg-zinc-950/60 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500">
                 </div>
                 <div>
-                    <label for="devisMessage" class="block text-xs font-medium text-zinc-400 mb-1.5">Votre projet *</label>
-                    <textarea id="devisMessage" name="message" rows="4" required
-                        placeholder="Parlez-nous de votre activité et de ce que vous recherchez pour votre site..."
+                    <label for="contactMessage" class="block text-xs font-medium text-zinc-400 mb-1.5">Votre message *</label>
+                    <textarea id="contactMessage" name="message" rows="4" required
+                        placeholder="Dites-nous en plus sur votre demande..."
                         class="w-full bg-zinc-950/60 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 resize-none"></textarea>
                 </div>
-                <input type="hidden" name="offer" value="Site sur mesure">
                 <!-- Piège à robots : champ caché, ne doit jamais être rempli par un humain -->
                 <div class="hidden" aria-hidden="true">
-                    <label for="devisCompany">Entreprise</label>
-                    <input id="devisCompany" name="company" type="text" tabindex="-1" autocomplete="off">
+                    <label for="contactCompany">Entreprise</label>
+                    <input id="contactCompany" name="company" type="text" tabindex="-1" autocomplete="off">
                 </div>
 
-                <button type="submit" id="devisSubmit"
+                <button type="submit" id="contactSubmit"
                     class="btn-pop w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-3.5 rounded-xl">
-                    Envoyer ma demande
+                    Envoyer mon message
                 </button>
-                <p id="devisFeedback" class="text-sm text-center" role="status"></p>
+                <p id="contactFeedback" class="text-sm text-center" role="status"></p>
             </form>
         </div>
     </section>
@@ -574,6 +573,7 @@
                     <li><a href="#concept" class="hover:text-white transition-colors">Notre Concept</a></li>
                     <li><a href="#offres" class="hover:text-white transition-colors">Notre Service</a></li>
                     <li><a href="#delais" class="hover:text-white transition-colors">Disponibilités</a></li>
+                    <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
                     <li><a href="#booking" class="hover:text-white transition-colors">Prendre rendez-vous</a></li>
                 </ul>
             </div>
@@ -701,24 +701,24 @@
             }
         }
 
-        // --- Formulaire de demande de devis ---
-        const devisForm = document.getElementById('devisForm');
-        if (devisForm) {
-            const devisSubmit = document.getElementById('devisSubmit');
-            const devisFeedback = document.getElementById('devisFeedback');
+        // --- Formulaire de contact ---
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            const contactSubmit = document.getElementById('contactSubmit');
+            const contactFeedback = document.getElementById('contactFeedback');
 
-            devisForm.addEventListener('submit', async (event) => {
+            contactForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
-                devisFeedback.textContent = '';
-                devisFeedback.className = 'text-sm text-center';
+                contactFeedback.textContent = '';
+                contactFeedback.className = 'text-sm text-center';
 
-                const data = Object.fromEntries(new FormData(devisForm).entries());
+                const data = Object.fromEntries(new FormData(contactForm).entries());
 
-                devisSubmit.disabled = true;
-                devisSubmit.textContent = 'Envoi en cours...';
+                contactSubmit.disabled = true;
+                contactSubmit.textContent = 'Envoi en cours...';
 
                 try {
-                    const response = await fetch('/api/send-devis', {
+                    const response = await fetch('/api/contact', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data),
@@ -729,15 +729,15 @@
                         throw new Error(result.error || 'Une erreur est survenue.');
                     }
 
-                    devisForm.reset();
-                    devisFeedback.textContent = 'Merci ! Votre demande a bien été envoyée, nous revenons vers vous sous 24h.';
-                    devisFeedback.classList.add('text-emerald-400');
+                    contactForm.reset();
+                    contactFeedback.textContent = 'Merci ! Votre message a bien été envoyé, nous revenons vers vous sous 24h.';
+                    contactFeedback.classList.add('text-emerald-400');
                 } catch (err) {
-                    devisFeedback.textContent = err.message || 'Impossible d\'envoyer votre demande pour le moment. Réessayez ou contactez-nous par e-mail.';
-                    devisFeedback.classList.add('text-red-400');
+                    contactFeedback.textContent = err.message || 'Impossible d\'envoyer votre message pour le moment. Réessayez ou contactez-nous par e-mail.';
+                    contactFeedback.classList.add('text-red-400');
                 } finally {
-                    devisSubmit.disabled = false;
-                    devisSubmit.textContent = 'Envoyer ma demande';
+                    contactSubmit.disabled = false;
+                    contactSubmit.textContent = 'Envoyer mon message';
                 }
             });
         }

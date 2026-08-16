@@ -1,4 +1,4 @@
-// Reçoit les données du formulaire de devis et envoie automatiquement
+// Reçoit les données du formulaire de contact et envoie automatiquement
 // un e-mail via l'API transactionnelle de Brevo (ex-Sendinblue).
 //
 // Variable d'environnement requise (à configurer sur Vercel) :
@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { name, email, phone, message, offer, company } = req.body || {};
+    const { name, email, phone, message, company } = req.body || {};
 
     // Piège à robots : ce champ doit rester vide, un bot le remplit généralement.
     if (company) {
@@ -50,9 +50,9 @@ module.exports = async (req, res) => {
       sender: { name: SENDER_NAME, email: SENDER_EMAIL },
       to: [{ email: NOTIFY_EMAIL }],
       replyTo: { email, name },
-      subject: `Nouvelle demande de devis - ${name}`,
+      subject: `Nouveau message de contact - ${name}`,
       htmlContent: `
-        <h2>Nouvelle demande de devis (${escapeHtml(offer || 'Site sur mesure')})</h2>
+        <h2>Nouveau message reçu depuis le site</h2>
         <p><strong>Nom / Entreprise :</strong> ${escapeHtml(name)}</p>
         <p><strong>E-mail :</strong> ${escapeHtml(email)}</p>
         <p><strong>Téléphone :</strong> ${escapeHtml(phone || 'Non renseigné')}</p>
@@ -80,10 +80,10 @@ module.exports = async (req, res) => {
     const confirmPayload = {
       sender: { name: SENDER_NAME, email: SENDER_EMAIL },
       to: [{ email, name }],
-      subject: 'Votre demande de devis a bien été reçue - OrkaWeb',
+      subject: 'Votre message a bien été reçu - OrkaWeb',
       htmlContent: `
         <p>Bonjour ${escapeHtml(name)},</p>
-        <p>Nous avons bien reçu votre demande de devis pour un site vitrine sur mesure. Notre équipe revient vers vous sous 24h pour convenir d'un rendez-vous (appel ou visio).</p>
+        <p>Nous avons bien reçu votre message. Notre équipe revient vers vous sous 24h.</p>
         <p>Récapitulatif de votre message :</p>
         <blockquote style="border-left:3px solid #6366f1;padding-left:12px;color:#555;">
           ${escapeHtml(message).replace(/\n/g, '<br>')}
@@ -110,7 +110,7 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error('Erreur send-devis :', err);
+    console.error('Erreur contact :', err);
     return res.status(500).json({ error: 'Une erreur interne est survenue.' });
   }
 };
