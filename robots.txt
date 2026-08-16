@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /Templates/
 
-Sitemap: https://orkaweb.fr/sitemap.xml
+Sitemap: https://www.orkaweb.fr/sitemap.xml
