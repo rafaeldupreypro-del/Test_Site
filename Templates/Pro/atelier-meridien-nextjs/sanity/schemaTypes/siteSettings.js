@@ -75,6 +75,10 @@ export default {
       description: "Identifiant du fiche établissement Google (Google Business Profile), utilisé pour afficher les avis. Laisser vide pour masquer le bloc." },
     { name: 'instagramFeedUrl', title: 'Compte Instagram (lien complet)', type: 'url', group: 'cro',
       description: 'Ex : https://www.instagram.com/nom-du-compte. Laisser vide pour masquer le bloc Instagram sur l\'accueil.' },
+    { name: 'trustpilotBusinessUnitId', title: 'Trustpilot — Business Unit ID', type: 'string', group: 'cro',
+      description: "Identifiant technique de la fiche entreprise (Trustpilot Business → Intégrations → TrustBox). Alternative à afficher si le client n'a pas de fiche Google. Laisser vide pour masquer le bloc." },
+    { name: 'trustpilotUrl', title: 'Trustpilot — lien vers la page d\'avis', type: 'url', group: 'cro',
+      description: "Ex : https://fr.trustpilot.com/review/votredomaine.fr — utilisé pour le bouton « Laisser un avis »." },
 
     // Informations légales — utilisées sur les pages Mentions légales,
     // Confidentialité et Cookies. Champs à compléter par chaque client :

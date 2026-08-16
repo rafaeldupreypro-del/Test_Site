@@ -7,6 +7,7 @@ import EventBanner from '@/components/EventBanner';
 import NewsletterModal from '@/components/NewsletterModal';
 import TrustedByStrip from '@/components/TrustedByStrip';
 import GoogleReviews from '@/components/GoogleReviews';
+import TrustpilotWidget from '@/components/TrustpilotWidget';
 
 export const revalidate = 60;
 
@@ -143,6 +144,8 @@ export default async function HomePage() {
       </section>
 
       <GoogleReviews placeId={settings?.googlePlaceId} />
+
+      <TrustpilotWidget businessUnitId={settings?.trustpilotBusinessUnitId} reviewUrl={settings?.trustpilotUrl} />
 
       <section className="section">
         <div className="container text-center" data-reveal>

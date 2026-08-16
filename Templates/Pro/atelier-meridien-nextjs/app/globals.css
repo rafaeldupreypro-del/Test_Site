@@ -1222,3 +1222,8 @@ section { position: relative; }
   overflow: hidden;
 }
 .google-review-card__author { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-45, var(--ink-35)); }
+
+/* =========================================================================
+   AVIS TRUSTPILOT (widget officiel TrustBox)
+   ========================================================================= */
+.trustpilot-widget { min-height: 150px; }
