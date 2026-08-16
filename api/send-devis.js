@@ -11,7 +11,7 @@
 const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
 
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'rafaeldupreypro@gmail.com';
-const SENDER_EMAIL = process.env.NOTIFY_SENDER_EMAIL || 'no-reply@votre-site.fr';
+const SENDER_EMAIL = process.env.NOTIFY_SENDER_EMAIL || 'no-reply@orkaweb.fr';
 const SENDER_NAME = 'OrkaWeb - Site web';
 
 function escapeHtml(str = '') {
@@ -34,7 +34,12 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { name, email, phone, message, offer } = req.body || {};
+    const { name, email, phone, message, offer, company } = req.body || {};
+
+    // Piège à robots : ce champ doit rester vide, un bot le remplit généralement.
+    if (company) {
+      return res.status(200).json({ success: true });
+    }
 
     if (!name || !email || !message) {
       return res.status(400).json({ error: 'Merci de renseigner votre nom, votre e-mail et un message.' });

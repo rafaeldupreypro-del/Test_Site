@@ -170,6 +170,7 @@
                 <a href="#concept" class="nav-link hover:text-white transition-colors">Notre Concept</a>
                 <a href="#offres" class="nav-link hover:text-white transition-colors">Notre Service</a>
                 <a href="#delais" class="nav-link hover:text-white transition-colors">Disponibilités</a>
+                <a href="#devis" class="nav-link hover:text-white transition-colors">Devis</a>
             </div>
             
             <div class="flex items-center gap-4">
@@ -395,6 +396,53 @@
         </div>
     </section>
 
+    <section id="devis" class="py-20 border-t border-zinc-900">
+        <div data-reveal class="max-w-2xl mx-auto px-6">
+            <div class="text-center space-y-3 mb-10">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Envoyez-nous votre demande</h2>
+                <p class="text-zinc-400 font-light">Décrivez votre projet en quelques lignes, nous revenons vers vous sous 24h.</p>
+            </div>
+
+            <form id="devisForm" class="bg-zinc-900/40 border border-zinc-800 p-6 sm:p-8 rounded-2xl space-y-4" novalidate>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="devisName" class="block text-xs font-medium text-zinc-400 mb-1.5">Nom / Entreprise *</label>
+                        <input id="devisName" name="name" type="text" required
+                            class="w-full bg-zinc-950/60 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label for="devisEmail" class="block text-xs font-medium text-zinc-400 mb-1.5">E-mail *</label>
+                        <input id="devisEmail" name="email" type="email" required
+                            class="w-full bg-zinc-950/60 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+                <div>
+                    <label for="devisPhone" class="block text-xs font-medium text-zinc-400 mb-1.5">Téléphone (facultatif)</label>
+                    <input id="devisPhone" name="phone" type="tel"
+                        class="w-full bg-zinc-950/60 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="devisMessage" class="block text-xs font-medium text-zinc-400 mb-1.5">Votre projet *</label>
+                    <textarea id="devisMessage" name="message" rows="4" required
+                        placeholder="Parlez-nous de votre activité et de ce que vous recherchez pour votre site..."
+                        class="w-full bg-zinc-950/60 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500 resize-none"></textarea>
+                </div>
+                <input type="hidden" name="offer" value="Site sur mesure">
+                <!-- Piège à robots : champ caché, ne doit jamais être rempli par un humain -->
+                <div class="hidden" aria-hidden="true">
+                    <label for="devisCompany">Entreprise</label>
+                    <input id="devisCompany" name="company" type="text" tabindex="-1" autocomplete="off">
+                </div>
+
+                <button type="submit" id="devisSubmit"
+                    class="btn-pop w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-3.5 rounded-xl">
+                    Envoyer ma demande
+                </button>
+                <p id="devisFeedback" class="text-sm text-center" role="status"></p>
+            </form>
+        </div>
+    </section>
+
     <section id="booking" class="py-24 bg-black-600 text-white-600">
         <div data-reveal class="max-w-4xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-8">Planifier un échange</h2>
@@ -498,6 +546,25 @@
                 </p>
                 <div class="flex items-center gap-2 text-xs text-zinc-500 pt-2">
                     <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Le Havre, Normandie
+                </div>
+
+                <div class="pt-4 max-w-sm">
+                    <h4 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2">Newsletter</h4>
+                    <p class="text-xs text-zinc-500 font-light mb-3">Conseils web &amp; conversion, une fois de temps en temps. Pas de spam.</p>
+                    <form id="newsletterForm" class="flex flex-col sm:flex-row gap-2" novalidate>
+                        <label for="newsletterEmail" class="sr-only">Votre e-mail</label>
+                        <input id="newsletterEmail" name="email" type="email" required placeholder="votre@email.fr"
+                            class="flex-1 bg-zinc-950/60 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-indigo-500">
+                        <div class="hidden" aria-hidden="true">
+                            <label for="newsletterCompany">Entreprise</label>
+                            <input id="newsletterCompany" name="company" type="text" tabindex="-1" autocomplete="off">
+                        </div>
+                        <button type="submit" id="newsletterSubmit"
+                            class="btn-pop bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl whitespace-nowrap">
+                            S'inscrire
+                        </button>
+                    </form>
+                    <p id="newsletterFeedback" class="text-xs mt-2" role="status"></p>
                 </div>
             </div>
 
@@ -632,6 +699,88 @@
             if (contactModal.classList.contains('invisible') && explainModal.classList.contains('invisible')) {
                 document.body.style.overflow = '';
             }
+        }
+
+        // --- Formulaire de demande de devis ---
+        const devisForm = document.getElementById('devisForm');
+        if (devisForm) {
+            const devisSubmit = document.getElementById('devisSubmit');
+            const devisFeedback = document.getElementById('devisFeedback');
+
+            devisForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                devisFeedback.textContent = '';
+                devisFeedback.className = 'text-sm text-center';
+
+                const data = Object.fromEntries(new FormData(devisForm).entries());
+
+                devisSubmit.disabled = true;
+                devisSubmit.textContent = 'Envoi en cours...';
+
+                try {
+                    const response = await fetch('/api/send-devis', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data),
+                    });
+                    const result = await response.json().catch(() => ({}));
+
+                    if (!response.ok) {
+                        throw new Error(result.error || 'Une erreur est survenue.');
+                    }
+
+                    devisForm.reset();
+                    devisFeedback.textContent = 'Merci ! Votre demande a bien été envoyée, nous revenons vers vous sous 24h.';
+                    devisFeedback.classList.add('text-emerald-400');
+                } catch (err) {
+                    devisFeedback.textContent = err.message || 'Impossible d\'envoyer votre demande pour le moment. Réessayez ou contactez-nous par e-mail.';
+                    devisFeedback.classList.add('text-red-400');
+                } finally {
+                    devisSubmit.disabled = false;
+                    devisSubmit.textContent = 'Envoyer ma demande';
+                }
+            });
+        }
+
+        // --- Formulaire newsletter ---
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            const newsletterSubmit = document.getElementById('newsletterSubmit');
+            const newsletterFeedback = document.getElementById('newsletterFeedback');
+
+            newsletterForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                newsletterFeedback.textContent = '';
+                newsletterFeedback.className = 'text-xs mt-2';
+
+                const data = Object.fromEntries(new FormData(newsletterForm).entries());
+
+                newsletterSubmit.disabled = true;
+                newsletterSubmit.textContent = '...';
+
+                try {
+                    const response = await fetch('/api/newsletter', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data),
+                    });
+                    const result = await response.json().catch(() => ({}));
+
+                    if (!response.ok) {
+                        throw new Error(result.error || 'Une erreur est survenue.');
+                    }
+
+                    newsletterForm.reset();
+                    newsletterFeedback.textContent = 'Merci pour votre inscription !';
+                    newsletterFeedback.classList.add('text-emerald-400');
+                } catch (err) {
+                    newsletterFeedback.textContent = err.message || 'Inscription impossible pour le moment.';
+                    newsletterFeedback.classList.add('text-red-400');
+                } finally {
+                    newsletterSubmit.disabled = false;
+                    newsletterSubmit.textContent = "S'inscrire";
+                }
+            });
         }
     </script>
 </body>
