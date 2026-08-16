@@ -12,7 +12,7 @@ const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
 
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'rafaeldupreypro@gmail.com';
 const SENDER_EMAIL = process.env.NOTIFY_SENDER_EMAIL || 'no-reply@votre-site.fr';
-const SENDER_NAME = 'NovaWeb - Site web';
+const SENDER_NAME = 'OrkaWeb - Site web';
 
 function escapeHtml(str = '') {
   return String(str)
@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
     const confirmPayload = {
       sender: { name: SENDER_NAME, email: SENDER_EMAIL },
       to: [{ email, name }],
-      subject: 'Votre demande de devis a bien été reçue - NovaWeb',
+      subject: 'Votre demande de devis a bien été reçue - OrkaWeb',
       htmlContent: `
         <p>Bonjour ${escapeHtml(name)},</p>
         <p>Nous avons bien reçu votre demande de devis pour un site vitrine sur mesure. Notre équipe revient vers vous sous 24h pour convenir d'un rendez-vous (appel ou visio).</p>
@@ -83,7 +83,7 @@ module.exports = async (req, res) => {
         <blockquote style="border-left:3px solid #6366f1;padding-left:12px;color:#555;">
           ${escapeHtml(message).replace(/\n/g, '<br>')}
         </blockquote>
-        <p>À très vite,<br>L'équipe NovaWeb</p>
+        <p>À très vite,<br>L'équipe OrkaWeb</p>
       `,
     };
 
